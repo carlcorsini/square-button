@@ -13,15 +13,88 @@
     <meta property="og:description" content="This is a square.">
     <meta property="og:image" content="https://sitejerk.com/images/black-square-outline-png-9.png">
     <meta property="og:url" content="https://sqr.surge.sh">
+    <audio volume="0.1" id="drip" src="./drip.wav"></audio>
+    <audio id="works" src="./fireworks.wav"></audio>
     <title>Square</title>
 </head>
+<script>
+    function playSound(file, speed = 1, pitchShift = 1, loop = false, autoplay = true) {
+        /*
+        Use the play() method to start the audio. if pitchShift is true
+        use the stop() method to stop the audio and destroy the object.
+        If pitchShift is false use the pause() method to pause and set
+        the attribute currentTime to 0 to reset the time.
+        */
+        if (pitchShift) {
+            /*
+            After weeks of searching, I have finally found a way to pitch shift audio.
+            Thank you Mozilla.
+            2018/03/31:
+                https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/playbackRate
+                https://github.com/mdn/webaudio-examples/tree/master/decode-audio-data
+                https://www.w3schools.com/jsref/prop_audio_loop.asp
+            Original comments:
+                use XHR to load an audio track, and
+                decodeAudioData to decode it and stick it in a buffer.
+                Then we put the buffer into the source
+            */
+            audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+            source = audioCtx.createBufferSource();
+            request = new XMLHttpRequest();
+
+            request.open('GET', file, true);
+
+            request.responseType = 'arraybuffer';
+
+
+            request.onload = function () {
+                var audioData = request.response;
+
+                audioCtx.decodeAudioData(audioData, function (buffer) {
+                        myBuffer = buffer;
+                        songLength = buffer.duration;
+                        source.buffer = myBuffer;
+                        source.playbackRate.value = speed;
+                        source.connect(audioCtx.destination);
+                        source.loop = loop;
+                    },
+
+                    function (e) {
+                        "Error with decoding audio data" + e.error
+                    });
+
+            }
+
+            request.send();
+            source.play = source.start
+        } else {
+            source = new Audio(file)
+            source.playbackRate = speed
+            source.loop = loop
+        }
+        if (autoplay) {
+            source.play()
+        }
+        return source
+    }
+    var source
+
+    function play(pitch) {
+        source = playSound('./drip.wav', pitch);
+    }
+
+    function stop() {
+        source.stop(0);
+        document.getElementById('play').href = ''
+        document.getElementById('play').innerHTML = 'Refresh to play again'
+    }
+</script>
 
 <body>
     <div id="titleLink">
-        <a href="https://github.com/carlcorsini/square-button" target="_blank">
-            <h1 id="title">Square</h1>
+        <a id="gitlink" href="https://github.com/carlcorsini/square-button" target="_blank">
+            <h1 href="https://github.com/carlcorsini/square-button" id="title">Square</h1>
         </a>
-
     </div>
 
 
@@ -60,9 +133,13 @@
             <button type="submit" id="changeColor" class="ui inverted teal massive button">Click Me</button>
         </form>
         <div id="bottom-left">
-            <p id="scoreTitle">Score: <em id="score">0</em></p>
+
+            <p id="scoreBox">
+                <em id="score">0</em>
+            </p>
         </div>
     </div>
+
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -70,6 +147,11 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.6/p5.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.6/addons/p5.dom.js"></script>
+    <script src="sketch.js"></script>
+    <script language="javascript" type="text/javascript" src="sketch.js"></script>
 </body>
 
 </html>
