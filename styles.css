@@ -5,12 +5,12 @@
 	margin-bottom: .5em;
 	text-decoration: none;
 	color: aliceblue;
-	cursor: url(github.png), auto !important;
+	cursor: url(assets/images/github.png), auto !important;
 }
 
 #gitlink {
 	padding: 0;
-	cursor: url(pointer.png), auto !important;
+	cursor: url(assets/images/pointer.png), auto !important;
 }
 
 body {
@@ -22,7 +22,7 @@ body {
 	-moz-user-select: -moz-none;
 	-ms-user-select: none;
 	user-select: none;
-	cursor: url(circle.png), auto !important;
+	cursor: url(assets/images/circle.png), auto !important;
 
 }
 
@@ -31,7 +31,7 @@ body {
 	margin: auto;
 	margin-top: 5em;
 	width: 42%;
-	cursor: url(pointer.png), auto !important;
+	cursor: url(assets/images/pointer.png), auto !important;
 }
 
 #square {
@@ -73,7 +73,7 @@ canvas {
 #changeColor {
 	transition: opacity .3s linear;
 	cursor: url(https://thumbnail.imgbin.com/3/4/7/imgbin-pizza-pizza-computer-mouse-pointer-cursor-cool-sliced-of-pizza-8-bit-illustration-HZwxHNMLxE0z3NFyL14jJ0pZK_t.jpg) !important;
-	cursor: url(pointer.png), auto !important;
+	cursor: url(assets/images/pointer.png), auto !important;
 }
 
 .ui dropdown {
@@ -90,16 +90,16 @@ canvas {
 	position: absolute;
 	margin: 1em;
 	text-overflow: ellipsis;
-	cursor: url(thumbs.png), auto !important;
+	cursor: url(assets/images/thumbs.png), auto !important;
 }
 
 #scoreBox {
 	transition: opacity 1s linear;
-	cursor: url(thumbs.png), auto !important;
+	cursor: url(assets/images/thumbs.png), auto !important;
 }
 
 #score {
-	cursor: url(thumbs.png), auto !important;
+	cursor: url(assets/images/thumbs.png), auto !important;
 }
 
 

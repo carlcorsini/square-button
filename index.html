@@ -13,8 +13,8 @@
     <meta property="og:description" content="This is a square.">
     <meta property="og:image" content="https://sitejerk.com/images/black-square-outline-png-9.png">
     <meta property="og:url" content="https://sqr.surge.sh">
-    <audio volume="0.1" id="drip" src="./drip.wav"></audio>
-    <audio id="works" src="./fireworks.wav"></audio>
+    <audio volume="0.1" id="drip" src="assets/audio/drip.wav"></audio>
+    <audio id="works" src="assets/audio/fireworks.wav"></audio>
     <title>Square</title>
 </head>
 <script>
@@ -80,7 +80,7 @@
     var source
 
     function play(pitch) {
-        source = playSound('./drip.wav', pitch);
+        source = playSound('assets/audio/drip.wav', pitch);
     }
 
     function stop() {
