@@ -99,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } else if (e.target.value == 'keep') {
             random = false
-            color = color
         } else {
             color = e.target.value
             random = false
@@ -125,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         turnYourLightsDownLow()
         animation = randomAnimation ? animations[Math.floor(Math.random() * animations.length)] : animation
         square.classList.add(animation)
-        square.style.backgroundColor = random ? getRandomColor() : color
+        square.style.backgroundColor = random ? getRandomColor() : square.style.backgroundColor
         ripple = randomRipple ? getRandomColor() : ripple
         setTimeout(() => {
             letThereBeLight()
