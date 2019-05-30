@@ -14,4 +14,5 @@
 #changeColorDiv {
     text-align: center;
     margin: auto;
+    transition: background-color 2s linear;
 }
