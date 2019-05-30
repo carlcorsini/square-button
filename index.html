@@ -5,22 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="./styles.css">
     <script src="./index.js"></script>
     <title>Square</title>
 </head>
 
 <body>
+
     <h1 id="title">Square</h1>
-    <section id="square"></section>
+
+    <section class="shape1" id="square"></section>
     <br>
+
     <div id="changeColorDiv">
-        <button id="changeColor" class="ui inverted teal massive button">Click Me</button>
+        <form id="theForm" action="">
+            <select id="selectaAnimation" class="ui dropdown">
+                <option value="spin">Spin</option>
+                <option value="bounce">Bounce</option>
+                <option value="move">Move</option>
+            </select>
+            <select id="selectaColor" class="ui dropdown">
+                <option value="random">Random Color</option>
+                <option value="white">White</option>
+                <option value="#1FE3C8">Teal</option>
+                <option value="#05BFF2">Blue</option>
+                <option value="#F20568">Red</option>
+                <option value="#F27905">Orange</option>
+            </select>
+            <br>
+            <br>
+            <button type="submit" id="changeColor" class="ui inverted teal massive button">Click Me</button>
+        </form>
     </div>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 </body>
 
 </html>

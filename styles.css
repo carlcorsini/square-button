@@ -1,18 +1,234 @@
 #title {
-    text-align: center;
-    margin-top: 3em;
+	text-align: center;
+	margin-top: 2em;
 }
 
-#square {
-    text-align: center;
-    margin: 0 auto;
-    width: 500px;
-    height: 500px;
-    border: solid;
+body {
+	background-color: #0c1522;
+	color: white;
+	overflow: hidden;
 }
 
 #changeColorDiv {
-    text-align: center;
-    margin: auto;
-    transition: background-color 2s linear;
+	text-align: center;
+	margin: auto;
+	margin-top: 5em;
+}
+
+#square {
+	transition: background-color 2s linear;
+	text-align: center;
+	margin: 0 auto;
+	width: 420px;
+	height: 420px;
+	border: solid;
+	border-color: aliceblue;
+	border-radius: 10px
+}
+
+.spin {
+	-webkit-animation-name: spin;
+	-webkit-animation-duration: 4000ms;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-name: spin;
+	-moz-animation-duration: 4000ms;
+	-moz-animation-iteration-count: 1;
+	-moz-animation-timing-function: linear;
+	-ms-animation-name: spin;
+	-ms-animation-duration: 4000ms;
+	-ms-animation-iteration-count: 1;
+	-ms-animation-timing-function: linear;
+	-o-transition: rotate(2880deg);
+}
+
+.move {
+	position: relative;
+	-webkit-animation: moveIt 4s 1;
+	/* Safari 4.0 - 8.0 */
+	-webkit-animation-direction: alternate;
+	/* Safari 4.0 - 8.0 */
+	animation: moveIt 4s 1;
+	animation-direction: alternate;
+}
+
+#square:hover {
+	/* Start the shake animation and make the animation last for 0.5 seconds */
+	animation: shake 0.5s;
+
+	/* When the animation is finished, start again */
+	animation-iteration-count: infinite;
+}
+
+.bounce {
+	animation: bounceIt 2s 2 alternate;
+	-webkit-animation: bounceIt 2s 2 alternate;
+}
+
+
+@-moz-keyframes spin {
+	0% {
+		-moz-transform: rotate(0deg);
+	}
+
+	60% {
+		-moz-transform: rotate(1080deg);
+	}
+
+	90% {
+		-moz-transform: rotate(360deg);
+	}
+
+
+	100% {
+		-moz-transform: rotate(180deg);
+	}
+}
+
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+
+	60% {
+		-webkit-transform: rotate(1080deg);
+	}
+
+	90% {
+		-webkit-transform: rotate(360deg);
+	}
+
+
+	100% {
+		-webkit-transform: rotate(180deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	60% {
+		transform: rotate(1080deg);
+	}
+
+	90% {
+		transform: rotate(360deg);
+	}
+
+
+	100% {
+		transform: rotate(180deg);
+	}
+}
+
+@-webkit-keyframes moveIt {
+	0% {
+
+		left: 0px;
+	}
+
+	25% {
+		left: 200px;
+	}
+
+
+
+	75% {
+		left: -200px;
+	}
+
+	100% {
+
+		left: 0px;
+	}
+}
+
+@keyframes moveIt {
+	0% {
+
+		left: 0px;
+	}
+
+	25% {
+		left: 200px;
+	}
+
+
+
+	75% {
+		left: -200px;
+	}
+
+	100% {
+
+		left: 0px;
+	}
+}
+
+@keyframes shake {
+	0% {
+		transform: translate(1px, 1px) rotate(0deg);
+	}
+
+	10% {
+		transform: translate(-1px, -2px) rotate(-1deg);
+	}
+
+	20% {
+		transform: translate(-3px, 0px) rotate(1deg);
+	}
+
+	30% {
+		transform: translate(3px, 2px) rotate(0deg);
+	}
+
+	40% {
+		transform: translate(1px, -1px) rotate(1deg);
+	}
+
+	50% {
+		transform: translate(-1px, 2px) rotate(-1deg);
+	}
+
+	60% {
+		transform: translate(-3px, 1px) rotate(0deg);
+	}
+
+	70% {
+		transform: translate(3px, 1px) rotate(-1deg);
+	}
+
+	80% {
+		transform: translate(-1px, -1px) rotate(1deg);
+	}
+
+	90% {
+		transform: translate(1px, 2px) rotate(0deg);
+	}
+
+	100% {
+		transform: translate(1px, -2px) rotate(-1deg);
+	}
+}
+
+@keyframes bounceIt {
+	from {
+		transform: translateY(0px);
+	}
+
+	to {
+		transform: translateY(-50px);
+	}
+}
+
+@-webkit-keyframes bounceIt {
+	from {
+		transform: translateY(0px);
+	}
+
+	to {
+		transform: translateY(-50px);
+	}
 }
