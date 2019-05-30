@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.disabled = true
         $('.ui.dropdown').addClass("disabled");
         title.style.opacity = '0.25'
-        scoreTitle.style.opacity = '0.25'
+        scoreTitle.style.opacity = '0.1'
         document.body.style.backgroundColor = "#010106"
     }
 
@@ -40,8 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#theForm').hide().fadeIn(4000)
     $('#titleLink').hide().fadeIn(5000)
     $('#bottom-left').hide().fadeIn(4000)
-
-
 
     // assign required variables
     let color = '#0c1522'
@@ -146,8 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let fib = (num) => num <= 1 ? 1 : fib(num - 1) + fib(num - 2)
 
-
-
     $("body").click(function (e) {
         // Remove any old one
         $(".ripple").remove();
@@ -221,11 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         }
-
-
     });
-
-
 })
 
 // random color function
