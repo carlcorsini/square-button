@@ -207,26 +207,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 winner++
                 if (winner == 2) {
                     getSoundAndFadeAudio('works')
+                    turnYourLightsDownLow()
 
                     winner++
                     scoreBox.innerHTML = 'HIGH SCORE!!'
                     scoreBox.style.color = 'yellow'
                     $('#scoreBox').css('font-size', '1.2em')
                     $('#square').css('opacity', '0')
+                    $('#square').css('border-color', 'black')
+                    $('#square').css('background-color', '#0c1522;')
                     $('#defaultCanvas0').css('opacity', '1')
                     highScore = true
-                    turnYourLightsDownLow()
                     $('#scoreBox').addClass('hover')
                     $('#scoreBox').css('opacity', '1')
+
                     setTimeout(() => {
                         $('#square').css('opacity', '1')
-                        $('#defaultCanvas0').css('opacity', '0')
-                        $('#defaultCanvas0').css('visibility', 'hidden')
                         $('#scoreBox').removeClass('hover')
                         highScore = false
                         letThereBeLight()
+                        $('#square').css('border-color', 'aliceblue')
+                        $('#defaultCanvas0').css('opacity', '0')
                     }, 14000)
-
                 }
             } else {
                 $('#scoreBox').effect('shake', {
@@ -237,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 $('#scoreBox').prop('Counter', fib(Number(score - 1))).animate({
                     Counter: fib(Number(score))
                 }, {
-                    duration: 800,
+                    duration: 500,
                     easing: 'swing',
                     step: function (now) {
                         $('#scoreBox').text(Math.ceil(now));
