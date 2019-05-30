@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     // ---------------------
-    // splash event listener
+    // ripple event listener
     // ---------------------
 
     $("body").click(function (e) {
@@ -133,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 // random color function
+// returns color string
 
 let getRandomColor = () => {
     var letters = '0123456789ABCDEF';

@@ -29,7 +29,7 @@ body {
 	height: 420px;
 	border: solid;
 	border-color: aliceblue;
-	border-radius: 10px
+	border-radius: 10px;
 }
 
 #changeColor {
@@ -261,7 +261,7 @@ body {
 
 @keyframes rippleDrop {
 	100% {
-		transform: scale(.5);
+		transform: scale(2);
 		opacity: 0;
 	}
 }
