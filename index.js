@@ -1,33 +1,71 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // initialize semantic dropdown
     $('.ui.dropdown')
         .dropdown();
 
-    let getRandomColor = () => {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
+    // turnYourLightsDownLow function
+    //        * dims page *
+    let turnYourLightsDownLow = () => {
+        animating = true
+        button.disabled = true
+        $('.ui.dropdown').addClass("disabled");
+        title.style.opacity = '0.5'
+        document.body.style.backgroundColor = "#010106"
     }
 
+    // letThereBeLight function
+    // * reverses dim effect *
+    let letThereBeLight = () => {
+        $('.ui.dropdown').removeClass("disabled");
+        title.style.opacity = '1'
+        document.body.style.backgroundColor = '#0c1522'
+        button.disabled = false
+        animating = false
+    }
+
+    // select necessary html elements    
     let square = document.querySelector('#square')
     let theForm = document.querySelector('#theForm')
     let selectaAnimation = document.querySelector('#selectaAnimation')
     let selectaColor = document.querySelector('#selectaColor')
     let button = document.querySelector('#changeColor')
     let title = document.querySelector('#title')
+    let changeColorDiv = document.querySelector('#changeColorDiv')
+
+    // assign required variables
     let animation = 'spin'
     let color = getRandomColor()
     let random = true
     let animating = false
     let hovering = false
 
+    // ---------------------
+    // hover event listeners
+    // ---------------------
+
+    square.addEventListener('mouseover', () => {
+        if (!animating) square.classList.add('hover')
+        hovering = true
+    })
+    square.addEventListener('mouseout', () => {
+        if (!animating) square.classList.remove('hover')
+        hovering = false
+    })
+
+    changeColorDiv.addEventListener('mouseover', () => {
+        hovering = true
+    })
+    changeColorDiv.addEventListener('mouseout', () => {
+        hovering = false
+    })
+
+    // --------------------
+    // form event listeners
+    // --------------------
 
     selectaAnimation.addEventListener('change', (e) => {
         animation = e.target.value
     })
-
 
     selectaColor.addEventListener('change', (e) => {
         if (e.target.value == 'random') {
@@ -39,42 +77,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    square.addEventListener('mouseover', () => {
-        if (!animating) square.classList.add('hover')
-        hovering = true
-    })
-    square.addEventListener('mouseout', () => {
-        if (!animating) square.classList.remove('hover')
-        hovering = false
-    })
-
-    let changeColorDiv = document.querySelector('#changeColorDiv')
-
-    changeColorDiv.addEventListener('mouseover', () => {
-        hovering = true
-    })
-    changeColorDiv.addEventListener('mouseout', () => {
-        hovering = false
-    })
-
     theForm.addEventListener('submit', (e) => {
-        animating = true
-        button.disabled = true
-        $('.ui.dropdown').addClass("disabled");
-        title.style.opacity = '0.5'
-        document.body.style.backgroundColor = "#010106"
         e.preventDefault()
+        turnYourLightsDownLow()
         square.classList.add(animation)
         square.style.backgroundColor = random ? getRandomColor() : color
         setTimeout(() => {
-            $('.ui.dropdown').removeClass("disabled");
+            letThereBeLight()
             square.classList.remove(animation)
-            title.style.opacity = '1'
-            button.disabled = false
-            document.body.style.backgroundColor = '#0c1522'
-            animating = false
         }, 4000)
     })
+
+    // ---------------------
+    // splash event listener
+    // ---------------------
 
     $("body").click(function (e) {
 
@@ -115,3 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 })
+
+// random color function
+
+let getRandomColor = () => {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
