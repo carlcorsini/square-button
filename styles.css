@@ -256,12 +256,12 @@ body {
 }
 
 .rippleEffect {
-	animation: rippleDrop .5s linear;
+	animation: rippleDrop 1s linear;
 }
 
 @keyframes rippleDrop {
 	100% {
-		transform: scale(2);
+		transform: scale(3);
 		opacity: 0;
 	}
 }
