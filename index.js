@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     // initialize semantic dropdown
     $('.ui.dropdown')
         .dropdown();
@@ -57,7 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
     square.classList.add('hover')
     setTimeout(() => {
         square.classList.remove('hover')
+        document.body.style.backgroundColor = '#0c1522'
     }, 2000)
+    setTimeout(() => {
+
+        document.body.style.backgroundColor = '#0c1522'
+    }, 1000)
 
     square.addEventListener('mouseover', () => {
         if (!animating) square.classList.add('hover')
