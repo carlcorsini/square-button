@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     square.classList.add('hover')
     setTimeout(() => {
         square.classList.remove('hover')
-    }, 1000)
+    }, 2000)
 
     square.addEventListener('mouseover', () => {
         if (!animating) square.classList.add('hover')
