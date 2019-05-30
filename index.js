@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+
     // initialize semantic dropdown
     $('.ui.dropdown')
         .dropdown();
@@ -33,6 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let title = document.querySelector('#title')
     let changeColorDiv = document.querySelector('#changeColorDiv')
 
+    $('#theForm').hide().fadeIn(4000)
+    $('#titleLink').hide().fadeIn(5000)
+
+
+
     // assign required variables
     let color = getRandomColor()
     let ripple = getRandomColor()
@@ -47,6 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---------------------
     // hover event listeners
     // ---------------------
+
+    square.classList.add('hover')
+    setTimeout(() => {
+        square.classList.remove('hover')
+    }, 1000)
 
     square.addEventListener('mouseover', () => {
         if (!animating) square.classList.add('hover')
