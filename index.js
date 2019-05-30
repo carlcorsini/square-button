@@ -28,16 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let theForm = document.querySelector('#theForm')
     let selectaAnimation = document.querySelector('#selectaAnimation')
     let selectaColor = document.querySelector('#selectaColor')
+    let selectaRipple = document.querySelector('#selectaRipple')
     let button = document.querySelector('#changeColor')
     let title = document.querySelector('#title')
     let changeColorDiv = document.querySelector('#changeColorDiv')
 
     // assign required variables
-    let animation = 'spin'
     let color = getRandomColor()
+    let ripple = getRandomColor()
+    let randomAnimation = true
+    let randomRipple = true
     let random = true
     let animating = false
     let hovering = false
+    let animations = ['spin', 'bounce', 'move']
+    let animation = animations[Math.floor(Math.random() * animations.length)];
 
     // ---------------------
     // hover event listeners
@@ -64,7 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // --------------------
 
     selectaAnimation.addEventListener('change', (e) => {
-        animation = e.target.value
+        if (e.target.value == 'random') {
+            randomAnimation = true
+            animation = animations[Math.floor(Math.random() * animations.length)]
+        } else {
+            randomAnimation = false
+            animation = e.target.value
+        }
     })
 
     selectaColor.addEventListener('change', (e) => {
@@ -77,11 +88,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    selectaRipple.addEventListener('change', (e) => {
+        if (e.target.value == 'random') {
+            randomRipple = true
+        } else {
+            ripple = e.target.value
+            randomRipple = false
+        }
+    })
+
+
+
+
     theForm.addEventListener('submit', (e) => {
         e.preventDefault()
         turnYourLightsDownLow()
+        animation = randomAnimation ? animations[Math.floor(Math.random() * animations.length)] : animation
         square.classList.add(animation)
         square.style.backgroundColor = random ? getRandomColor() : color
+        ripple = randomRipple ? getRandomColor() : ripple
         setTimeout(() => {
             letThereBeLight()
             square.classList.remove(animation)
@@ -105,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add the element
         $(this).prepend("<span class='ripple'></span>");
-
+        $(".ripple").css('background', ripple)
 
         // Make it round!
         if (buttonWidth >= buttonHeight) {
