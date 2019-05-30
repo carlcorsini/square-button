@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // assign required variables
-    let color = getRandomColor()
+    let color = '#0c1522'
     let ripple = getRandomColor()
     let randomAnimation = true
     let randomRipple = true
@@ -97,6 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.value == 'random') {
             random = true
 
+        } else if (e.target.value == 'keep') {
+            random = false
+            color = color
         } else {
             color = e.target.value
             random = false
