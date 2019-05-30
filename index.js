@@ -102,6 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
     selectaRipple.addEventListener('change', (e) => {
         if (e.target.value == 'random') {
             randomRipple = true
+        } else if (e.target.value === 'keep') {
+            randomRipple = false
         } else {
             ripple = e.target.value
             randomRipple = false
