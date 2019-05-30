@@ -1,5 +1,5 @@
 # square-button
-###this is a square that will change colors!
+### this is a square that will change colors!
 
 *DOM Manipulation*, ever heard of it? 
 
