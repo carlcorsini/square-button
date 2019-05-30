@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animating = true
         button.disabled = true
         $('.ui.dropdown').addClass("disabled");
-        title.style.opacity = '0.5'
+        title.style.opacity = '0.25'
         document.body.style.backgroundColor = "#010106"
     }
 
