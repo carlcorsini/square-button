@@ -45,6 +45,35 @@ body {
 	transition: opacity .3s linear;
 }
 
+#bottom-left {
+	transition: color .5s linear;
+	width: '25%';
+	font-size: 2em;
+	color: aliceblue;
+	left: 0;
+	bottom: 0;
+	position: absolute;
+	margin: 1em;
+	text-overflow: ellipsis;
+}
+
+#scoreTitle {
+	transition: opacity 1s linear;
+}
+
+
+
+/* ------------- */
+/* ------------- */
+/* ------------- */
+/* ------------- */
+/* animation CSS */
+/* ------------- */
+/* ------------- */
+/* ------------- */
+/* ------------- */
+
+
 .spin {
 	-webkit-animation-name: spin;
 	-webkit-animation-duration: 4000ms;

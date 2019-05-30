@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.disabled = true
         $('.ui.dropdown').addClass("disabled");
         title.style.opacity = '0.25'
+        scoreTitle.style.opacity = '0.25'
         document.body.style.backgroundColor = "#010106"
     }
 
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let letThereBeLight = () => {
         $('.ui.dropdown').removeClass("disabled");
         title.style.opacity = '1'
+        scoreTitle.style.opacity = '1'
         document.body.style.backgroundColor = '#0c1522'
         button.disabled = false
         animating = false
@@ -32,9 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let button = document.querySelector('#changeColor')
     let title = document.querySelector('#title')
     let changeColorDiv = document.querySelector('#changeColorDiv')
+    let scoreDiv = document.querySelector('#score')
+    let scoreTitle = document.querySelector('#scoreTitle')
 
     $('#theForm').hide().fadeIn(4000)
     $('#titleLink').hide().fadeIn(5000)
+    $('#bottom-left').hide().fadeIn(4000)
 
 
 
@@ -48,6 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let hovering = false
     let animations = ['spin', 'bounce', 'move']
     let animation = animations[Math.floor(Math.random() * animations.length)];
+    let score = 0
+    let highScore = false
+
 
     // ---------------------
     // hover event listeners
@@ -136,8 +144,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ripple event listener
     // ---------------------
 
-    $("body").click(function (e) {
+    let fib = (num) => num <= 1 ? 1 : fib(num - 1) + fib(num - 2)
 
+
+
+    $("body").click(function (e) {
         // Remove any old one
         $(".ripple").remove();
 
@@ -171,8 +182,49 @@ document.addEventListener('DOMContentLoaded', () => {
                 top: y + 'px',
                 left: x + 'px'
             }).addClass("rippleEffect");
+
+            if (highScore) {
+                $('#scoreTitle').css('color', 'yellow')
+                $('#scoreTitle').css('font-size', '1.2em')
+                $('#scoreTitle').effect('shake', {
+                    times: 4,
+                    distance: 2,
+                    queue: false
+                }, 200)
+                scoreDiv.innerHTML = 'HIGH SCORE!!'
+            } else {
+                console.log('no')
+                scoreDiv.innerHTML = fib(Number(score))
+                score++
+                $('#score').effect('shake', {
+                    times: 4,
+                    distance: 2,
+                    queue: false
+                }, 400)
+            }
+            if (highScore || fib(Number(score)) > 2900000) {
+                highScore = true
+                scoreDiv.innerHTML = 'HIGH SCORE!!'
+                $('#scoreTitle').css('color', 'yellow')
+                $('#scoreTitle').css('font-size', '1.2em')
+            } else {
+                console.log('no')
+                $('#score').prop('Counter', fib(Number(score - 1))).animate({
+                    Counter: fib(Number(score))
+                }, {
+                    duration: 800,
+                    easing: 'swing',
+                    step: function (now) {
+                        $('#score').text(Math.ceil(now));
+                    },
+                    queue: false
+                });
+            }
         }
+
+
     });
+
 
 })
 
