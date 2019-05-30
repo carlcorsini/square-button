@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let animation = 'spin'
     let color = getRandomColor()
     let random = true
+    let animating = false
 
 
     selectaAnimation.addEventListener('change', (e) => {
@@ -37,7 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    square.addEventListener('mouseover', () => {
+        if (!animating) square.classList.add('hover')
+    })
+    square.addEventListener('mouseout', () => {
+        if (!animating) square.classList.remove('hover')
+    })
+
     theForm.addEventListener('submit', (e) => {
+        animating = true
         button.disabled = true
         $('.ui.dropdown').addClass("disabled");
         title.style.opacity = '0.5'
@@ -51,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title.style.opacity = '1'
             button.disabled = false
             document.body.style.backgroundColor = '#0c1522'
+            animating = false
         }, 4000)
     })
 
