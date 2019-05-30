@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let color = getRandomColor()
     let random = true
     let animating = false
+    let hovering = false
 
 
     selectaAnimation.addEventListener('change', (e) => {
@@ -40,9 +41,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     square.addEventListener('mouseover', () => {
         if (!animating) square.classList.add('hover')
+        hovering = true
     })
     square.addEventListener('mouseout', () => {
         if (!animating) square.classList.remove('hover')
+        hovering = false
+    })
+
+    let changeColorDiv = document.querySelector('#changeColorDiv')
+
+    changeColorDiv.addEventListener('mouseover', () => {
+        hovering = true
+    })
+    changeColorDiv.addEventListener('mouseout', () => {
+        hovering = false
     })
 
     theForm.addEventListener('submit', (e) => {
@@ -64,14 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000)
     })
 
-    $("#square").click(function (e) {
+    $("body").click(function (e) {
 
         // Remove any old one
         $(".ripple").remove();
 
         // Setup
-        var posX = $(this).offset().left + 5,
-            posY = $(this).offset().top + 10,
+        var posX = $(this).offset().left,
+            posY = $(this).offset().top - 38,
             buttonWidth = $(this).width(),
             buttonHeight = $(this).height();
 
@@ -92,12 +104,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // Add the ripples CSS and start the animation
-        $(".ripple").css({
-            width: buttonWidth,
-            height: buttonHeight,
-            top: y + 'px',
-            left: x + 'px'
-        }).addClass("rippleEffect");
+        if (!hovering) {
+            $(".ripple").css({
+                width: buttonWidth,
+                height: buttonHeight,
+                top: y + 'px',
+                left: x + 'px'
+            }).addClass("rippleEffect");
+        }
     });
 
 })
