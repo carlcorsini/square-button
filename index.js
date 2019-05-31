@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let chosenValue
     let chosenAudio = 'assets/audio/womp.wav'
     let muting = false
+    let winningScore = 33
 
     womp.addEventListener('click', () => {
         drip.classList.remove('active')
@@ -194,8 +195,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let fibMinusOne
 
     $("body").click(function (e) {
-        if (score === 33) {
+        if (score === winningScore) {
+            chosenValue = Math.random() < 0.5 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
             winner++
+
         }
         if (score == 10) {
             $('#scoreBox').css('font-size', '1.1em')
@@ -256,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (winner) {
                 winner++
                 if (winner == 2) {
-                    getSoundAndFadeAudio('works')
+                    Math.random() < 0.5 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
                     turnYourLightsDownLow()
                     highScore = true
                     animating = true
@@ -459,10 +462,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     var source
 
-    chosenValue = Math.random() < 0.5 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
 
     function play(pitch) {
-        source = score === 33 ? playSound(chosenValue, 1) : playSound(chosenAudio, pitch)
+
+        source = score === winningScore ? playSound(chosenValue, 1) : playSound(chosenAudio, pitch)
     }
 
     function stop() {
@@ -482,11 +485,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Only fade if past the fade out point or not at zero already
             console.log(sound.volume)
-            if ((sound.currentTime >= fadePoint) && (sound.volume >= 0.11)) {
-                sound.volume -= 0.1;
+            if ((sound.currentTime >= fadePoint) && (sound.volume >= 0.0)) {
+                sound.volume -= 0.09;
             }
             // When volume at zero stop all the intervalling
-            if (sound.volume < 0.11) {
+            if (sound.volume <= 0.010000000000000259) {
+                sound.volume = 0
                 clearInterval(fadeAudio);
                 sound.volume = 1
             }
