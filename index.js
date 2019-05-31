@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let fibMinusOne
 
     $("body").click(function (e) {
-        if (score === 35) {
+        if (score === 33) {
             winner++
         }
         if (!hovering && !highScore) {
