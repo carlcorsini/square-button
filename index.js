@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let scoreBox = document.querySelector('#scoreBox')
     let womp = document.querySelector('#womp')
     let drip = document.querySelector('#drip')
+    let mute = document.querySelector('#mute')
 
 
     $('#theForm').hide().fadeIn(4000)
@@ -64,14 +65,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     womp.addEventListener('click', () => {
         drip.classList.remove('active')
+        mute.classList.remove('mute')
         womp.classList.add('active')
         chosenAudio = 'assets/audio/womp.wav'
     })
 
     drip.addEventListener('click', () => {
         womp.classList.remove('active')
+        mute.classList.remove('mute')
         drip.classList.add('active')
         chosenAudio = 'assets/audio/drip.wav'
+    })
+
+    mute.addEventListener('click', () => {
+        womp.classList.remove('active')
+        drip.classList.remove('active')
+        mute.classList.add('active')
+        chosenAudio = ''
     })
 
     document.body.addEventListener('mousemove', e => {
