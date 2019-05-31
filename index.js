@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let title = document.querySelector('#title')
     let changeColorDiv = document.querySelector('#changeColorDiv')
     let scoreBox = document.querySelector('#scoreBox')
-    let works = document.querySelector('#works')
+    let womp = document.querySelector('#womp')
+    let drip = document.querySelector('#drip')
+
 
     $('#theForm').hide().fadeIn(4000)
     $('#titleLink').hide().fadeIn(5000)
@@ -57,6 +59,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let modifier = 5
     let winner = 0
     let fibula = []
+    let chosenValue
+    let chosenAudio = 'assets/audio/womp.wav'
+
+    womp.addEventListener('click', () => {
+        drip.classList.remove('active')
+        womp.classList.add('active')
+        chosenAudio = 'assets/audio/womp.wav'
+    })
+
+    drip.addEventListener('click', () => {
+        womp.classList.remove('active')
+        drip.classList.add('active')
+        chosenAudio = 'assets/audio/drip.wav'
+    })
 
     document.body.addEventListener('mousemove', e => {
 
@@ -79,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000)
 
     square.addEventListener('mouseover', () => {
-        console.log('hey')
         if (!animating) square.classList.add('hover')
         hovering = true
     })
@@ -230,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         $('#square').css('opacity', '1')
                         $('#scoreBox').removeClass('hover')
                         letThereBeLight()
+                        animating = true
                         $('#defaultCanvas0').css('border-color', 'black')
                         $('#square').css('border-color', 'aliceblue')
                         $('#square').css('background-color', '#0c1522')
@@ -237,9 +253,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         $('#defaultCanvas0').css('border-color', '#0c1522')
                     }, 14000)
                     setTimeout(() => {
-                        animating = false
                         $('body').css('background-color', '#0c1522')
                         $('#square').removeClass('moveUp')
+                        animating = false
 
                     }, 20000)
                     setTimeout(() => {
@@ -344,6 +360,78 @@ document.addEventListener('DOMContentLoaded', () => {
     // And get it started by calling animate().
     animate()
 
+    function playSound(file, speed = 1, pitchShift = 1, loop = false, autoplay = true) {
+        /*
+        Use the play() method to start the audio. if pitchShift is true
+        use the stop() method to stop the audio and destroy the object.
+        If pitchShift is false use the pause() method to pause and set
+        the attribute currentTime to 0 to reset the time.
+        */
+        if (pitchShift) {
+            /*
+            After weeks of searching, I have finally found a way to pitch shift audio.
+            Thank you Mozilla.
+            2018/03/31:
+                https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/playbackRate
+                https://github.com/mdn/webaudio-examples/tree/master/decode-audio-data
+                https://www.w3schools.com/jsref/prop_audio_loop.asp
+            Original comments:
+                use XHR to load an audio track, and
+                decodeAudioData to decode it and stick it in a buffer.
+                Then we put the buffer into the source
+            */
+            audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+            source = audioCtx.createBufferSource();
+            request = new XMLHttpRequest();
+
+            request.open('GET', file, true);
+
+            request.responseType = 'arraybuffer';
+
+
+            request.onload = function () {
+                var audioData = request.response;
+
+                audioCtx.decodeAudioData(audioData, function (buffer) {
+                        myBuffer = buffer;
+                        songLength = buffer.duration;
+                        source.buffer = myBuffer;
+                        source.playbackRate.value = speed;
+                        source.connect(audioCtx.destination);
+                        source.loop = loop;
+                    },
+
+                    function (e) {
+                        "Error with decoding audio data" + e.error
+                    });
+
+            }
+
+            request.send();
+            source.play = source.start
+        } else {
+            source = new Audio(file)
+            source.playbackRate = speed
+            source.loop = loop
+        }
+        if (autoplay) {
+            source.play()
+        }
+        return source
+    }
+    var source
+
+    chosenValue = Math.random() < 0.5 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
+
+    function play(pitch) {
+        source = score === 33 ? playSound(chosenValue, 1) : playSound(chosenAudio, pitch)
+    }
+
+    function stop() {
+        source.stop(0);
+        document.getElementById('play').href = ''
+        document.getElementById('play').innerHTML = 'Refresh to play again'
+    }
 })
 
 // random color function
@@ -505,6 +593,7 @@ function Firework() {
             this.particles[i].show();
         }
     }
+
 
 }
 

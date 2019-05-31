@@ -92,6 +92,17 @@ canvas {
 	cursor: url(assets/images/thumbs.png), auto !important;
 }
 
+#bottom-right {
+	transition: color .5s linear;
+	padding: .5em;
+	font-size: 2em;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	margin: 1em;
+	text-overflow: ellipsis;
+}
+
 #scoreBox {
 	transition: opacity 1s linear;
 	cursor: url(assets/images/thumbs.png), auto !important;
@@ -101,6 +112,13 @@ canvas {
 	cursor: url(assets/images/thumbs.png), auto !important;
 }
 
+/* #womp {
+	position: relative;
+}
+
+#drip {
+	position: relative;
+} */
 
 
 
@@ -203,7 +221,7 @@ canvas {
 		top: -50px;
 	}
 
-	99.5% {
+	99% {
 
 		top: -5px;
 	}
