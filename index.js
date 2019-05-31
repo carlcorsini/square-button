@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let pitch = 1
     let modifier = 5
     let winner = 0
+    let fibula = []
 
     document.body.addEventListener('mousemove', e => {
 
@@ -136,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         turnYourLightsDownLow()
         animation = randomAnimation ? animations[Math.floor(Math.random() * animations.length)] : animation
         square.classList.add(animation)
-        square.style.backgroundColor = random ? getRandomColor() : square.style.backgroundColor
+        square.style.backgroundColor = random ? getRandomColor() : color
         ripple = randomRipple ? getRandomColor() : ripple
         setTimeout(() => {
             letThereBeLight()
@@ -152,8 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let fibMinusOne
 
     $("body").click(function (e) {
-        fibMinusOne = fib(score - 1)
-        if (fibMinusOne >= 2178309) {
+        if (score === 35) {
             winner++
         }
         if (!hovering && !highScore) {
@@ -208,27 +208,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (winner == 2) {
                     getSoundAndFadeAudio('works')
                     turnYourLightsDownLow()
-
+                    highScore = true
+                    animating = true
                     winner++
                     scoreBox.innerHTML = 'HIGH SCORE!!'
                     scoreBox.style.color = 'yellow'
                     $('#scoreBox').css('font-size', '1.2em')
                     $('#square').css('opacity', '0')
                     $('#square').css('border-color', 'black')
-                    $('#square').css('background-color', '#0c1522;')
+                    $('#square').addClass('moveUp')
                     $('#defaultCanvas0').css('opacity', '1')
-                    highScore = true
                     $('#scoreBox').addClass('hover')
                     $('#scoreBox').css('opacity', '1')
-
+                    setIntervalX((e) => {
+                        $('body').css('background-color', getRandomColor())
+                    }, 1000, 13)
                     setTimeout(() => {
+                        highScore = false
+                        winner = 0
+                        score = 0
                         $('#square').css('opacity', '1')
                         $('#scoreBox').removeClass('hover')
-                        highScore = false
                         letThereBeLight()
+                        $('#defaultCanvas0').css('border-color', 'black')
                         $('#square').css('border-color', 'aliceblue')
-                        $('#defaultCanvas0').css('opacity', '0')
+                        $('#square').css('background-color', '#0c1522')
+                        $('#defaultCanvas0').css('opacity', '0.1')
+                        $('#defaultCanvas0').css('border-color', '#0c1522')
                     }, 14000)
+                    setTimeout(() => {
+                        animating = false
+                        $('body').css('background-color', '#0c1522')
+                        $('#square').removeClass('moveUp')
+
+                    }, 20000)
+                    setTimeout(() => {
+                        $('#defaultCanvas0').css('opacity', '0')
+                    }, 17000)
                 }
             } else {
                 $('#scoreBox').effect('shake', {
@@ -236,8 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     distance: 3,
                 }, 100)
                 score++
-                $('#scoreBox').prop('Counter', fib(Number(score - 1))).animate({
-                    Counter: fib(Number(score))
+                fibula.push(fib(score))
+                $('#scoreBox').prop('Counter', fibula[score - 2] || 0).animate({
+                    Counter: fibula[score - 1]
                 }, {
                     duration: 500,
                     easing: 'swing',
@@ -246,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     queue: false
                 });
-                scoreBox.innerHTML = fib(Number(score))
+                scoreBox.innerHTML = fibula[score]
             }
 
 
@@ -353,7 +370,7 @@ var gravity;
 
 
 function setup() {
-    var cnv = createCanvas(840, 420);
+    var cnv = createCanvas(1260, 420);
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 4;
     cnv.position(x, y);
@@ -510,5 +527,18 @@ function getSoundAndFadeAudio(audiosnippetId) {
             clearInterval(fadeAudio);
         }
     }, 200);
+
     sound.play()
+}
+
+function setIntervalX(callback, delay, repetitions) {
+    var x = 0;
+    var intervalID = window.setInterval(function () {
+
+        callback();
+
+        if (++x === repetitions) {
+            window.clearInterval(intervalID);
+        }
+    }, delay);
 }
