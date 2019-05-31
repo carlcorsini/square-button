@@ -62,11 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let fibula = []
     let chosenValue
     let chosenAudio = 'assets/audio/womp.wav'
+    let muting = false
 
     womp.addEventListener('click', () => {
         drip.classList.remove('active')
         mute.classList.remove('mute')
         womp.classList.add('active')
+        muting = false
         chosenAudio = 'assets/audio/womp.wav'
     })
 
@@ -74,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         womp.classList.remove('active')
         mute.classList.remove('mute')
         drip.classList.add('active')
+        muting = false
         chosenAudio = 'assets/audio/drip.wav'
     })
 
@@ -81,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         womp.classList.remove('active')
         drip.classList.remove('active')
         mute.classList.add('active')
+        muting = true
         chosenAudio = ''
     })
 
@@ -181,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (score === 33) {
             winner++
         }
-        if (!hovering && !highScore) {
+        if (!hovering && !highScore && !muting) {
             play(pitch / modifier)
         }
         if (highScore) return
@@ -377,6 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         If pitchShift is false use the pause() method to pause and set
         the attribute currentTime to 0 to reset the time.
         */
+        if (muting) return
         if (pitchShift) {
             /*
             After weeks of searching, I have finally found a way to pitch shift audio.
@@ -441,6 +446,28 @@ document.addEventListener('DOMContentLoaded', () => {
         source.stop(0);
         document.getElementById('play').href = ''
         document.getElementById('play').innerHTML = 'Refresh to play again'
+    }
+
+    function getSoundAndFadeAudio(audiosnippetId) {
+        if (muting) return
+        var sound = document.getElementById(audiosnippetId);
+
+        // Set the point in playback that fadeout begins. This is for a 2 second fade out.
+        var fadePoint = sound.duration - 2;
+
+        var fadeAudio = setInterval(function () {
+
+            // Only fade if past the fade out point or not at zero already
+            if ((sound.currentTime >= fadePoint) && (sound.volume != 0.0)) {
+                sound.volume -= 0.1;
+            }
+            // When volume at zero stop all the intervalling
+            if (sound.volume === 0.0) {
+                clearInterval(fadeAudio);
+            }
+        }, 200);
+
+        sound.play()
     }
 })
 
@@ -607,28 +634,7 @@ function Firework() {
 
 }
 
-function getSoundAndFadeAudio(audiosnippetId) {
 
-    var sound = document.getElementById(audiosnippetId);
-    console.log(sound.duration)
-
-    // Set the point in playback that fadeout begins. This is for a 2 second fade out.
-    var fadePoint = sound.duration - 2;
-
-    var fadeAudio = setInterval(function () {
-
-        // Only fade if past the fade out point or not at zero already
-        if ((sound.currentTime >= fadePoint) && (sound.volume != 0.0)) {
-            sound.volume -= 0.1;
-        }
-        // When volume at zero stop all the intervalling
-        if (sound.volume === 0.0) {
-            clearInterval(fadeAudio);
-        }
-    }, 200);
-
-    sound.play()
-}
 
 function setIntervalX(callback, delay, repetitions) {
     var x = 0;
