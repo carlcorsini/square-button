@@ -1,4 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
+    if (mobileCheck()) {
+        document.body.innerHTML = ''
+        document.body.style.textAlign = "center"
+        let container = document.createElement('div')
+        container.classList.add('ui', 'container')
+        document.body.appendChild(container)
+        let sorry = document.createElement('h1')
+        container.appendChild(sorry)
+        sorry.style.marginTop = '5em'
+        sorry.innerHTML = "Square doesn't work on a phone yet. Sorry :( "
+        document.body.appendChild(sorry)
+        let sorry2 = document.createElement('h2')
+        sorry2.style.marginBottom = '2em'
+        let website = document.createElement('a')
+        website.href = 'https://carlcorsini.com'
+        website.innerText = 'carlcorsini.com'
+        website.style.fontSize = '3em'
+        website.style.color = 'aliceblue'
+
+        sorry2.innerHTML = `Check out my website for other projects:`
+        document.body.appendChild(sorry)
+        document.body.appendChild(sorry2)
+        document.body.appendChild(website)
+
+        return
+    }
+
     $('.ui.dropdown').hide().fadeIn(5000)
     $('#theForm').hide().fadeIn(5000)
     $('#titleLink').hide().fadeIn(5000)
@@ -46,9 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let drip = document.querySelector('#drip')
     let mute = document.querySelector('#mute')
 
-
-
-
     // assign required variables
     let color = '#0c1522'
     let ripple = getRandomColor()
@@ -68,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let chosenValue
     let chosenAudio = 'assets/audio/womp.wav'
     let muting = false
-    let winningScore = 33
+    let winningScore = 32
 
     womp.addEventListener('click', () => {
         drip.classList.remove('active')
@@ -192,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---------------------
 
     let fib = (num) => num <= 1 ? 1 : fib(num - 1) + fib(num - 2)
-    let fibMinusOne
 
     $("body").click(function (e) {
         if (score === winningScore) {
@@ -328,6 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // dots is an array of Dot objects,
     // mouse is an object used to track the X and Y position
     // of the mouse, set with a mousemove event listener below
+
     var dots = [],
         mouse = {
             x: 0,
@@ -498,181 +522,187 @@ document.addEventListener('DOMContentLoaded', () => {
 
         sound.play()
     }
+
+    let getRandomColor = () => {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+
+
+    // Round Two
+
+
+    //Based on https://www.youtube.com/watch?v=CKeyIbT3vXI
+
+    var fireworks = [];
+    var gravity;
+
+
+    function setup() {
+        if (mobileCheck()) return
+        var cnv = createCanvas(1260, 420);
+        var x = (windowWidth - width) / 2;
+        var y = (windowHeight - height) / 4;
+        cnv.position(x, y);
+        stroke(10);
+        strokeWeight(1);
+
+        gravity = createVector(0, .2);
+    }
+
+
+    function draw() {
+        colorMode(RGB, 100, 500, 10, 255);
+        background(0, 100);
+
+        if (random(1) < .3) {
+            fireworks.push(new Firework());
+        }
+
+        for (var i = fireworks.length - 1; i >= 0; i--) {
+            fireworks[i].update();
+            fireworks[i].show();
+            if (fireworks[i].done()) {
+                fireworks.splice(i, 1);
+            }
+        }
+    }
+
+
+    //____Particle Function____// 
+    function Particle(x, y, firework, hu) {
+        this.pos = createVector(x, y);
+        this.firework = firework;
+        this.lifespan = 300;
+        this.weight = 4;
+        this.hu = hu;
+
+        if (this.firework) {
+            this.vel = createVector(0, -random(height / 100, height / (32 + height / 100)));
+        } else {
+            this.vel = p5.Vector.random2D();
+            this.vel.setMag(pow(random(1, 2), 2));
+            this.weight = map(mag(this.vel.x, this.vel.y), 1, 4, 3, 0);
+            this.vel.mult(height / this.pos.y);
+        }
+
+        this.acc = createVector(0, 0);
+
+        this.applyForce = function (force) {
+            this.acc.add(force);
+        }
+
+        this.update = function () {
+            if (!this.firework) {
+                this.vel.mult(0.9);
+                this.lifespan -= 5;
+            }
+            this.vel.add(this.acc);
+            this.pos.add(this.vel);
+            this.acc.mult(0);
+        }
+
+        this.done = function () {
+            if (this.lifespan > 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        this.show = function () {
+            if (!this.firework) {
+                colorMode(HSB);
+                stroke(hu, 255, 255, this.lifespan);
+                strokeWeight(this.weight);
+            } else {
+                colorMode(HSB);
+                stroke(hu, 255, 255);
+                strokeWeight(4);
+            }
+            point(this.pos.x, this.pos.y);
+        }
+
+    }
+
+
+    //____Firework Function____// 
+    function Firework() {
+
+        this.hu = random(255);
+        this.firework = new Particle(random(width), height, true, this.hu);
+        this.exploded = false;
+        this.particles = [];
+
+        this.done = function () {
+            if (this.exploded && this.particles.length === 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        this.update = function () {
+            if (!this.exploded) {
+                this.firework.applyForce(gravity);
+                this.firework.update();
+                if (this.firework.vel.y >= 0) {
+                    this.exploded = true;
+                    this.explode();
+                }
+            }
+            for (var i = this.particles.length - 1; i >= 0; i--) {
+                this.particles[i].applyForce(gravity);
+                this.particles[i].update();
+                if (this.particles[i].done()) {
+                    this.particles.splice(i, 1);
+                }
+            }
+        }
+
+        this.explode = function () {
+            for (var i = 0; i < floor(random(10, 100)); i++) {
+                var p = new Particle(this.firework.pos.x, this.firework.pos.y, false, this.hu);
+                this.particles.push(p);
+            }
+        }
+
+        this.show = function () {
+            if (!this.exploded) {
+                this.firework.show();
+            }
+            for (var i = 0; i < this.particles.length; i++) {
+                this.particles[i].show();
+            }
+        }
+    }
+
+    function setIntervalX(callback, delay, repetitions) {
+        var x = 0;
+        var intervalID = window.setInterval(function () {
+
+            callback();
+
+            if (++x === repetitions) {
+                window.clearInterval(intervalID);
+            }
+        }, delay);
+    }
+
+
 })
+let mobileCheck = () => {
+    var check = false;
+    (function (a) {
+        if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+    })(navigator.userAgent || navigator.vendor || window.opera);
+    return check;
+};
 
 // random color function
 // returns color string
-
-let getRandomColor = () => {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-
-
-// Round Two
-
-
-//Based on https://www.youtube.com/watch?v=CKeyIbT3vXI
-
-var fireworks = [];
-var gravity;
-
-
-function setup() {
-    var cnv = createCanvas(1260, 420);
-    var x = (windowWidth - width) / 2;
-    var y = (windowHeight - height) / 4;
-    cnv.position(x, y);
-    stroke(10);
-    strokeWeight(1);
-
-    gravity = createVector(0, .2);
-}
-
-
-function draw() {
-    colorMode(RGB, 100, 500, 10, 255);
-    background(0, 100);
-
-    if (random(1) < .3) {
-        fireworks.push(new Firework());
-    }
-
-    for (var i = fireworks.length - 1; i >= 0; i--) {
-        fireworks[i].update();
-        fireworks[i].show();
-        if (fireworks[i].done()) {
-            fireworks.splice(i, 1);
-        }
-    }
-}
-
-
-//____Particle Function____// 
-function Particle(x, y, firework, hu) {
-    this.pos = createVector(x, y);
-    this.firework = firework;
-    this.lifespan = 300;
-    this.weight = 4;
-    this.hu = hu;
-
-    if (this.firework) {
-        this.vel = createVector(0, -random(height / 100, height / (32 + height / 100)));
-    } else {
-        this.vel = p5.Vector.random2D();
-        this.vel.setMag(pow(random(1, 2), 2));
-        this.weight = map(mag(this.vel.x, this.vel.y), 1, 4, 3, 0);
-        this.vel.mult(height / this.pos.y);
-    }
-
-    this.acc = createVector(0, 0);
-
-    this.applyForce = function (force) {
-        this.acc.add(force);
-    }
-
-    this.update = function () {
-        if (!this.firework) {
-            this.vel.mult(0.9);
-            this.lifespan -= 5;
-        }
-        this.vel.add(this.acc);
-        this.pos.add(this.vel);
-        this.acc.mult(0);
-    }
-
-    this.done = function () {
-        if (this.lifespan > 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    this.show = function () {
-        if (!this.firework) {
-            colorMode(HSB);
-            stroke(hu, 255, 255, this.lifespan);
-            strokeWeight(this.weight);
-        } else {
-            colorMode(HSB);
-            stroke(hu, 255, 255);
-            strokeWeight(4);
-        }
-        point(this.pos.x, this.pos.y);
-    }
-
-}
-
-
-//____Firework Function____// 
-function Firework() {
-
-    this.hu = random(255);
-    this.firework = new Particle(random(width), height, true, this.hu);
-    this.exploded = false;
-    this.particles = [];
-
-    this.done = function () {
-        if (this.exploded && this.particles.length === 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    this.update = function () {
-        if (!this.exploded) {
-            this.firework.applyForce(gravity);
-            this.firework.update();
-            if (this.firework.vel.y >= 0) {
-                this.exploded = true;
-                this.explode();
-            }
-        }
-        for (var i = this.particles.length - 1; i >= 0; i--) {
-            this.particles[i].applyForce(gravity);
-            this.particles[i].update();
-            if (this.particles[i].done()) {
-                this.particles.splice(i, 1);
-            }
-        }
-    }
-
-    this.explode = function () {
-        for (var i = 0; i < floor(random(10, 100)); i++) {
-            var p = new Particle(this.firework.pos.x, this.firework.pos.y, false, this.hu);
-            this.particles.push(p);
-        }
-    }
-
-    this.show = function () {
-        if (!this.exploded) {
-            this.firework.show();
-        }
-        for (var i = 0; i < this.particles.length; i++) {
-            this.particles[i].show();
-        }
-    }
-
-
-}
-
-
-
-function setIntervalX(callback, delay, repetitions) {
-    var x = 0;
-    var intervalID = window.setInterval(function () {
-
-        callback();
-
-        if (++x === repetitions) {
-            window.clearInterval(intervalID);
-        }
-    }, delay);
-}
