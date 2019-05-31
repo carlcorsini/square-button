@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    $('.ui.dropdown').hide().fadeIn(5000)
+    $('#theForm').hide().fadeIn(5000)
+    $('#titleLink').hide().fadeIn(5000)
+    $('#bottom-right').hide().fadeIn(5000)
+    $('#bottom-left').hide().fadeIn(5000)
     // initialize semantic dropdown
     $('.ui.dropdown')
         .dropdown();
@@ -7,8 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     //        * dims page *
     let turnYourLightsDownLow = () => {
         animating = true
-        button.disabled = true
+        // button.disabled = true
         $('.ui.dropdown').addClass("disabled");
+        $('.ui.button').addClass("disabled");
         title.style.opacity = '0.25'
         scoreBox.style.opacity = '0.1'
         document.body.style.backgroundColor = "#010106"
@@ -18,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // * reverses dim effect *
     let letThereBeLight = () => {
         $('.ui.dropdown').removeClass("disabled");
+        $('.ui.button').removeClass("disabled");
         title.style.opacity = '1'
         scoreBox.style.opacity = '1'
         document.body.style.backgroundColor = '#0c1522'
@@ -40,9 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let mute = document.querySelector('#mute')
 
 
-    $('#theForm').hide().fadeIn(4000)
-    $('#titleLink').hide().fadeIn(5000)
-    $('#bottom-left').hide().fadeIn(4000)
+
 
     // assign required variables
     let color = '#0c1522'
@@ -52,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let random = true
     let animating = false
     let hovering = false
-    let animations = ['spin', 'bounce', 'move']
+    let animations = ['spin', 'bounce', 'move', 'wrapAround']
     let animation = animations[Math.floor(Math.random() * animations.length)];
     let score = 0
     let highScore = false
@@ -169,8 +174,15 @@ document.addEventListener('DOMContentLoaded', () => {
         square.style.backgroundColor = random ? getRandomColor() : color
         ripple = randomRipple ? getRandomColor() : ripple
         setTimeout(() => {
-            letThereBeLight()
-            square.classList.remove(animation)
+            if (animation == 'wrapAround') {
+                setTimeout(() => {
+                    letThereBeLight()
+                    square.classList.remove(animation)
+                }, 6000)
+            } else {
+                letThereBeLight()
+                square.classList.remove(animation)
+            }
         }, 4000)
     })
 
@@ -184,6 +196,15 @@ document.addEventListener('DOMContentLoaded', () => {
     $("body").click(function (e) {
         if (score === 33) {
             winner++
+        }
+        if (score == 10) {
+            $('#scoreBox').css('font-size', '1.1em')
+        }
+        if (score == 20) {
+            $('#scoreBox').css('font-size', '1.2em')
+        }
+        if (score == 30) {
+            $('#scoreBox').css('font-size', '1.3em')
         }
         if (!hovering && !highScore && !muting) {
             play(pitch / modifier)
@@ -242,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     winner++
                     scoreBox.innerHTML = 'HIGH SCORE!!'
                     scoreBox.style.color = 'yellow'
-                    $('#scoreBox').css('font-size', '1.2em')
+                    $('#scoreBox').css('font-size', '1.5em')
                     $('#square').css('opacity', '0')
                     $('#square').css('border-color', 'black')
                     $('#square').addClass('moveUp')
@@ -265,6 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         $('#square').css('background-color', '#0c1522')
                         $('#defaultCanvas0').css('opacity', '0.1')
                         $('#defaultCanvas0').css('border-color', '#0c1522')
+                        scoreBox.style.color = 'aliceblue'
+                        $('#scoreBox').css('font-size', '1em')
                     }, 14000)
                     setTimeout(() => {
                         $('body').css('background-color', '#0c1522')
@@ -458,12 +481,14 @@ document.addEventListener('DOMContentLoaded', () => {
         var fadeAudio = setInterval(function () {
 
             // Only fade if past the fade out point or not at zero already
-            if ((sound.currentTime >= fadePoint) && (sound.volume != 0.0)) {
+            console.log(sound.volume)
+            if ((sound.currentTime >= fadePoint) && (sound.volume >= 0.11)) {
                 sound.volume -= 0.1;
             }
             // When volume at zero stop all the intervalling
-            if (sound.volume === 0.0) {
+            if (sound.volume < 0.11) {
                 clearInterval(fadeAudio);
+                sound.volume = 1
             }
         }, 200);
 

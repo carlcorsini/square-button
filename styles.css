@@ -51,6 +51,23 @@ body {
 	opacity: 1;
 }
 
+.square {
+	background-color: #0c1522;
+	transition: opacity 2s linear, background-color 4s linear, border-color 5s linear;
+	text-align: center;
+	margin: 0 auto;
+	width: 420px;
+	height: 420px;
+	border: solid;
+	border-color: aliceblue;
+	border-radius: 10px;
+	box-shadow: #0c1522;
+	-webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
+	-moz-box-shadow: 0 0 10px rgb(0, 0, 0);
+	z-index: 1;
+	opacity: 1;
+}
+
 canvas {
 	background-color: #0c1522;
 	transition: opacity 3s linear, background-color 4s linear, border-color 6s linear;
@@ -76,8 +93,8 @@ canvas {
 }
 
 .ui dropdown {
-	transition: opacity .3s linear;
 
+	transition: opacity .3s linear;
 }
 
 #bottom-left {
@@ -104,7 +121,7 @@ canvas {
 }
 
 #scoreBox {
-	transition: opacity 1s linear;
+	transition: opacity 1s linear, font-size .1s linear;
 	cursor: url(assets/images/thumbs.png), auto !important;
 }
 
@@ -112,13 +129,11 @@ canvas {
 	cursor: url(assets/images/thumbs.png), auto !important;
 }
 
-/* #womp {
-	position: relative;
-}
 
-#drip {
-	position: relative;
-} */
+
+.ui .button {
+	transition: opacity .3s linear;
+}
 
 
 
@@ -423,4 +438,48 @@ canvas {
 	width: 6px;
 	border-radius: 3px;
 	background: teal;
+}
+
+.wrapAround {
+	animation: moveSlideShow 10s linear 1;
+	transform: translate3d(0, 0, 0);
+}
+
+@keyframes moveSlideShow {
+	0% {
+		-webkit-transform: translateX(0%);
+	}
+
+	33% {
+
+		-webkit-transform: translateX(-300%);
+	}
+
+	33.1% {
+		border-radius: 100%;
+		border: dotted;
+		-webkit-transform: translateX(300%);
+	}
+
+
+	66% {
+		-webkit-transform: translateX(0%);
+	}
+
+	100% {
+		-webkit-transform: rotate(900deg)
+	}
+
+}
+
+.wrapAround2 {
+	animation: moveSlideShow2 10s linear infinite;
+	transform: translate3d(0, 0, 0);
+}
+
+@keyframes moveSlideShow2 {
+	100% {
+
+		-webkit-transform: translateX(100%);
+	}
 }
