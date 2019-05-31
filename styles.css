@@ -121,7 +121,7 @@ canvas {
 }
 
 #scoreBox {
-	transition: opacity 1s linear, font-size .1s linear;
+	transition: opacity 1s linear, font-size .2s linear;
 	cursor: url(assets/images/thumbs.png), auto !important;
 }
 
