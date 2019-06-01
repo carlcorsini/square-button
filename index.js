@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     womp.addEventListener('click', () => {
         drip.classList.remove('active')
         mute.classList.remove('mute')
-        rasta.classList.remove('rasta')
+        rasta.classList.remove('active')
         womp.classList.add('active')
         muting = false
         chosenAudio = 'assets/audio/womp.wav'
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drip.addEventListener('click', () => {
         womp.classList.remove('active')
         mute.classList.remove('mute')
-        rasta.classList.remove('rasta')
+        rasta.classList.remove('active')
         drip.classList.add('active')
         muting = false
         chosenAudio = 'assets/audio/drip.wav'
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mute.addEventListener('click', () => {
         womp.classList.remove('active')
         drip.classList.remove('active')
-        rasta.classList.remove('rasta')
+        rasta.classList.remove('active')
         mute.classList.add('active')
         muting = true
         chosenAudio = ''

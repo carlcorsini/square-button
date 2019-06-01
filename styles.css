@@ -264,7 +264,7 @@ body {
 	animation-iteration-count: infinite;
 }
 
-*/ .bounce {
+.bounce {
 	animation: bounceIt 2s 2 alternate;
 	-webkit-animation: bounceIt 2s 2 alternate;
 }
