@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (winner) {
                 winner++
                 if (winner == 2) {
-                    Math.random() < 0.5 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
+                    Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
                     turnYourLightsDownLow()
                     highScore = true
                     animating = true
