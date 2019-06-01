@@ -34,7 +34,7 @@ body {
 #changeColorDiv {
 	text-align: center;
 	margin: auto;
-	margin-top: 5em;
+	margin-top: 3em;
 	width: 42%;
 	cursor: url(assets/images/pointer.png), auto !important;
 }
@@ -486,7 +486,7 @@ body {
 
 	33.1% {
 		border-radius: 100%;
-		border: dotted;
+
 		-webkit-transform: translateX(300%);
 	}
 
