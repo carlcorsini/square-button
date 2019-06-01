@@ -28,7 +28,6 @@ body {
 	-ms-user-select: none;
 	user-select: none;
 	cursor: url(assets/images/circle.png), auto !important;
-
 }
 
 #changeColorDiv {
@@ -99,10 +98,10 @@ body {
 	cursor: url(assets/images/pointer.png), auto !important;
 }
 
-.ui dropdown {
-
-	transition: opacity .3s linear;
-}
+/* .ui dropdown {
+	opacity: 0;
+	transition: opacity 3s linear;
+} */
 
 #bottom-left {
 	transition: color .5s linear;
@@ -139,6 +138,7 @@ body {
 #sequence {
 	transition: opacity 1s linear, font-size .3s linear;
 	color: 'aliceblue';
+	opacity: 0
 }
 
 

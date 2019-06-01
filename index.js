@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    // -----------
+    // helpers
+    // -----------
+
     let getRandomColor = () => {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -15,7 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
             direction: 'up'
         }, 20000)
     }
-    initiateSquare()
+
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // Variable Land
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
 
     // select necessary html elements    
     let square = document.querySelector('#square')
@@ -33,8 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let rasta = document.querySelector('#rasta')
     let homerun = document.querySelector('#homerun')
     let special = document.querySelector('#special')
-
-
 
     // assign required variables
     let color = '#0c1522'
@@ -61,64 +73,75 @@ document.addEventListener('DOMContentLoaded', () => {
     let muting = false
     let winningScore = 32
 
+    // ------------
+    // mobile check
+    // ------------
+
     if (mobileCheck()) {
+        let container = document.createElement('div')
+        let sorry = document.createElement('h1')
+        let sorry2 = document.createElement('h2')
+        let website = document.createElement('a')
         document.body.innerHTML = ''
         document.body.style.textAlign = "center"
-        let container = document.createElement('div')
         container.classList.add('ui', 'container')
         container.style.textAlign = 'center'
         container.style.position = '-webkit-sticky'
         document.body.appendChild(container)
-        let sorry = document.createElement('h1')
         container.appendChild(sorry)
+        container.appendChild(sorry)
+        container.appendChild(sorry2)
+        container.appendChild(website)
         sorry.style.marginTop = '5em'
         sorry.innerHTML = "Square doesn't work on a phone yet. Sorry :( "
-
-        let sorry2 = document.createElement('h2')
         sorry2.style.marginBottom = '2em'
-        let website = document.createElement('a')
+        sorry2.innerHTML = `Check out my website for other projects:`
         website.href = 'https://carlcorsini.com/#projects'
         website.innerText = 'carlcorsini.com'
         website.style.fontSize = '3em'
         website.style.color = 'aliceblue'
-
-        sorry2.innerHTML = `Check out my website for other projects:`
-        container.appendChild(sorry)
-        container.appendChild(sorry2)
-        container.appendChild(website)
         document.body.style.overflow = 'hidden'
         document.body.addEventListener('touchstart', function (e) {
             e.preventDefault();
         });
-
         setTimeout(() => {
             let canvas = document.querySelector('#defaultCanvas0')
             canvas.style.opacity = 1
         }, 1000)
-
-
         return
-
     }
 
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // Initiation
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+
+    initiateSquare()
+    setTimeout(() => {
+        document.body.style.backgroundColor = '#0c1522'
+    }, 2000)
+
+    // lock secrets
     if (score < 32) {
         special.disabled = true
         homerun.disabled = true
     }
 
-
-
-
-
-
+    // fade in 
     $('#theForm').hide().fadeIn(5000)
     $('#titleLink').hide().fadeIn(5000)
     $('#bottom-right').hide().fadeIn(5000)
     $('#bottom-left').hide().fadeIn(5000)
+
     // initialize semantic dropdown
     $('.ui.dropdown')
         .dropdown();
-    $('ui.dropdown').css('cursor', './pointer.png')
+
     // turnYourLightsDownLow function
     //        * dims page *
     let turnYourLightsDownLow = () => {
@@ -142,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animating = false
     }
 
-
+    // helper for sound selection
     let setActiveButton = (active, disabled) => {
         disabled.forEach(a => {
             a.classList.remove('active')
@@ -164,13 +187,21 @@ document.addEventListener('DOMContentLoaded', () => {
         playSound(chosenAudio, 1)
     })
 
-
     mute.addEventListener('click', () => {
         setActiveButton(mute, [drip, womp, rasta, homerun, special])
         muting = true
         chosenAudio = ''
     })
 
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // Click Event Listeners
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
 
 
     rasta.addEventListener('click', () => {
@@ -199,23 +230,19 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     document.body.addEventListener('mousemove', e => {
-
         pitch = Math.ceil(e.clientY / 100)
         modifier = Math.ceil(e.clientX / 100)
     })
 
-    // ---------------------
-    // hover event listeners
-    // ---------------------
-
-    setTimeout(() => {
-        document.body.style.backgroundColor = '#0c1522'
-    }, 2000)
-
-    setTimeout(() => {
-
-        document.body.style.backgroundColor = '#0c1522'
-    }, 1000)
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // Hover Event Listeners
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
 
     square.addEventListener('mouseover', () => {
         if (!animating) square.classList.add('hover')
@@ -244,10 +271,15 @@ document.addEventListener('DOMContentLoaded', () => {
         hovering = false
     })
 
-
-    // --------------------
-    // form event listeners
-    // --------------------
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // Form Event Listeners
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
 
     selectaAnimation.addEventListener('change', (e) => {
         if (e.target.value == 'random') {
@@ -302,6 +334,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // Form Submit
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+
     theForm.addEventListener('submit', (e) => {
         e.preventDefault()
         turnYourLightsDownLow()
@@ -316,18 +359,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     letThereBeLight()
                     square.classList.remove(animation)
+                    document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
                 }, 6000)
             } else {
                 letThereBeLight()
-                document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
                 square.classList.remove(animation)
             }
+            document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
         }, 4000)
     })
 
-    // ---------------------
-    // ripple event listener
-    // ---------------------
+
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // The Click
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
+    // ******************************************************************************
 
     let fib = (num) => num <= 1 ? 1 : fib(num - 1) + fib(num - 2)
 
@@ -349,11 +400,6 @@ document.addEventListener('DOMContentLoaded', () => {
             $('#sequence').css('opacity', '1')
             $('#sequence').html(score + 2)
         }
-
-
-
-
-
 
         let scoreSize = (currentScore, element) => {
             if (currentScore + 2 < 3) {
@@ -401,8 +447,16 @@ document.addEventListener('DOMContentLoaded', () => {
         var x = e.pageX - posX - buttonWidth / 2;
         var y = e.pageY - posY - buttonHeight / 2;
 
+        // ****************************************************************************
+        // ****************************************************************************
+        // ****************************************************************************
+        // ****************************************************************************
+        // Winner
+        // ****************************************************************************
+        // ****************************************************************************
+        // ****************************************************************************
+        // ****************************************************************************
 
-        // Add the ripples CSS and start the animation
         if (!hovering) {
             $(".ripple").css({
                 width: buttonWidth,
@@ -509,13 +563,77 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 scoreBox.innerHTML = fibula[score]
             }
-
-
         }
     });
-    // dots is an array of Dot objects,
-    // mouse is an object used to track the X and Y position
-    // of the mouse, set with a mousemove event listener below
+
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // Square Event Listener
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+
+    $("#square").click(function (e) {
+        play(pitch / modifier)
+        // Setup
+        if (animating) return
+        var posX = $(this).offset().left - 15,
+            posY = $(this).offset().top - 13,
+            buttonWidth = $(this).width(),
+            buttonHeight = $(this).height();
+
+        // Add the element
+        $(this).prepend("<span class='ripple2'></span>");
+        $(".ripple2").css('background', '#010106')
+
+        // Make it round!
+        if (buttonWidth >= buttonHeight) {
+            buttonHeight = buttonWidth;
+        } else {
+            buttonWidth = buttonHeight;
+        }
+
+        // Get the center of the element
+        var x = e.pageX - posX - buttonWidth / 2;
+        var y = e.pageY - posY - buttonHeight / 2;
+
+        // Add the ripples CSS and start the animation
+        $(".ripple2").css({
+            width: buttonWidth,
+            height: buttonHeight,
+            top: y + 'px',
+            left: x + 'px'
+        }).addClass("rippleEffect2");
+    })
+
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // Dots 
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
 
     var dots = [],
         mouse = {
@@ -567,57 +685,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    addEventListener("mousemove", function (event) {
-        //event.preventDefault();
-        mouse.x = event.pageX + 13.25
-        mouse.y = event.pageY + 13.25;
-    });
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // Tail
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
 
-    // animate() calls draw() then recursively calls itself
-    // everytime the screen repaints via requestAnimationFrame().
-    function animate() {
-        if (!hovering) {
-            draw();
-            $('.trail').css('visibility', 'visible')
-            requestAnimationFrame(animate);
-        } else {
-            $('.trail').css('visibility', 'hidden')
-            requestAnimationFrame(animate);
-        }
-    }
 
-    // And get it started by calling animate().
-    animate()
+    // addEventListener("mousemove", function (event) {
+    //     //event.preventDefault();
+    //     mouse.x = event.pageX + 13.25
+    //     mouse.y = event.pageY + 13.25;
+    // });
+
+    // // animate() calls draw() then recursively calls itself
+    // // everytime the screen repaints via requestAnimationFrame().
+    // function animate() {
+    //     if (!hovering) {
+    //         draw();
+    //         $('.trail').css('visibility', 'visible')
+    //         requestAnimationFrame(animate);
+    //     } else {
+    //         $('.trail').css('visibility', 'hidden')
+    //         requestAnimationFrame(animate);
+    //     }
+    // }
+
+    // // And get it started by calling animate().
+    // animate()
+
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // AudioZone
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
 
     function playSound(file, speed = 1, pitchShift = 1, loop = false, autoplay = true) {
-        /*
-        Use the play() method to start the audio. if pitchShift is true
-        use the stop() method to stop the audio and destroy the object.
-        If pitchShift is false use the pause() method to pause and set
-        the attribute currentTime to 0 to reset the time.
-        */
+
         if (muting) return
         if (pitchShift) {
-            /*
-            After weeks of searching, I have finally found a way to pitch shift audio.
-            Thank you Mozilla.
-            2018/03/31:
-                https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/playbackRate
-                https://github.com/mdn/webaudio-examples/tree/master/decode-audio-data
-                https://www.w3schools.com/jsref/prop_audio_loop.asp
-            Original comments:
-                use XHR to load an audio track, and
-                decodeAudioData to decode it and stick it in a buffer.
-                Then we put the buffer into the source
-            */
             audioCtx = new(window.AudioContext || window.webkitAudioContext)();
             source = audioCtx.createBufferSource();
             request = new XMLHttpRequest();
-
             request.open('GET', file, true);
-
             request.responseType = 'arraybuffer';
-
 
             request.onload = function () {
                 var audioData = request.response;
@@ -630,13 +749,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         source.connect(audioCtx.destination);
                         source.loop = loop;
                     },
-
                     function (e) {
                         "Error with decoding audio data" + e.error
                     });
 
             }
-
             request.send();
             source.play = source.start
         } else {
@@ -660,11 +777,6 @@ document.addEventListener('DOMContentLoaded', () => {
         score === winningScore ? playSound(chosenValue, 1) : playSound(chosenAudio, pitch)
     }
 
-    function stop() {
-        source.stop(0);
-        document.getElementById('play').href = ''
-        document.getElementById('play').innerHTML = 'Refresh to play again'
-    }
 
     function getSoundAndFadeAudio(audiosnippetId) {
         if (muting) return
@@ -690,66 +802,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
         sound.play()
     }
-
-    $("#square").click(function (e) {
-        play(pitch / modifier)
-        // Setup
-        if (animating) return
-        var posX = $(this).offset().left - 15,
-            posY = $(this).offset().top - 13,
-            buttonWidth = $(this).width(),
-            buttonHeight = $(this).height();
-
-
-        // Add the element
-        $(this).prepend("<span class='ripple2'></span>");
-        $(".ripple2").css('background', '#010106')
-
-        // Make it round!
-        if (buttonWidth >= buttonHeight) {
-            buttonHeight = buttonWidth;
-        } else {
-            buttonWidth = buttonHeight;
-        }
-
-        // Get the center of the element
-        var x = e.pageX - posX - buttonWidth / 2;
-        var y = e.pageY - posY - buttonHeight / 2;
-
-
-        // Add the ripples CSS and start the animation
-        // if (!hovering) {
-        $(".ripple2").css({
-            width: buttonWidth,
-            height: buttonHeight,
-            top: y + 'px',
-            left: x + 'px'
-        }).addClass("rippleEffect2");
-        // if (!hovering) {
-        //     $(".ripple2").css({
-        //         width: buttonWidth,
-        //         height: buttonHeight,
-        //         top: y + 'px',
-        //         left: x + 'px'
-        //     }).removeClass("rippleEffect2");
-        // }
-
-
-
-        // }
-    })
-
-
-
 })
-// Round Two
+
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// p5
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
 
 
-//Based on https://www.youtube.com/watch?v=CKeyIbT3vXI
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// Fire Works
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
 
 var fireworks = [];
 var gravity;
-
 
 function setup() {
     if (mobileCheck()) {
@@ -892,6 +985,17 @@ function Firework() {
     }
 }
 
+
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// Scoped Helpers
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+
 function setIntervalX(callback, delay, repetitions) {
     var x = 0;
     var intervalID = window.setInterval(function () {
@@ -910,6 +1014,3 @@ let mobileCheck = () => {
     })(navigator.userAgent || navigator.vendor || window.opera);
     return check;
 };
-
-// random color function
-// returns color string
