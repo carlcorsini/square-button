@@ -25,11 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(sorry)
         document.body.appendChild(sorry2)
         document.body.appendChild(website)
+        document.body.style.overflow = 'hidden'
+        document.body.addEventListener('touchstart', function (e) {
+            e.preventDefault();
+        });
+
         setTimeout(() => {
 
             let canvas = document.querySelector('#defaultCanvas0')
             canvas.style.opacity = 1
-        }, 200)
+        }, 500)
 
 
         return
@@ -559,7 +564,11 @@ var gravity;
 
 
 function setup() {
-    var cnv = createCanvas(1260, 420);
+    if (mobileCheck()) {
+        var cnv = createCanvas(375, 812);
+    } else {
+        var cnv = createCanvas(1260, 420);
+    }
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 4;
     cnv.position(x, y);
@@ -570,7 +579,7 @@ function setup() {
 }
 
 function draw() {
-    colorMode(RGB, 100, 500, 10, 255);
+    colorMode(RGB, 1000);
     background(0, 100);
 
     if (random(1) < .3) {

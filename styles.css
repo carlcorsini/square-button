@@ -8,6 +8,11 @@
 	cursor: url(assets/images/github.png), auto !important;
 }
 
+html {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
 #gitlink {
 	padding: 0;
 	cursor: url(assets/images/github.png), auto !important;
