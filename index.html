@@ -35,47 +35,85 @@
     <br>
 
     <div id="changeColorDiv">
-        <form id="theForm">
-            <select id="selectaAnimation" class="ui dropdown">
-                <option value="random">Random Animation</option>
-                <option value="spin">Spin</option>
-                <option value="bounce">Bounce</option>
-                <option value="move">Move</option>
-                <option value="wrapAround">Wrap</option>
-            </select>
-            <select id="selectaColor" class="ui dropdown">
-                <option value="random">Random Color</option>
-                <option value="keep">Keep Color</option>
-                <option value="white">White</option>
-                <option value="#1FE3C8">Teal</option>
-                <option value="#05BFF2">Blue</option>
-                <option value="#F20568">Red</option>
-                <option value="#f06406">Orange</option>
-            </select>
-            <select id="selectaRipple" class="ui dropdown">
-                <option value="random">Random Ripple</option>
-                <option value="keep">Keep Ripple</option>
-                <option value="white">White</option>
-                <option value="#1FE3C8">Teal</option>
-                <option value="#05BFF2">Blue</option>
-                <option value="#F20568">Red</option>
-                <option value="#f06406">Orange</option>
-                <option value="rgba(215, 14, 255, 0.4)">Pink</option>
-            </select>
-            <br>
-            <br>
-            <button type="submit" id="changeColor" class="ui inverted teal massive button">Click Me</button>
-        </form>
-        <div id="bottom-left">
+        <div class="ui form inverted">
+            <form id="theForm">
+                <div class="five fields">
+                    <div class="field">
+                        <select disabled id="selectaBackground" class="ui dropdown">
+                            <option value="random">Random Background</option>
+                            <option value="keep">Keep Background</option>
+                            <option value="white">White</option>
+                            <option value="#1FE3C8">Teal</option>
+                            <option value="#05BFF2">Blue</option>
+                            <option value="#F20568">Red</option>
+                            <option value="#f06406">Orange</option>
+                            <option value="rgba(215, 14, 255, 0.4)">Pink</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <select disabled id="selectaColor" class="ui dropdown">
+                            <option value="random">Random Color</option>
+                            <option value="keep">Keep Color</option>
+                            <option value="white">White</option>
+                            <option value="#1FE3C8">Teal</option>
+                            <option value="#05BFF2">Blue</option>
+                            <option value="#F20568">Red</option>
+                            <option value="#f06406">Orange</option>
+                            <option value="rgba(215, 14, 255, 0.4)">Pink</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <select disabled id="selectaBorder" class="ui dropdown">
+                            <option value="random">Random Border</option>
+                            <option value="keep">Keep Border</option>
+                            <option value="white">White</option>
+                            <option value="#1FE3C8">Teal</option>
+                            <option value="#05BFF2">Blue</option>
+                            <option value="#F20568">Red</option>
+                            <option value="#f06406">Orange</option>
+                            <option value="rgba(215, 14, 255, 0.4)">Pink</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <select disabled id="selectaAnimation" class="ui dropdown">
+                            <option value="random">Random Animation</option>
+                            <option value="spin">Spin</option>
+                            <option value="bounce">Bounce</option>
+                            <option value="move">Move</option>
+                            <option value="wrapAround">Wrap</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <select disabled id="selectaRipple" class="ui dropdown">
+                            <option value="random">Random Ripple</option>
+                            <option value="keep">Keep Ripple</option>
+                            <option value="white">White</option>
+                            <option value="#1FE3C8">Teal</option>
+                            <option value="#05BFF2">Blue</option>
+                            <option value="#F20568">Red</option>
+                            <option value="#f06406">Orange</option>
+                            <option value="rgba(215, 14, 255, 0.4)">Pink</option>
+                        </select>
+                    </div>
 
+                </div>
+                <br>
+                <br>
+                <button type="submit" id="changeColor" class="ui inverted teal massive button">Commence</button>
+            </form>
+        </div>
+        <div id="bottom-left">
+            <p id="sequence"></p>
             <p id="scoreBox">
-                <em id="score">0</em>
+                <em id="score">1</em>
             </p>
         </div>
         <div id="bottom-right">
-            <button id="womp" class="ui inverted teal button active">Womp</button>
+            <button id="homerun" class="ui inverted red button">Home Run</button>
+            <button id="special" class="ui inverted yellow button">Special</button>
+            <button id="womp" class="ui inverted violet button active">Womp</button>
             <button id="drip" class="ui inverted orange button">Drip</button>
-            <button id="rasta" class="ui inverted yellow button">Rasta</button>
+            <button id="rasta" class="ui inverted green button">Rasta</button>
             <button id="mute" class="ui inverted pink button">Mute</button>
         </div>
     </div>

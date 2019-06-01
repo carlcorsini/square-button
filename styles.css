@@ -34,8 +34,8 @@ body {
 #changeColorDiv {
 	text-align: center;
 	margin: auto;
-	margin-top: 3em;
-	width: 42%;
+	margin-top: 1em;
+	width: 75%;
 	cursor: url(assets/images/pointer.png), auto !important;
 }
 
@@ -134,6 +134,11 @@ body {
 
 #score {
 	cursor: url(assets/images/thumbs.png), auto !important;
+}
+
+#sequence {
+	transition: opacity 1s linear, font-size .3s linear;
+	color: 'aliceblue';
 }
 
 

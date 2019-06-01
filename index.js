@@ -1,7 +1,67 @@
 document.addEventListener('DOMContentLoaded', () => {
+    let getRandomColor = () => {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    let initiateSquare = () => {
+        $('#square').effect('shake', {
+            times: 14,
+            distance: 5,
+            direction: 'up'
+        }, 20000)
+    }
+    initiateSquare()
+
+    // select necessary html elements    
+    let square = document.querySelector('#square')
+    let theForm = document.querySelector('#theForm')
+    let selectaAnimation = document.querySelector('#selectaAnimation')
+    let selectaColor = document.querySelector('#selectaColor')
+    let selectaRipple = document.querySelector('#selectaRipple')
+    let button = document.querySelector('#changeColor')
+    let title = document.querySelector('#title')
+    let bottomRight = document.querySelector('#bottom-right')
+    let scoreBox = document.querySelector('#scoreBox')
+    let womp = document.querySelector('#womp')
+    let drip = document.querySelector('#drip')
+    let mute = document.querySelector('#mute')
+    let rasta = document.querySelector('#rasta')
+    let homerun = document.querySelector('#homerun')
+    let special = document.querySelector('#special')
+
+
+
+    // assign required variables
+    let color = '#0c1522'
+    let background = '#0c1522'
+    let border = 'aliceblue'
+    let ripple = getRandomColor()
+    let randomAnimation = true
+    let randomRipple = true
+    let randomBackground = true
+    let randomBorder = true
+    let random = true
+    let animating = false
+    let hovering = false
+    let animations = ['spin', 'bounce', 'move', 'wrapAround']
+    let animation = animations[Math.floor(Math.random() * animations.length)];
+    let score = 0
+    let highScore = false
+    let pitch = 1
+    let modifier = 5
+    let winner = 0
+    let fibula = []
+    let chosenValue
+    let chosenAudio = 'assets/audio/womp.wav'
+    let muting = false
+    let winningScore = 32
+
     if (mobileCheck()) {
-
-
         document.body.innerHTML = ''
         document.body.style.textAlign = "center"
         let container = document.createElement('div')
@@ -32,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         setTimeout(() => {
-
             let canvas = document.querySelector('#defaultCanvas0')
             canvas.style.opacity = 1
         }, 1000)
@@ -41,16 +100,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return
 
     }
-    let getRandomColor = () => {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
+
+    if (score < 32) {
+        special.disabled = true
+        homerun.disabled = true
     }
 
-    $('.ui.dropdown').hide().fadeIn(5000)
+
+
+
+
+
     $('#theForm').hide().fadeIn(5000)
     $('#titleLink').hide().fadeIn(5000)
     $('#bottom-right').hide().fadeIn(5000)
@@ -82,77 +142,57 @@ document.addEventListener('DOMContentLoaded', () => {
         animating = false
     }
 
-    // select necessary html elements    
-    let square = document.querySelector('#square')
-    let theForm = document.querySelector('#theForm')
-    let selectaAnimation = document.querySelector('#selectaAnimation')
-    let selectaColor = document.querySelector('#selectaColor')
-    let selectaRipple = document.querySelector('#selectaRipple')
-    let button = document.querySelector('#changeColor')
-    let title = document.querySelector('#title')
-    let changeColorDiv = document.querySelector('#changeColorDiv')
-    let scoreBox = document.querySelector('#scoreBox')
-    let womp = document.querySelector('#womp')
-    let drip = document.querySelector('#drip')
-    let mute = document.querySelector('#mute')
-    let rasta = document.querySelector('#rasta')
 
-    // assign required variables
-    let color = '#0c1522'
-    let ripple = getRandomColor()
-    let randomAnimation = true
-    let randomRipple = true
-    let random = true
-    let animating = false
-    let hovering = false
-    let animations = ['spin', 'bounce', 'move', 'wrapAround']
-    let animation = animations[Math.floor(Math.random() * animations.length)];
-    let score = 0
-    let highScore = false
-    let pitch = 1
-    let modifier = 5
-    let winner = 0
-    let fibula = []
-    let chosenValue
-    let chosenAudio = 'assets/audio/womp.wav'
-    let muting = false
-    let winningScore = 32
+    let setActiveButton = (active, disabled) => {
+        disabled.forEach(a => {
+            a.classList.remove('active')
+        })
+        active.classList.add('active')
+    }
 
     womp.addEventListener('click', () => {
-        drip.classList.remove('active')
-        mute.classList.remove('mute')
-        rasta.classList.remove('active')
-        womp.classList.add('active')
+        setActiveButton(womp, [drip, mute, rasta, homerun, special])
         muting = false
         chosenAudio = 'assets/audio/womp.wav'
+        playSound(chosenAudio, 1)
     })
 
     drip.addEventListener('click', () => {
-        womp.classList.remove('active')
-        mute.classList.remove('mute')
-        rasta.classList.remove('active')
-        drip.classList.add('active')
+        setActiveButton(drip, [womp, mute, rasta, homerun, special])
         muting = false
         chosenAudio = 'assets/audio/drip.wav'
+        playSound(chosenAudio, 1)
     })
 
     mute.addEventListener('click', () => {
-        womp.classList.remove('active')
-        drip.classList.remove('active')
-        rasta.classList.remove('active')
-        mute.classList.add('active')
+        setActiveButton(mute, [drip, womp, rasta, homerun, special])
         muting = true
         chosenAudio = ''
     })
 
     rasta.addEventListener('click', () => {
-        console.log('hey')
-        womp.classList.remove('active')
-        drip.classList.remove('active')
-        rasta.classList.add('active')
-        mute.classList.remove('active')
+        playSound('assets/audio/streets.wav', 1)
+        square.style.backgroundColor = '#D51C2C'
+        document.body.style.backgroundColor = '#018A2D'
+        square.style.borderColor = '#FCDE03'
+        setActiveButton(rasta, [drip, mute, womp, homerun, special])
         muting = false
         chosenAudio = 'assets/audio/rasta.wav'
+        ripple = '#FCDE03'
+    })
+
+    homerun.addEventListener('click', () => {
+        setActiveButton(homerun, [drip, mute, rasta, womp, special])
+        muting = false
+        chosenAudio = 'assets/audio/homerun.wav'
+        playSound(chosenAudio, 1)
+    })
+
+    special.addEventListener('click', () => {
+        setActiveButton(special, [drip, mute, rasta, womp, homerun])
+        muting = false
+        chosenAudio = 'assets/audio/tony.wav'
+        playSound(chosenAudio, 1)
     })
 
     document.body.addEventListener('mousemove', e => {
@@ -165,11 +205,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // hover event listeners
     // ---------------------
 
-    square.classList.add('hover')
     setTimeout(() => {
-        square.classList.remove('hover')
         document.body.style.backgroundColor = '#0c1522'
     }, 2000)
+
     setTimeout(() => {
 
         document.body.style.backgroundColor = '#0c1522'
@@ -185,12 +224,23 @@ document.addEventListener('DOMContentLoaded', () => {
         hovering = false
     })
 
-    changeColorDiv.addEventListener('mouseover', () => {
+    bottomRight.addEventListener('mouseover', () => {
         hovering = true
     })
-    changeColorDiv.addEventListener('mouseout', () => {
+    bottomRight.addEventListener('mouseout', () => {
         hovering = false
     })
+    changeColor.addEventListener('mouseover', () => {
+        hovering = true
+    })
+    changeColor.addEventListener('mouseout', () => {
+        hovering = false
+    })
+
+    selectaAnimation.addEventListener('mouseout', () => {
+        hovering = false
+    })
+
 
     // --------------------
     // form event listeners
@@ -228,6 +278,26 @@ document.addEventListener('DOMContentLoaded', () => {
             randomRipple = false
         }
     })
+    selectaBackground.addEventListener('change', (e) => {
+        if (e.target.value == 'random') {
+            randomBackground = true
+        } else if (e.target.value === 'keep') {
+            randomBackground = false
+        } else {
+            background = e.target.value
+            randomBackground = false
+        }
+    })
+    selectaBorder.addEventListener('change', (e) => {
+        if (e.target.value == 'random') {
+            randomBorder = true
+        } else if (e.target.value === 'keep') {
+            randomBorder = false
+        } else {
+            border = e.target.value
+            randomBorder = false
+        }
+    })
 
     theForm.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -236,6 +306,8 @@ document.addEventListener('DOMContentLoaded', () => {
         square.classList.add(animation)
         square.style.backgroundColor = random ? getRandomColor() : color
         ripple = randomRipple ? getRandomColor() : ripple
+
+        square.style.borderColor = randomBorder ? getRandomColor() : border
         setTimeout(() => {
             if (animation == 'wrapAround') {
                 setTimeout(() => {
@@ -244,6 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 6000)
             } else {
                 letThereBeLight()
+                document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
                 square.classList.remove(animation)
             }
         }, 4000)
@@ -256,20 +329,43 @@ document.addEventListener('DOMContentLoaded', () => {
     let fib = (num) => num <= 1 ? 1 : fib(num - 1) + fib(num - 2)
 
     $("body").click(function (e) {
+        if (hovering || winner) return
+        if (score < 10 && score > 31) {
+            $('.ui.dropdown').addClass("disabled");
+        } else {
+            $('.ui.dropdown').removeClass("disabled");
+        }
         if (score === winningScore) {
-            chosenValue = Math.random() < 0.5 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
+            chosenValue = Math.random() < 0.6 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
             winner++
 
         }
-        if (score == 10) {
-            $('#scoreBox').css('font-size', '1.1em')
+
+        if (score + 2 > 3 && score + 2 < 35) {
+
+            $('#sequence').css('opacity', '1')
+            $('#sequence').html(score + 2)
         }
-        if (score == 20) {
-            $('#scoreBox').css('font-size', '1.2em')
+
+
+        let scoreSize = (currentScore, element) => {
+            if (currentScore + 2 < 3) {
+                $(element).css('font-size', '1em')
+            }
+            if (currentScore == 10) {
+                $(element).css('font-size', '1.1em')
+            }
+            if (currentScore == 20) {
+                $(element).css('font-size', '1.2em')
+            }
+            if (currentScore == 30) {
+                $(element).css('font-size', '1.3em')
+            }
         }
-        if (score == 30) {
-            $('#scoreBox').css('font-size', '1.3em')
-        }
+
+        scoreSize(score, '#scoreBox')
+        scoreSize(score + 2, '#sequence')
+
         if (!hovering && !highScore && !muting) {
             play(pitch / modifier)
         }
@@ -278,8 +374,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // $(".ripple").remove();
 
         // Setup
-        var posX = $(this).offset().left,
-            posY = $(this).offset().top - 38,
+        var posX = $(this).offset().left - 17,
+            posY = $(this).offset().top - 25,
             buttonWidth = $(this).width(),
             buttonHeight = $(this).height();
 
@@ -320,20 +416,34 @@ document.addEventListener('DOMContentLoaded', () => {
             if (winner) {
                 winner++
                 if (winner == 2) {
+                    special.disabled = false
+                    homerun.disabled = false
                     Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
                     turnYourLightsDownLow()
                     highScore = true
                     animating = true
                     winner++
                     scoreBox.innerHTML = 'HIGH SCORE!!'
-                    scoreBox.style.color = 'yellow'
+                    $('#defaultCanvas0').css('opacity', '1')
+                    $('#sequence').effect('shake', {
+                        times: 15,
+                        distance: 5,
+                        direction: 'up'
+                    }, 17000)
+                    $('#sequence').css({
+                        fontSize: '1.5em',
+                        color: 'yellow'
+                    })
                     $('#scoreBox').css('font-size', '1.5em')
+
                     $('#square').css('opacity', '0')
                     $('#square').css('border-color', 'black')
                     $('#square').addClass('moveUp')
-                    $('#defaultCanvas0').css('opacity', '1')
                     $('#scoreBox').addClass('hover')
-                    $('#scoreBox').css('opacity', '1')
+                    $('#scoreBox').css({
+                        opacity: '1',
+                        color: 'yellow'
+                    })
                     setIntervalX((e) => {
                         $('body').css('background-color', getRandomColor())
                     }, 1000, 13)
@@ -342,31 +452,38 @@ document.addEventListener('DOMContentLoaded', () => {
                         winner = 0
                         score = 0
                         $('#square').css('opacity', '1')
-                        $('#scoreBox').removeClass('hover')
-                        letThereBeLight()
+                        $('body').css('background-color', '#0c1522')
                         animating = true
                         $('#defaultCanvas0').css('border-color', 'black')
                         $('#square').css('border-color', 'aliceblue')
                         $('#square').css('background-color', '#0c1522')
                         $('#defaultCanvas0').css('opacity', '0.1')
                         $('#defaultCanvas0').css('border-color', '#0c1522')
-                        scoreBox.style.color = 'aliceblue'
-                        $('#scoreBox').css('font-size', '1em')
+                        $('#sequence').css('opacity', '0')
                     }, 14000)
                     setTimeout(() => {
-                        $('body').css('background-color', '#0c1522')
+                        $('.ui.dropdown').addClass("disabled");
                         $('#square').removeClass('moveUp')
                         animating = false
-
+                        initiateSquare()
+                        letThereBeLight()
+                        scoreBox.style.color = 'aliceblue'
                     }, 20000)
                     setTimeout(() => {
+                        $('#scoreBox').removeClass('hover')
                         $('#defaultCanvas0').css('opacity', '0')
+                        $('#sequence').html('')
                     }, 17000)
                 }
             } else {
                 $('#scoreBox').effect('shake', {
-                    times: 4,
+                    times: 2,
                     distance: 3,
+                }, 100)
+                $('#sequence').effect('shake', {
+                    times: 2,
+                    distance: 3,
+                    direction: 'up'
                 }, 100)
                 score++
                 fibula.push(fib(score))
@@ -568,8 +685,8 @@ document.addEventListener('DOMContentLoaded', () => {
         play(pitch / modifier)
         // Setup
         if (animating) return
-        var posX = $(this).offset().left - 20,
-            posY = $(this).offset().top,
+        var posX = $(this).offset().left - 15,
+            posY = $(this).offset().top - 13,
             buttonWidth = $(this).width(),
             buttonHeight = $(this).height();
 
