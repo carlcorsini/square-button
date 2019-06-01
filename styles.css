@@ -40,6 +40,7 @@ body {
 }
 
 #square {
+	overflow: hidden;
 	background-color: #0c1522;
 	transition: opacity 2s linear, background-color 4s linear, border-color 5s linear;
 	text-align: center;
@@ -54,6 +55,7 @@ body {
 	-moz-box-shadow: 0 0 10px rgb(0, 0, 0);
 	z-index: 1;
 	opacity: 1;
+	cursor: url(assets/images/pinksquare.png), auto !important;
 }
 
 .square {
@@ -255,14 +257,14 @@ body {
 
 
 .hover {
-	/* Start the shake animation and make the animation last for 0.5 seconds */
+	/* Start the shake animation and make the animation last for 0.5 seconds  */
 	animation: shake 0.5s;
 
 	/* When the animation is finished, start again */
 	animation-iteration-count: infinite;
 }
 
-.bounce {
+*/ .bounce {
 	animation: bounceIt 2s 2 alternate;
 	-webkit-animation: bounceIt 2s 2 alternate;
 }
@@ -425,11 +427,33 @@ body {
 	transition: background 5s linear
 }
 
+.ripple2 {
+	border-radius: 10%;
+	background: rgba(215, 14, 255, 0.4);
+	transform: scale(0);
+	position: absolute;
+	opacity: 1;
+	z-index: 1;
+	transition: background 5s linear;
+	overflow: hidden;
+}
+
 .rippleEffect {
 	animation: rippleDrop 1s linear;
 }
 
 @keyframes rippleDrop {
+	100% {
+		transform: scale(3);
+		opacity: 0;
+	}
+}
+
+.rippleEffect2 {
+	animation: rippleDrop2 .2s linear;
+}
+
+@keyframes rippleDrop2 {
 	100% {
 		transform: scale(3);
 		opacity: 0;

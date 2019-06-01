@@ -7,24 +7,25 @@ document.addEventListener('DOMContentLoaded', () => {
         let container = document.createElement('div')
         container.classList.add('ui', 'container')
         container.style.textAlign = 'center'
+        container.style.position = '-webkit-sticky'
         document.body.appendChild(container)
         let sorry = document.createElement('h1')
         container.appendChild(sorry)
         sorry.style.marginTop = '5em'
         sorry.innerHTML = "Square doesn't work on a phone yet. Sorry :( "
-        document.body.appendChild(sorry)
+
         let sorry2 = document.createElement('h2')
         sorry2.style.marginBottom = '2em'
         let website = document.createElement('a')
-        website.href = 'https://carlcorsini.com'
+        website.href = 'https://carlcorsini.com/#projects'
         website.innerText = 'carlcorsini.com'
         website.style.fontSize = '3em'
         website.style.color = 'aliceblue'
 
         sorry2.innerHTML = `Check out my website for other projects:`
-        document.body.appendChild(sorry)
-        document.body.appendChild(sorry2)
-        document.body.appendChild(website)
+        container.appendChild(sorry)
+        container.appendChild(sorry2)
+        container.appendChild(website)
         document.body.style.overflow = 'hidden'
         document.body.addEventListener('touchstart', function (e) {
             e.preventDefault();
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let canvas = document.querySelector('#defaultCanvas0')
             canvas.style.opacity = 1
-        }, 500)
+        }, 1000)
 
 
         return
@@ -62,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //        * dims page *
     let turnYourLightsDownLow = () => {
         animating = true
-        // button.disabled = true
         $('.ui.dropdown').addClass("disabled");
         $('.ui.button').addClass("disabled");
         title.style.opacity = '0.25'
@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let womp = document.querySelector('#womp')
     let drip = document.querySelector('#drip')
     let mute = document.querySelector('#mute')
+    let rasta = document.querySelector('#rasta')
 
     // assign required variables
     let color = '#0c1522'
@@ -120,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     womp.addEventListener('click', () => {
         drip.classList.remove('active')
         mute.classList.remove('mute')
+        rasta.classList.remove('rasta')
         womp.classList.add('active')
         muting = false
         chosenAudio = 'assets/audio/womp.wav'
@@ -128,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drip.addEventListener('click', () => {
         womp.classList.remove('active')
         mute.classList.remove('mute')
+        rasta.classList.remove('rasta')
         drip.classList.add('active')
         muting = false
         chosenAudio = 'assets/audio/drip.wav'
@@ -136,9 +139,20 @@ document.addEventListener('DOMContentLoaded', () => {
     mute.addEventListener('click', () => {
         womp.classList.remove('active')
         drip.classList.remove('active')
+        rasta.classList.remove('rasta')
         mute.classList.add('active')
         muting = true
         chosenAudio = ''
+    })
+
+    rasta.addEventListener('click', () => {
+        console.log('hey')
+        womp.classList.remove('active')
+        drip.classList.remove('active')
+        rasta.classList.add('active')
+        mute.classList.remove('active')
+        muting = false
+        chosenAudio = 'assets/audio/rasta.wav'
     })
 
     document.body.addEventListener('mousemove', e => {
@@ -166,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hovering = true
     })
     square.addEventListener('mouseout', () => {
+        $("#ripple2").css('display', 'none')
         if (!animating) square.classList.remove('hover')
         hovering = false
     })
@@ -511,8 +526,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function play(pitch) {
-
-        source = score === winningScore ? playSound(chosenValue, 1) : playSound(chosenAudio, pitch)
+        if (hovering) {
+            playSound('assets/audio/pop.wav', pitch)
+            return
+        }
+        score === winningScore ? playSound(chosenValue, 1) : playSound(chosenAudio, pitch)
     }
 
     function stop() {
@@ -546,10 +564,53 @@ document.addEventListener('DOMContentLoaded', () => {
         sound.play()
     }
 
+    $("#square").click(function (e) {
+        play(pitch / modifier)
+        // Setup
+        if (animating) return
+        var posX = $(this).offset().left - 20,
+            posY = $(this).offset().top,
+            buttonWidth = $(this).width(),
+            buttonHeight = $(this).height();
+
+
+        // Add the element
+        $(this).prepend("<span class='ripple2'></span>");
+        $(".ripple2").css('background', '#010106')
+
+        // Make it round!
+        if (buttonWidth >= buttonHeight) {
+            buttonHeight = buttonWidth;
+        } else {
+            buttonWidth = buttonHeight;
+        }
+
+        // Get the center of the element
+        var x = e.pageX - posX - buttonWidth / 2;
+        var y = e.pageY - posY - buttonHeight / 2;
+
+
+        // Add the ripples CSS and start the animation
+        // if (!hovering) {
+        $(".ripple2").css({
+            width: buttonWidth,
+            height: buttonHeight,
+            top: y + 'px',
+            left: x + 'px'
+        }).addClass("rippleEffect2");
+        // if (!hovering) {
+        //     $(".ripple2").css({
+        //         width: buttonWidth,
+        //         height: buttonHeight,
+        //         top: y + 'px',
+        //         left: x + 'px'
+        //     }).removeClass("rippleEffect2");
+        // }
 
 
 
-
+        // }
+    })
 
 
 
