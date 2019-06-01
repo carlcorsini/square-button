@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     if (mobileCheck()) {
-
-
         document.body.innerHTML = ''
         document.body.style.textAlign = "center"
         let container = document.createElement('div')
@@ -25,15 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(sorry)
         document.body.appendChild(sorry2)
         document.body.appendChild(website)
-        setTimeout(() => {
-
-            let canvas = document.querySelector('#defaultCanvas0')
-            canvas.style.opacity = 1
-        }, 200)
-
 
         return
-
     }
     let getRandomColor = () => {
         var letters = '0123456789ABCDEF';
@@ -559,6 +550,7 @@ var gravity;
 
 
 function setup() {
+    if (mobileCheck()) return
     var cnv = createCanvas(1260, 420);
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 4;

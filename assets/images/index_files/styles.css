@@ -68,7 +68,7 @@ body {
 	opacity: 1;
 }
 
-#defaultCanvas0 {
+canvas {
 	background-color: #0c1522;
 	transition: opacity 3s linear, background-color 4s linear, border-color 6s linear;
 	text-align: center;
