@@ -27,7 +27,7 @@ body {
 	-moz-user-select: -moz-none;
 	-ms-user-select: none;
 	user-select: none;
-	cursor: url(assets/images/circle.png), auto !important;
+	cursor: url(assets/images/rainbow.png), auto !important;
 }
 
 #changeColorDiv {
@@ -35,7 +35,7 @@ body {
 	margin: auto;
 	margin-top: 1em;
 	width: 75%;
-	cursor: url(assets/images/pointer.png), auto !important;
+	cursor: url(assets/images/cube.png), auto !important;
 }
 
 #square {
@@ -54,7 +54,7 @@ body {
 	-moz-box-shadow: 0 0 10px rgb(0, 0, 0);
 	z-index: 1;
 	opacity: 1;
-	cursor: url(assets/images/pinksquare.png), auto !important;
+	cursor: url(assets/images/square.png), auto !important;
 }
 
 .square {
@@ -95,7 +95,7 @@ body {
 #changeColor {
 	transition: opacity .3s linear;
 	cursor: url(https://thumbnail.imgbin.com/3/4/7/imgbin-pizza-pizza-computer-mouse-pointer-cursor-cool-sliced-of-pizza-8-bit-illustration-HZwxHNMLxE0z3NFyL14jJ0pZK_t.jpg) !important;
-	cursor: url(assets/images/pointer.png), auto !important;
+	cursor: url(assets/images/dot.png), auto !important;
 }
 
 /* .ui dropdown {
@@ -465,14 +465,14 @@ body {
 	}
 }
 
-.trail {
-	/* className for the trail elements */
+/* .trail {
+	className for the trail elements
 	position: absolute;
 	height: 6px;
 	width: 6px;
 	border-radius: 3px;
 	background: teal;
-}
+} */
 
 .wrapAround {
 	animation: moveSlideShow 10s linear 1;
