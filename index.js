@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // letThereBeLight function
     // * reverses dim effect *
     let letThereBeLight = () => {
-        $('.ui.dropdown').removeClass("disabled");
+        if (score > 5) $('.ui.dropdown').removeClass("disabled");
         $('.ui.button').removeClass("disabled");
         title.style.opacity = '1'
         scoreBox.style.opacity = '1'
@@ -164,11 +164,14 @@ document.addEventListener('DOMContentLoaded', () => {
         playSound(chosenAudio, 1)
     })
 
+
     mute.addEventListener('click', () => {
         setActiveButton(mute, [drip, womp, rasta, homerun, special])
         muting = true
         chosenAudio = ''
     })
+
+
 
     rasta.addEventListener('click', () => {
         playSound('assets/audio/streets.wav', 1)
@@ -336,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
             $('.ui.dropdown').removeClass("disabled");
         }
         if (score === winningScore) {
-            chosenValue = Math.random() < 0.6 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
+            chosenValue = Math.random() < 0.5 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
             winner++
 
         }
@@ -346,6 +349,10 @@ document.addEventListener('DOMContentLoaded', () => {
             $('#sequence').css('opacity', '1')
             $('#sequence').html(score + 2)
         }
+
+
+
+
 
 
         let scoreSize = (currentScore, element) => {
@@ -414,10 +421,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (winner) {
+                if (chosenValue == 'assets/audio/homerun.wav') {
+                    homerun.disabled = false
+                } else {
+                    special.disabled = false
+                }
                 winner++
                 if (winner == 2) {
-                    special.disabled = false
-                    homerun.disabled = false
                     Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
                     turnYourLightsDownLow()
                     highScore = true
@@ -462,12 +472,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         $('#sequence').css('opacity', '0')
                     }, 14000)
                     setTimeout(() => {
-                        $('.ui.dropdown').addClass("disabled");
                         $('#square').removeClass('moveUp')
                         animating = false
                         initiateSquare()
                         letThereBeLight()
                         scoreBox.style.color = 'aliceblue'
+                        $('.ui.dropdown').addClass("disabled");
                     }, 20000)
                     setTimeout(() => {
                         $('#scoreBox').removeClass('hover')
