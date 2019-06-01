@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $("body").click(function (e) {
         if (hovering || winner) return
-        if (score < 10 && score > 31) {
+        if (score < 5 || score > 31 || animating) {
             $('.ui.dropdown').addClass("disabled");
         } else {
             $('.ui.dropdown').removeClass("disabled");
