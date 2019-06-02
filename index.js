@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let special = document.querySelector('#special')
     let changeColorDiv = document.querySelector('#changeColorDiv')
 
+
+
     // assign required variables
     let color = '#0c1522'
     let background = '#0c1522'
@@ -150,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animating = true
         $('.ui.dropdown').addClass("disabled");
         $('.ui.button').addClass("disabled");
-        title.style.opacity = '0.25'
+        title.style.opacity = '0.1'
         scoreBox.style.opacity = '0.1'
         document.body.style.backgroundColor = "#010106"
     }
@@ -246,13 +248,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
     // ******************************************************************************
 
+
     square.addEventListener('mouseover', () => {
-        if (!animating) square.classList.add('hover')
+        console.log(square.classList)
+        if (!animating) {
+            square.classList.add('hover')
+        } else {
+            square.classList.add('no')
+        }
         hovering = true
     })
     square.addEventListener('mouseout', () => {
         $("#ripple2").css('display', 'none')
         if (!animating) square.classList.remove('hover')
+        square.classList.remove('no')
         hovering = false
     })
 
@@ -354,13 +363,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
 
     theForm.addEventListener('submit', (e) => {
+        animating = true
         e.preventDefault()
         turnYourLightsDownLow()
         animation = randomAnimation ? animations[Math.floor(Math.random() * animations.length)] : animation
         square.classList.add(animation)
         square.style.backgroundColor = random ? getRandomColor() : color
         ripple = randomRipple ? getRandomColor() : ripple
-
         square.style.borderColor = randomBorder ? getRandomColor() : border
         setTimeout(() => {
             if (animation == 'wrapAround') {
@@ -369,6 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     square.classList.remove(animation)
                     document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
                 }, 6000)
+
             } else {
                 letThereBeLight()
                 square.classList.remove(animation)
@@ -504,11 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (winner) {
-            if (chosenValue == 'assets/audio/homerun.wav') {
-                homerun.disabled = false
-            } else {
-                special.disabled = false
-            }
+
             winner++
             if (winner == 2) {
                 Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
@@ -560,9 +566,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     initiateSquare()
                     letThereBeLight()
                     scoreBox.style.color = 'aliceblue'
-                    $('.ui.dropdown').addClass("disabled");
                 }, 20000)
                 setTimeout(() => {
+                    if (chosenValue == 'assets/audio/homerun.wav') {
+                        homerun.disabled = false
+                    } else {
+                        special.disabled = false
+                    }
                     $('#scoreBox').removeClass('hover')
                     $('#defaultCanvas0').css('opacity', '0')
                     $('#sequence').html('')
@@ -606,9 +616,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // *****************************************************************************
 
     $("#square").click(function (e) {
+        if (animating) {
+            return
+        }
         play(pitch / modifier)
         // Setup
-        if (animating) return
         var posX = $(this).offset().left - 15,
             posY = $(this).offset().top - 13,
             buttonWidth = $(this).width(),

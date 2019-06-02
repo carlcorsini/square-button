@@ -38,6 +38,12 @@ body {
 	cursor: url(assets/images/overlay.png), auto !important;
 }
 
+
+.no {
+	cursor: url(assets/images/no.png), auto !important;
+
+}
+
 #square {
 	overflow: hidden;
 	background-color: #0c1522;
@@ -54,8 +60,10 @@ body {
 	-moz-box-shadow: 0 0 10px rgb(0, 0, 0);
 	z-index: 1;
 	opacity: 1;
-	cursor: url(assets/images/overlay.png), auto !important;
+	cursor: url(assets/images/overlay.png), auto;
 }
+
+
 
 .square {
 	background-color: #0c1522;
