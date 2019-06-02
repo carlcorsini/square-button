@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
             distance: 5,
             direction: 'up'
         }, 20000)
-
     }
 
     // ******************************************************************************
@@ -123,8 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
     // ******************************************************************************
     // ******************************************************************************
-
-
 
     initiateSquare()
     setTimeout(() => {
@@ -408,12 +405,17 @@ document.addEventListener('DOMContentLoaded', () => {
             winner++
         }
 
+
         if (score + 2 > 3 && score + 2 < 35) {
+
             $('#sequence').css('opacity', '1')
             $('#sequence').html(score + 2)
         }
+        if (score === 6) {
+            console.log('six');
 
-
+            chosenValue = 'assets/audio/achievement.wav'
+        }
 
         let scoreSize = (currentScore, element) => {
             if (currentScore + 2 < 3) {
@@ -465,7 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('hey');
 
             $(".ripple").css({
-                borderRadius: '5%',
+                borderRadius: '0',
                 width: buttonWidth,
                 height: buttonHeight,
                 top: y + 'px',
@@ -759,37 +761,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (muting) return
         if (pitchShift) {
-            audioCtx = new(window.webkitAudioContext || window.AudioContext)();
-            // audioCtx.createGainNode()
+            audioCtx = new(window.AudioContext || window.webkitAudioContext)();
             source = audioCtx.createBufferSource();
             request = new XMLHttpRequest();
             request.open('GET', file, true);
             request.responseType = 'arraybuffer';
 
-            request.onload = async function () {
-                var audioData = request.response
+            request.onload = function () {
+                var audioData = request.response;
 
                 audioCtx.decodeAudioData(audioData, function (buffer) {
-                        // audioData.createGainNode()
                         myBuffer = buffer;
                         songLength = buffer.duration;
-                        console.log(source.context.currentTime)
-                        source.buffer = myBuffer
+                        source.buffer = myBuffer;
                         source.playbackRate.value = speed;
                         source.connect(audioCtx.destination);
                         source.loop = loop;
-
-
                     },
                     function (e) {
                         "Error with decoding audio data" + e.error
-                    }).catch(error => {
-                    return source
-                })
+                    });
 
             }
-            request.send()
-
+            request.send();
             source.play = source.start
         } else {
             source = new Audio(file)
@@ -797,7 +791,6 @@ document.addEventListener('DOMContentLoaded', () => {
             source.loop = loop
         }
         if (autoplay) {
-
             source.play()
         }
         return source
@@ -810,13 +803,11 @@ document.addEventListener('DOMContentLoaded', () => {
             source = playSound('assets/audio/pop.wav', pitch)
             return
         }
-        source = score === winningScore ? playSound(chosenValue, 1) : playSound(chosenAudio, pitch)
-        if (score === 5) {
-            console.log('six');
-            source = playSound('assets/audio/achievement.wav', 1)
 
-        } else if (score === winningScore) {
+        if (score === winningScore) {
             source = playSound(chosenValue, 1)
+        } else if (score == 5) {
+            source = playSound('assets/audio/achievement.wav')
         } else {
             source = playSound(chosenAudio, pitch)
         }
