@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (muting) {
         soundOn.innerHTML = 'Sound Off'
+        soundOn.classList.remove('active')
     }
 
     if (introing) {
