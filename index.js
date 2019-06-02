@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             distance: 5,
             direction: 'up'
         }, 20000)
+
     }
 
     // ******************************************************************************
@@ -47,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let rasta = document.querySelector('#rasta')
     let homerun = document.querySelector('#homerun')
     let special = document.querySelector('#special')
+    let changeColorDiv = document.querySelector('#changeColorDiv')
 
     // assign required variables
     let color = '#0c1522'
@@ -60,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let random = true
     let animating = false
     let hovering = false
+    let squaring = false
     let animations = ['spin', 'bounce', 'move', 'wrapAround']
     let animation = animations[Math.floor(Math.random() * animations.length)];
     let score = 0
@@ -120,6 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
     // ******************************************************************************
     // ******************************************************************************
+
+
 
     initiateSquare()
     setTimeout(() => {
@@ -262,14 +267,20 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     changeColor.addEventListener('mouseover', () => {
         hovering = true
+
     })
     changeColor.addEventListener('mouseout', () => {
         hovering = false
     })
-
-    selectaAnimation.addEventListener('mouseout', () => {
-        hovering = false
+    changeColorDiv.addEventListener('mouseover', () => {
+        squaring = true
     })
+
+    changeColorDiv.addEventListener('mouseout', () => {
+        squaring = false
+    })
+
+
 
     // ******************************************************************************
     // ******************************************************************************
@@ -383,23 +394,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let fib = (num) => num <= 1 ? 1 : fib(num - 1) + fib(num - 2)
 
     $("body").click(function (e) {
-        if (hovering || winner) return
+        if (highScore) return
+
+        if (winner || hovering) return
         if (score < 5 || score > 31 || animating) {
             $('.ui.dropdown').addClass("disabled");
         } else {
             $('.ui.dropdown').removeClass("disabled");
         }
+
         if (score === winningScore) {
             chosenValue = Math.random() < 0.5 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
             winner++
-
         }
 
         if (score + 2 > 3 && score + 2 < 35) {
-
             $('#sequence').css('opacity', '1')
             $('#sequence').html(score + 2)
         }
+
+
 
         let scoreSize = (currentScore, element) => {
             if (currentScore + 2 < 3) {
@@ -422,9 +436,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!hovering && !highScore && !muting) {
             play(pitch / modifier)
         }
-        if (highScore) return
-        // Remove any old one
-        // $(".ripple").remove();
+
+
 
         // Setup
         var posX = $(this).offset().left - 17,
@@ -435,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add the element
         $(this).prepend("<span class='ripple'></span>");
         $(".ripple").css('background', ripple)
+
 
         // Make it round!
         if (buttonWidth >= buttonHeight) {
@@ -447,6 +461,26 @@ document.addEventListener('DOMContentLoaded', () => {
         var x = e.pageX - posX - buttonWidth / 2;
         var y = e.pageY - posY - buttonHeight / 2;
 
+        if (squaring) {
+            console.log('hey');
+
+            $(".ripple").css({
+                borderRadius: '5%',
+                width: buttonWidth,
+                height: buttonHeight,
+                top: y + 'px',
+                left: x + 'px'
+            }).addClass("rippleEffect");
+
+        } else {
+            $(".ripple").css({
+                width: buttonWidth,
+                height: buttonHeight,
+                top: y + 'px',
+                left: x + 'px'
+            }).addClass("rippleEffect");
+
+        }
         // ****************************************************************************
         // ****************************************************************************
         // ****************************************************************************
@@ -457,113 +491,106 @@ document.addEventListener('DOMContentLoaded', () => {
         // ****************************************************************************
         // ****************************************************************************
 
-        if (!hovering) {
-            $(".ripple").css({
-                width: buttonWidth,
-                height: buttonHeight,
-                top: y + 'px',
-                left: x + 'px'
-            }).addClass("rippleEffect");
 
-            if (winner >= 2) {
-                winner++
-                $('#scoreBox').effect('shake', {
-                    times: 4,
-                    distance: 2,
-                }, 400)
+        if (winner >= 2) {
+            winner++
+            $('#scoreBox').effect('shake', {
+                times: 4,
+                distance: 2,
+            }, 400)
 
-            }
-
-            if (winner) {
-                if (chosenValue == 'assets/audio/homerun.wav') {
-                    homerun.disabled = false
-                } else {
-                    special.disabled = false
-                }
-                winner++
-                if (winner == 2) {
-                    Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
-                    turnYourLightsDownLow()
-                    highScore = true
-                    animating = true
-                    winner++
-                    scoreBox.innerHTML = 'HIGH SCORE!!'
-                    $('#defaultCanvas0').css('opacity', '1')
-                    $('#sequence').effect('shake', {
-                        times: 15,
-                        distance: 5,
-                        direction: 'up'
-                    }, 17000)
-                    $('#sequence').css({
-                        fontSize: '1.5em',
-                        color: 'yellow'
-                    })
-                    $('#scoreBox').css('font-size', '1.5em')
-
-                    $('#square').css('opacity', '0')
-                    $('#square').css('border-color', 'black')
-                    $('#square').addClass('moveUp')
-                    $('#scoreBox').addClass('hover')
-                    $('#scoreBox').css({
-                        opacity: '1',
-                        color: 'yellow'
-                    })
-                    setIntervalX((e) => {
-                        $('body').css('background-color', getRandomColor())
-                    }, 1000, 13)
-                    setTimeout(() => {
-                        highScore = false
-                        winner = 0
-                        score = 0
-                        $('#square').css('opacity', '1')
-                        $('body').css('background-color', '#0c1522')
-                        animating = true
-                        $('#defaultCanvas0').css('border-color', 'black')
-                        $('#square').css('border-color', 'aliceblue')
-                        $('#square').css('background-color', '#0c1522')
-                        $('#defaultCanvas0').css('opacity', '0.1')
-                        $('#defaultCanvas0').css('border-color', '#0c1522')
-                        $('#sequence').css('opacity', '0')
-                    }, 14000)
-                    setTimeout(() => {
-                        $('#square').removeClass('moveUp')
-                        animating = false
-                        initiateSquare()
-                        letThereBeLight()
-                        scoreBox.style.color = 'aliceblue'
-                        $('.ui.dropdown').addClass("disabled");
-                    }, 20000)
-                    setTimeout(() => {
-                        $('#scoreBox').removeClass('hover')
-                        $('#defaultCanvas0').css('opacity', '0')
-                        $('#sequence').html('')
-                    }, 17000)
-                }
-            } else {
-                $('#scoreBox').effect('shake', {
-                    times: 2,
-                    distance: 3,
-                }, 100)
-                $('#sequence').effect('shake', {
-                    times: 2,
-                    distance: 3,
-                    direction: 'up'
-                }, 100)
-                score++
-                fibula.push(fib(score))
-                $('#scoreBox').prop('Counter', fibula[score - 2] || 0).animate({
-                    Counter: fibula[score - 1]
-                }, {
-                    duration: 500,
-                    easing: 'swing',
-                    step: function (now) {
-                        $('#scoreBox').text(Math.ceil(now));
-                    },
-                    queue: false
-                });
-                scoreBox.innerHTML = fibula[score]
-            }
         }
+
+        if (winner) {
+            if (chosenValue == 'assets/audio/homerun.wav') {
+                homerun.disabled = false
+            } else {
+                special.disabled = false
+            }
+            winner++
+            if (winner == 2) {
+                Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
+                turnYourLightsDownLow()
+                highScore = true
+                animating = true
+                winner++
+                scoreBox.innerHTML = 'HIGH SCORE!!'
+                $('#defaultCanvas0').css('opacity', '1')
+                $('#sequence').effect('shake', {
+                    times: 15,
+                    distance: 5,
+                    direction: 'up'
+                }, 17000)
+                $('#sequence').css({
+                    fontSize: '1.5em',
+                    color: 'yellow'
+                })
+                $('#scoreBox').css('font-size', '1.5em')
+
+                $('#square').css('opacity', '0')
+                $('#square').css('border-color', 'black')
+                $('#square').addClass('moveUp')
+                $('#scoreBox').addClass('hover')
+                $('#scoreBox').css({
+                    opacity: '1',
+                    color: 'yellow'
+                })
+                setIntervalX((e) => {
+                    $('body').css('background-color', getRandomColor())
+                }, 1000, 13)
+                setTimeout(() => {
+                    highScore = false
+                    winner = 0
+                    score = 0
+                    $('#square').css('opacity', '1')
+                    $('body').css('background-color', '#0c1522')
+                    animating = true
+                    $('#defaultCanvas0').css('border-color', 'black')
+                    $('#square').css('border-color', 'aliceblue')
+                    $('#square').css('background-color', '#0c1522')
+                    $('#defaultCanvas0').css('opacity', '0.1')
+                    $('#defaultCanvas0').css('border-color', '#0c1522')
+                    $('#sequence').css('opacity', '0')
+                }, 14000)
+                setTimeout(() => {
+                    $('#square').removeClass('moveUp')
+                    animating = false
+                    initiateSquare()
+                    letThereBeLight()
+                    scoreBox.style.color = 'aliceblue'
+                    $('.ui.dropdown').addClass("disabled");
+                }, 20000)
+                setTimeout(() => {
+                    $('#scoreBox').removeClass('hover')
+                    $('#defaultCanvas0').css('opacity', '0')
+                    $('#sequence').html('')
+                }, 17000)
+            }
+        } else {
+            $('#scoreBox').effect('shake', {
+                times: 2,
+                distance: 3,
+            }, 100)
+            $('#sequence').effect('shake', {
+                times: 2,
+                distance: 3,
+                direction: 'up'
+            }, 100)
+            score++
+            fibula.push(fib(score))
+            $('#scoreBox').prop('Counter', fibula[score - 2] || 0).animate({
+                Counter: fibula[score - 1]
+            }, {
+                duration: 500,
+                easing: 'swing',
+                step: function (now) {
+                    $('#scoreBox').text(Math.ceil(now));
+                },
+                queue: false
+            });
+            scoreBox.innerHTML = fibula[score]
+        }
+
     });
 
     // *****************************************************************************
@@ -732,29 +759,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (muting) return
         if (pitchShift) {
-            audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+            audioCtx = new(window.webkitAudioContext || window.AudioContext)();
+            // audioCtx.createGainNode()
             source = audioCtx.createBufferSource();
             request = new XMLHttpRequest();
             request.open('GET', file, true);
             request.responseType = 'arraybuffer';
 
-            request.onload = function () {
-                var audioData = request.response;
+            request.onload = async function () {
+                var audioData = request.response
 
                 audioCtx.decodeAudioData(audioData, function (buffer) {
+                        // audioData.createGainNode()
                         myBuffer = buffer;
                         songLength = buffer.duration;
-                        source.buffer = myBuffer;
+                        console.log(source.context.currentTime)
+                        source.buffer = myBuffer
                         source.playbackRate.value = speed;
                         source.connect(audioCtx.destination);
                         source.loop = loop;
+
+
                     },
                     function (e) {
                         "Error with decoding audio data" + e.error
-                    });
+                    }).catch(error => {
+                    return source
+                })
 
             }
-            request.send();
+            request.send()
+
             source.play = source.start
         } else {
             source = new Audio(file)
@@ -762,6 +797,7 @@ document.addEventListener('DOMContentLoaded', () => {
             source.loop = loop
         }
         if (autoplay) {
+
             source.play()
         }
         return source
@@ -771,10 +807,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function play(pitch) {
         if (hovering) {
-            playSound('assets/audio/pop.wav', pitch)
+            source = playSound('assets/audio/pop.wav', pitch)
             return
         }
-        score === winningScore ? playSound(chosenValue, 1) : playSound(chosenAudio, pitch)
+        source = score === winningScore ? playSound(chosenValue, 1) : playSound(chosenAudio, pitch)
+        if (score === 5) {
+            console.log('six');
+            source = playSound('assets/audio/achievement.wav', 1)
+
+        } else if (score === winningScore) {
+            source = playSound(chosenValue, 1)
+        } else {
+            source = playSound(chosenAudio, pitch)
+        }
     }
 
 

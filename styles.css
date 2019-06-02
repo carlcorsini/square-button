@@ -35,7 +35,7 @@ body {
 	margin: auto;
 	margin-top: 1em;
 	width: 75%;
-	cursor: url(assets/images/cube.png), auto !important;
+	cursor: url(assets/images/overlay.png), auto !important;
 }
 
 #square {
@@ -54,7 +54,7 @@ body {
 	-moz-box-shadow: 0 0 10px rgb(0, 0, 0);
 	z-index: 1;
 	opacity: 1;
-	cursor: url(assets/images/square.png), auto !important;
+	cursor: url(assets/images/overlay.png), auto !important;
 }
 
 .square {
@@ -429,11 +429,10 @@ body {
 	position: absolute;
 	opacity: 1;
 	z-index: -1;
-	transition: background 5s linear
+	transition: background 5s linear, border-radius 10s linear;
 }
 
 .ripple2 {
-	border-radius: 10%;
 	background: rgba(215, 14, 255, 0.4);
 	transform: scale(0);
 	position: absolute;
@@ -441,6 +440,7 @@ body {
 	z-index: 1;
 	transition: background 5s linear;
 	overflow: hidden;
+	border-radius: 5%;
 }
 
 .rippleEffect {
