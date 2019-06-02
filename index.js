@@ -467,7 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('hey');
 
             $(".ripple").css({
-                borderRadius: '0',
+                borderRadius: '5%',
                 width: buttonWidth,
                 height: buttonHeight,
                 top: y + 'px',
