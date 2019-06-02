@@ -169,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (free) {
         freeButton.disabled = false
+        freeButton.classList.remove('disabled')
         freeButton.classList.add('active')
         storyButton.classList.remove('active')
         $('#scoreBox').html('Free Mode').css({
@@ -581,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-        if (!hovering && !highScore && !muting) {
+        if (!hovering && !highScore && muting) {
             play(pitch / modifier)
         }
 
