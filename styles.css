@@ -106,6 +106,12 @@ body {
 	cursor: url(assets/images/dot.png), auto !important;
 }
 
+#modal {
+	top: 8em;
+	text-align: center;
+	font-size: 1.5em
+}
+
 /* .ui dropdown {
 	opacity: 0;
 	transition: opacity 3s linear;

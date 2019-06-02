@@ -106,10 +106,32 @@
         <div id="bottom-right">
             <button id="homerun" class="ui inverted red button">Home Run</button>
             <button id="special" class="ui inverted yellow button">Special</button>
-            <button id="womp" class="ui inverted violet button active">Womp</button>
+            <button id="womp" class="ui inverted violet button">Womp</button>
             <button id="drip" class="ui inverted teal button">Drip</button>
-            <button id="rasta" class="ui inverted green button">Rasta</button>
-            <button id="mute" class="ui inverted grey button">Mute</button>
+            <button id="rasta" class="ui inverted yellow button">Rasta</button>
+
+            <button id="menu" class="ui icon inverted grey button"><i class="cog icon"></i></button>
+            <div id='modal' class="ui mini basic modal">
+                <div class="Settings">
+                    <i class="cog icon"></i>
+                    Settings
+                </div>
+                <div style="text-align: center" class="content">
+                    <div class="five vertical ui buttons ">
+
+                        <button id="soundOn" class="ui inverted toggle button red">Sound On</button>
+                        <button id="intro" class="ui inverted toggle red button">Intro Off</button>
+                        <button id="story" class="ui inverted red toggle button active">Fibonacci Mode</button>
+                        <button id="free" class="ui inverted red toggle button">Free Mode</button>
+                    </div>
+                </div>
+                <div id="closeMenu" style="text-align: center;" class="actions">
+                    <div class="ui red basic cancel inverted button">
+                        <i class="remove icon"></i>
+                        Close
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
