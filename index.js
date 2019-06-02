@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setActiveButton(freeButton, [storyButton])
         $('#sequence').html('')
         $('#scoreBox').css('font-size', '.9em').html('Free Mode')
-        freeButton.classList.remove('flashit4ever')
+        freeButton.classList.remove('flashit')
         free = true
         score = 0
         winner = 0
@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     reset.addEventListener('click', () => {
 
-        ['free', 'homerun', 'special', 'intro', 'muting'].forEach(a => {
+        ['free', 'homerun', 'special', 'intro', 'muting', 'champion'].forEach(a => {
             localStorage.removeItem(a)
         })
 
@@ -415,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
             $('#reset2').html('detaching service node...')
         }, 4000)
         setTimeout(() => {
-            $('#reset2').html('FatalError::ERR_HARD_DRIVE_COMPROMISED')
+            $('#reset2').html('fatal_error::ERR_HARD_DRIVE_COMPROMISED')
             $('#reset2').effect('shake', {
                 times: 10,
                 distance: 6,
@@ -808,7 +808,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 17000)
 
                 setTimeout(() => {
-                    if (champion) clearTimeout()
+                    if (champion) return
                     if (chosenValue == 'assets/audio/homerun.wav' && !free && homerun.disabled) {
                         localStorage.setItem('homerun', 'true')
                         homerun.disabled = false
@@ -823,9 +823,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         special.disabled = false
                     }
                     if (!special.disabled && !homerun.disabled) {
-                        console.log(champion)
+                        console.log('but champion?')
                         if (!free && !champion) {
-                            freeButton.classList.add('flashit4ever')
+                            console.log('tis');
+
+                            freeButton.classList.add('flashit')
                             localStorage.setItem('champion', 'true')
                             freeButton.disabled = false
                             freeButton.classList.remove('disabled')
