@@ -24,8 +24,10 @@ body {
 	color: aliceblue;
 	overflow: hidden;
 	-webkit-user-select: none;
-	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
 	-ms-user-select: none;
+	-o-user-select: none;
 	user-select: none;
 	cursor: url(assets/images/rainbow.png), auto !important;
 }

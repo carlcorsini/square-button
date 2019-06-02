@@ -84,6 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let chosenAudio = 'assets/audio/womp.wav'
     let muting = localStorage.getItem('muting') ? true : false
     let winningScore = 32
+    let specialUnlocked = localStorage.getItem('special') || false
+    let homerunUnlocked = localStorage.getItem('homerun') || false
 
     // ------------
     // mobile check
@@ -133,41 +135,49 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
     // ******************************************************************************
 
-
-
     initiateSquare()
-    if (!muting && introing) {
-        womp.classList.add('active')
-        soundOn.classList.add('active')
 
-        playSound('assets/audio/ps2.wav', 1)
-    } else {
-        soundOn.classList.add('active')
-        // soundOn.innerHTML = 'Sound Off'
+    setTimeout(() => {
+        document.body.style.backgroundColor = '#0c1522'
+    }, 2000)
+
+
+    if (homerunUnlocked) {
+        homerun.disabled = false
+        homerun.classList.remove('disabled')
 
     }
+    if (specialUnlocked) {
+        special.classList.remove('disabled')
+        special.disabled = false
+    }
+    if (!muting && introing) {
+        playSound('assets/audio/ps2.wav', 1)
+    }
+    if (!muting) {
+        womp.classList.add('active')
+        soundOn.classList.add('active')
+    }
 
+    if (muting) {
+        soundOn.innerHTML = 'Sound Off'
+    }
 
     if (introing) {
         intro.classList.add('active')
         intro.innerHTML = 'Intro On'
     }
-
     if (free) {
+        freeButton.disabled = false
         freeButton.classList.add('active')
         storyButton.classList.remove('active')
         $('#scoreBox').html('Free Mode').css({
             fontSize: '0.9em',
         })
     }
-    setTimeout(() => {
-        document.body.style.backgroundColor = '#0c1522'
-    }, 2000)
-
-    // lock secrets
     if (score < 32) {
-        special.disabled = true
-        homerun.disabled = true
+        if (!specialUnlocked) special.disabled = true
+        if (!homerunUnlocked) homerun.disabled = true
     }
 
     // fade in 
@@ -195,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // letThereBeLight function
     // * reverses dim effect *
     let letThereBeLight = () => {
-        if (score > 5 && free) $('.ui.dropdown').removeClass("disabled");
+        if (score > 5 || free) $('.ui.dropdown').removeClass("disabled");
         $('.ui.button').removeClass("disabled");
         title.style.opacity = '1'
         scoreBox.style.opacity = '1'
@@ -234,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     drip.addEventListener('click', () => {
         localStorage.removeItem('muting')
-        setActiveButton(drip, [womp, soundOn, rasta, homerun, special])
+        setActiveButton(drip, [womp, rasta, homerun, special])
         muting = false
         chosenAudio = 'assets/audio/drip.wav'
         playSound(chosenAudio, 1)
@@ -269,6 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     freeButton.addEventListener('click', () => {
         $('.ui.dropdown').removeClass("disabled");
+        $('.ui.button').removeClass("disabled");
         localStorage.setItem('free', 'true')
         setActiveButton(freeButton, [storyButton])
         $('#sequence').html('')
@@ -287,12 +298,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             intro.innerHTML = "Intro Off"
             introing = false
-
             localStorage.removeItem('intro')
-
             intro.classList.remove('active')
-
-
         }
     })
 
@@ -301,33 +308,16 @@ document.addEventListener('DOMContentLoaded', () => {
             .modal({
                 autoFocus: false,
                 onHide: function () {
-                    setTimeout(() => {
-                        document.activeElement.blur()
-                    }, 600)
+                    menu.classList.remove('active')
                     paused = false
                     modaling = false
                 },
                 onShow: function () {
-                    setTimeout(() => {
-                        document.activeElement.blur()
-                    }, 600)
+                    menu.classList.add('active')
                     paused = true
                 }
             }).modal('show');
     })
-
-
-
-
-    // ******************************************************************************
-    // ******************************************************************************
-    // ******************************************************************************
-    // ******************************************************************************
-    // Click Event Listeners
-    // ******************************************************************************
-    // ******************************************************************************
-    // ******************************************************************************
-    // ******************************************************************************
 
 
     rasta.addEventListener('click', () => {
@@ -335,21 +325,21 @@ document.addEventListener('DOMContentLoaded', () => {
         square.style.backgroundColor = '#D51C2C'
         document.body.style.backgroundColor = '#018A2D'
         square.style.borderColor = '#FCDE03'
-        setActiveButton(rasta, [drip, soundOn, womp, homerun, special])
+        setActiveButton(rasta, [drip, womp, homerun, special])
         muting = false
         chosenAudio = 'assets/audio/rasta.wav'
         ripple = '#FCDE03'
     })
 
     homerun.addEventListener('click', () => {
-        setActiveButton(homerun, [drip, soundOn, rasta, womp, special])
+        setActiveButton(homerun, [drip, rasta, womp, special])
         muting = false
         chosenAudio = 'assets/audio/homerun.wav'
         playSound(chosenAudio, 1)
     })
 
     special.addEventListener('click', () => {
-        setActiveButton(special, [drip, soundOn, rasta, womp, homerun])
+        setActiveButton(special, [drip, rasta, womp, homerun])
         muting = false
         chosenAudio = 'assets/audio/tony.wav'
         playSound(chosenAudio, 1)
@@ -372,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     square.addEventListener('mouseover', () => {
-        console.log(square.classList)
+
         if (!animating) {
             square.classList.add('hover')
         } else {
@@ -559,6 +549,9 @@ document.addEventListener('DOMContentLoaded', () => {
             winner++
         }
 
+        if (!homerun.disabled && !special.disabled) {
+            freeButton.disabled = false
+        }
 
         if ((score + 2 > 3) && score + 2 < 35) {
 
@@ -566,7 +559,7 @@ document.addEventListener('DOMContentLoaded', () => {
             $('#sequence').html(score + 2)
         }
         if (score === 6) {
-            console.log('six');
+
 
             chosenValue = 'assets/audio/achievement.wav'
         }
@@ -617,7 +610,6 @@ document.addEventListener('DOMContentLoaded', () => {
         var y = e.pageY - posY - buttonHeight / 2;
 
         if (squaring) {
-            console.log('hey');
 
             $(".ripple").css({
                 borderRadius: '5%',
@@ -681,13 +673,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     color: 'yellow'
                 })
 
-
-
                 $('#square').css({
                     opacity: '0',
                     borderColor: 'black'
                 }).addClass('moveUp')
-
 
                 $('#scoreBox').addClass('hover').css({
                     opacity: '1',
@@ -720,10 +709,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 20000)
                 setTimeout(() => {
                     if (chosenValue == 'assets/audio/homerun.wav') {
+                        localStorage.setItem('homerun', 'true')
                         homerun.disabled = false
                     } else {
+                        localStorage.setItem('special', 'true')
                         special.disabled = false
                     }
+                    if (!special.disabled && special.disabled) {
+                        special.disabled
+                    }
+
                     $('#scoreBox').removeClass('hover')
                     $('#defaultCanvas0').css('opacity', '0')
                     $('#sequence').html('')
@@ -985,7 +980,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var fadeAudio = setInterval(function () {
 
             // Only fade if past the fade out point or not at zero already
-            console.log(sound.volume)
+
             if ((sound.currentTime >= fadePoint) && (sound.volume >= 0.0)) {
                 sound.volume -= 0.09;
             }

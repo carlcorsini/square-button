@@ -20,9 +20,9 @@
 </head>
 
 <body>
-    <div id="titleLink">
-        <a id="gitlink" href="https://github.com/carlcorsini/square-button" target="_blank">
-            <h1 href="https://github.com/carlcorsini/square-button" id="title">Square</h1>
+    <div tabindex="-1" id="titleLink">
+        <a tabindex="-1" id="gitlink" href="https://github.com/carlcorsini/square-button" target="_blank">
+            <h1 tabindex="-1" href="https://github.com/carlcorsini/square-button" id="title">Square</h1>
         </a>
     </div>
 
@@ -104,8 +104,8 @@
             </p>
         </div>
         <div id="bottom-right">
-            <button id="homerun" class="ui inverted red button">Home Run</button>
-            <button id="special" class="ui inverted yellow button">Special</button>
+            <button id="homerun" class="ui disabled inverted red button">Home Run</button>
+            <button id="special" class="ui disabled inverted yellow button">Special</button>
             <button id="womp" class="ui inverted violet button">Womp</button>
             <button id="drip" class="ui inverted teal button">Drip</button>
             <button id="rasta" class="ui inverted yellow button">Rasta</button>
@@ -122,7 +122,7 @@
                         <button id="soundOn" class="ui inverted toggle button red">Sound On</button>
                         <button id="intro" class="ui inverted toggle red button">Intro Off</button>
                         <button id="story" class="ui inverted red toggle button active">Fibonacci Mode</button>
-                        <button id="free" class="ui inverted red toggle button">Free Mode</button>
+                        <button disabled id="free" class="ui inverted red toggle button">Free Mode</button>
                     </div>
                 </div>
                 <div id="closeMenu" style="text-align: center;" class="actions">
