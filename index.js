@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let chosenValue
     let chosenAudio = 'assets/audio/womp.wav'
     let muting = localStorage.getItem('muting') ? true : false
-    let winningScore = 32
+    let winningScore = free ? 1000000000 : 32
     let specialUnlocked = localStorage.getItem('special') || false
     let homerunUnlocked = localStorage.getItem('homerun') || false
     let champion = localStorage.getItem('champion') || false
@@ -306,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
         winner = 0
         highScore = false
         winningScore = 100000000000
+        console.log(winningScore)
     })
 
     intro.addEventListener('click', () => {
@@ -627,13 +628,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return
         }
-        if ((score < 5 && !free) || score > 31 || animating) {
+        if ((score < 5 && !free) || (score > 31 && !free) || animating) {
             $('.ui.dropdown').addClass("disabled");
         } else {
             $('.ui.dropdown').removeClass("disabled");
         }
 
         if (score === winningScore) {
+            console.log(winningScore)
             chosenValue = Math.random() < 0.5 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
             winner++
         }
@@ -647,7 +649,8 @@ document.addEventListener('DOMContentLoaded', () => {
             $('#sequence').css('opacity', '1')
             $('#sequence').html(score + 2)
         }
-        if (score === 6) {
+        if (score === 6 && !free) {
+            console.log(free)
             chosenValue = 'assets/audio/achievement.wav'
         }
 
@@ -747,7 +750,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
-        if (winner) {
+        if (winner && !free) {
 
             winner++
             if (winner == 2) {
@@ -1084,7 +1087,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return
         } else if (score === winningScore) {
             source = playSound(chosenValue, 1)
-        } else if (score == 5) {
+        } else if (score == 5 && !free) {
             source = playSound('assets/audio/achievement.wav')
         } else {
             source = playSound(chosenAudio, pitch)
