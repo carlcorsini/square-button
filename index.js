@@ -324,6 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     menu.addEventListener('click', () => {
+        menu.classList.remove('flashit')
         $('.ui.basic.modal')
             .modal({
                 autoFocus: false,
@@ -826,7 +827,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log('but champion?')
                         if (!free && !champion) {
                             console.log('tis');
-
+                            menu.classList.add('flashit')
                             freeButton.classList.add('flashit')
                             localStorage.setItem('champion', 'true')
                             freeButton.disabled = false
