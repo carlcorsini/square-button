@@ -582,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-        if (!hovering && !highScore && muting) {
+        if (!hovering && !highScore && !muting) {
             play(pitch / modifier)
         }
 
