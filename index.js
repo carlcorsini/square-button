@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let storyButton = document.querySelector('#story')
     let closeMenu = document.querySelector('#closeMenu')
     let intro = document.querySelector('#intro')
+    let reset = document.querySelector('#reset')
 
 
 
@@ -86,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let winningScore = 32
     let specialUnlocked = localStorage.getItem('special') || false
     let homerunUnlocked = localStorage.getItem('homerun') || false
+    let champion = localStorage.getItem('champion') || false
 
     // ------------
     // mobile check
@@ -173,17 +175,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (introing) {
         intro.classList.add('active')
-        intro.innerHTML = 'Intro On'
+        intro.innerHTML = 'PS2 Intro On'
     }
     if (free) {
-        console.log('free')
-        winningScore = 1000000000
         freeButton.disabled = false
         freeButton.classList.remove('disabled')
         freeButton.classList.add('active')
         storyButton.classList.remove('active')
         $('#scoreBox').html('Free Mode').css({
             fontSize: '0.9em',
+
         })
     }
     if (score < 32) {
@@ -225,14 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animating = false
     }
 
-    // helper for sound selection
-    let setActiveButton = (active, disabled) => {
-        active.classList.add('active')
 
-        disabled.forEach(a => {
-            a.classList.remove('active')
-        })
-    }
 
 
     // ******************************************************************************
@@ -245,6 +239,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
     // ******************************************************************************
 
+    // helper for sound selection
+    let setActiveButton = (active, disabled) => {
+        active.classList.add('active')
+
+        disabled.forEach(a => {
+            a.classList.remove('active')
+        })
+    }
 
     womp.addEventListener('click', () => {
         localStorage.removeItem('muting')
@@ -284,6 +286,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setActiveButton(storyButton, [freeButton])
         free = false
         score = 0
+        winner = false
+        winningScore = 32
+        highScore = 0
         $('#sequence').html(2)
         $('#scoreBox').html(1).css('opacity', '1')
 
@@ -295,15 +300,17 @@ document.addEventListener('DOMContentLoaded', () => {
         setActiveButton(freeButton, [storyButton])
         $('#sequence').html('')
         $('#scoreBox').css('font-size', '.9em').html('Free Mode')
+        freeButton.classList.remove('flashit4ever')
         free = true
         score = 0
         winner = 0
         highScore = false
+        winningScore = 100000000000
     })
 
     intro.addEventListener('click', () => {
         if (!introing) {
-            intro.innerHTML = "Intro On"
+            intro.innerHTML = "PS2 Intro On"
             playSound('assets/audio/ps2.wav', 1)
             localStorage.setItem('intro', 'true')
             introing = true
@@ -349,6 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
         muting = false
         chosenAudio = 'assets/audio/homerun.wav'
         playSound(chosenAudio, 1)
+        homerun.classList.remove('flashit')
     })
 
     special.addEventListener('click', () => {
@@ -356,6 +364,73 @@ document.addEventListener('DOMContentLoaded', () => {
         muting = false
         chosenAudio = 'assets/audio/tony.wav'
         playSound(chosenAudio, 1)
+        special.classList.remove('flashit')
+    })
+
+    special.addEventListener('click', () => {
+        setActiveButton(special, [drip, rasta, womp, homerun])
+        muting = false
+        chosenAudio = 'assets/audio/tony.wav'
+        playSound(chosenAudio, 1)
+    })
+
+    reset.addEventListener('click', () => {
+
+        ['free', 'homerun', 'special', 'intro', 'muting'].forEach(a => {
+            localStorage.removeItem(a)
+        })
+
+        $('#reset2').html('resetting.')
+
+        setTimeout(() => {
+            $('#reset2').html('resetting..')
+        }, 400)
+        setTimeout(() => {
+            $('#reset2').html('resetting...')
+        }, 800)
+        setTimeout(() => {
+            $('#reset2').html('')
+        }, 1200)
+        setTimeout(() => {
+            $('#reset2').html('desynchronizing.')
+        }, 1600)
+
+        setTimeout(() => {
+            $('#reset2').html('desynchronizing..')
+        }, 2000)
+        setTimeout(() => {
+            $('#reset2').html('desynchronizing...')
+        }, 2400)
+        setTimeout(() => {
+            $('#reset2').html('')
+        }, 2800)
+        setTimeout(() => {
+            $('#reset2').html('detaching service node.')
+        }, 3200)
+
+        setTimeout(() => {
+            $('#reset2').html('detaching service node..')
+        }, 3600)
+        setTimeout(() => {
+            $('#reset2').html('detaching service node...')
+        }, 4000)
+        setTimeout(() => {
+            $('#reset2').html('FatalError::ERR_HARD_DRIVE_COMPROMISED')
+            $('#reset2').effect('shake', {
+                times: 10,
+                distance: 6,
+            }, 3000)
+        }, 5500)
+        // setTimeout(() => {
+        //     $('#reset2').html('your computer will now explode')
+
+        // }, 7500)
+
+
+        setTimeout(() => {
+            location.reload()
+
+        }, 8500)
     })
 
     document.body.addEventListener('mousemove', e => {
@@ -572,8 +647,6 @@ document.addEventListener('DOMContentLoaded', () => {
             $('#sequence').html(score + 2)
         }
         if (score === 6) {
-
-
             chosenValue = 'assets/audio/achievement.wav'
         }
 
@@ -591,7 +664,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 $(element).css('font-size', '1.3em')
             }
         }
-
 
 
         if (!hovering && !highScore && !muting) {
@@ -660,6 +732,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 direction: 'up'
             }, (score / score - 1))
             $('#scoreBox').css('opacity', '.3')
+            $('#sequence').css('opacity', '1')
             return
         }
         scoreSize(score, '#scoreBox')
@@ -729,21 +802,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     animating = false
                 }, 20000)
                 setTimeout(() => {
-                    if (chosenValue == 'assets/audio/homerun.wav') {
-                        localStorage.setItem('homerun', 'true')
-                        homerun.disabled = false
-                    } else {
-                        localStorage.setItem('special', 'true')
-                        special.disabled = false
-                    }
-                    if (!special.disabled && special.disabled) {
-                        special.disabled
-                    }
-
                     $('#scoreBox').removeClass('hover')
                     $('#defaultCanvas0').css('opacity', '0')
                     $('#sequence').html('')
                 }, 17000)
+
+                setTimeout(() => {
+                    if (champion) clearTimeout()
+                    if (chosenValue == 'assets/audio/homerun.wav' && !free && homerun.disabled) {
+                        localStorage.setItem('homerun', 'true')
+                        homerun.disabled = false
+                        homerun.classList.add('flashit')
+                        homerun.classList.remove('disabled')
+                        homerun.disabled = false
+                    } else if (!free && special.disabled) {
+                        localStorage.setItem('special', 'true')
+                        special.disabled = false
+                        special.classList.add('flashit')
+                        special.classList.remove('disabled')
+                        special.disabled = false
+                    }
+                    if (!special.disabled && !homerun.disabled) {
+                        console.log(champion)
+                        if (!free && !champion) {
+                            freeButton.classList.add('flashit4ever')
+                            localStorage.setItem('champion', 'true')
+                            freeButton.disabled = false
+                            freeButton.classList.remove('disabled')
+                        }
+                        champion = true
+                    }
+                }, 16000)
+
+                if (chosenValue == 'assets/audio/homerun') {
+                    homerun.classList.add('flashit')
+                    homerun.classList.remove('disabled')
+                }
+                if (chosenValue == 'assets/audio/special') {
+                    special.classList.add('flashit')
+                    special.classList.remove('disabled')
+                }
             }
         } else {
             $('#scoreBox').effect('shake', {
