@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
     // ******************************************************************************
 
+
     initiateSquare()
 
     setTimeout(() => {
@@ -150,6 +151,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (specialUnlocked) {
         special.classList.remove('disabled')
         special.disabled = false
+    }
+
+    if (specialUnlocked && homerunUnlocked) {
+        console.log('yes')
+        freeButton.disabled = false
+        freeButton.classList.remove('disabled')
+
     }
     if (!muting && introing) {
         playSound('assets/audio/ps2.wav', 1)
@@ -168,6 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
         intro.innerHTML = 'Intro On'
     }
     if (free) {
+        console.log('free')
+        winningScore = 1000000000
         freeButton.disabled = false
         freeButton.classList.remove('disabled')
         freeButton.classList.add('active')
@@ -287,6 +297,8 @@ document.addEventListener('DOMContentLoaded', () => {
         $('#scoreBox').css('font-size', '.9em').html('Free Mode')
         free = true
         score = 0
+        winner = 0
+        highScore = false
     })
 
     intro.addEventListener('click', () => {
@@ -640,6 +652,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // ****************************************************************************
 
         if (free) {
+            score++
+            $('#sequence').html(score)
+            $('#sequence').effect('shake', {
+                times: 1,
+                distance: 10,
+                direction: 'up'
+            }, (score / score - 1))
             $('#scoreBox').css('opacity', '.3')
             return
         }
@@ -658,6 +677,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             winner++
             if (winner == 2) {
+
                 Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
                 turnYourLightsDownLow()
                 highScore = true

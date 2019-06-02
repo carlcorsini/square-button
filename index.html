@@ -117,10 +117,13 @@
                 </div>
                 <div style="text-align: center" class="content">
                     <div class="five vertical ui buttons ">
-
-                        <button id="soundOn" class="ui inverted toggle button red">Sound On</button>
+                        <button id="soundOn" class="ui inverted toggle active button red">Sound On</button>
                         <button id="intro" class="ui inverted toggle red button">Intro Off</button>
-                        <button id="story" class="ui inverted red toggle button active">Fibonacci Mode</button>
+                        <div id="story" class="ui toggle button active red inverted animated button" tabindex="0">
+                            <div class="visible content">Fibonacci Mode</div>
+                            <div class="hidden content">
+                                New Game </div>
+                        </div>
                         <button disabled id="free" class="ui inverted red toggle button">Free Mode</button>
                     </div>
                 </div>
