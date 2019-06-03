@@ -90,9 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let animation = animations[Math.floor(Math.random() * animations.length)];
     let score = 0
     let highScore = false
+    let winner = 0
     let pitch = 1
     let modifier = 5
-    let winner = 0
     let fibula = []
     let chosenValue
     let chosenAudio = 'assets/audio/womp.wav'
@@ -309,8 +309,9 @@ document.addEventListener('DOMContentLoaded', () => {
         winner = false
         winningScore = 32
         highScore = 0
-        $('#sequence').html(2)
+        $('#sequence').css('opacity', '0').html(0)
         $('#scoreBox').html(1).css('opacity', '1')
+        fibula = []
 
     })
     freeButton.addEventListener('click', () => {
@@ -326,8 +327,9 @@ document.addEventListener('DOMContentLoaded', () => {
         score = 0
         winner = 0
         highScore = false
+        fibula = []
         winningScore = 100000000000
-        console.log(winningScore)
+        // console.log(winningScore)
     })
 
     intro.addEventListener('click', () => {
@@ -634,15 +636,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     changeColorDiv.style.opacity = 1
                     square.classList.remove(animation)
                     document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
-                }, 7000)
+                }, 6000)
 
             } else {
                 letThereBeLight()
                 changeColorDiv.style.opacity = 1
                 square.classList.remove(animation)
+                document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
             }
-            document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
-        }, 5000)
+        }, 4000)
     })
 
 
@@ -903,6 +905,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 100)
             score++
             fibula.push(fib(score))
+            console.log(fibula)
+            console.log(score)
             $('#scoreBox').prop('Counter', fibula[score - 2] || 0).animate({
                 Counter: fibula[score - 1]
             }, {
