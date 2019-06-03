@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // helper for sound selection
     let setActiveButton = (active, disabled) => {
-        active.classList.add('active')
+        if (active) active.classList.add('active')
 
         disabled.forEach(a => {
             a.classList.remove('active')
@@ -285,11 +285,11 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem('muting')
             muting = false
             chosenAudio = 'assets/audio/womp.wav'
-            womp.classList.add('active')
-            soundOn.classList.add('active')
+            setActiveButton(womp, [drip, soundOn, rasta, homerun, special])
+
             playClick()
         } else {
-
+            setActiveButton(null, [drip, soundOn, rasta, homerun, special, womp])
             soundOn.innerHTML = 'Sound Off'
             localStorage.setItem('muting', 'true')
             soundOn.classList.remove('active')
