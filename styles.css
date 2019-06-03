@@ -178,7 +178,7 @@ body {
 
 .spin {
 	-webkit-animation-name: spin;
-	-webkit-animation-duration: 4000ms;
+	-webkit-animation-duration: 10000ms;
 	-webkit-animation-iteration-count: 1;
 	-webkit-animation-timing-function: linear;
 	-moz-animation-name: spin;
@@ -189,7 +189,8 @@ body {
 	-ms-animation-duration: 4000ms;
 	-ms-animation-iteration-count: 1;
 	-ms-animation-timing-function: linear;
-	-o-transition: rotate(2880deg);
+	-o-transition: rotate(2deg);
+	-webkit-animation-timing-function: ease-out
 }
 
 .move {
@@ -334,18 +335,28 @@ body {
 		transform: rotate(0deg);
 	}
 
-	60% {
-		transform: rotate(1080deg);
+	40% {}
+
+	50% {
+		transform: rotate(7200deg);
 		left: 200px;
+		border: 15px solid white;
+		border-radius: 100%;
+		background-color: #48dbfb;
+		box-shadow: 0 0 100px #48dbfb;
 	}
 
-	90% {
-		transform: rotate(360deg);
+	60% {
+		/* border-radius: 100%; */
 	}
+
+
 
 	100% {
-		transform: rotate(180deg);
+		/* transform: rotate(7200deg); */
 	}
+
+
 }
 
 @-webkit-keyframes moveIt {
@@ -354,12 +365,18 @@ body {
 	}
 
 	25% {
-		left: 200px;
+		left: 300px;
+		transform: rotate(180deg);
 	}
 
+
+
 	75% {
-		left: -200px;
+		left: -300px;
+		transform: rotate(-10deg);
 	}
+
+
 
 	100% {
 		left: 0px;

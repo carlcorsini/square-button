@@ -21,6 +21,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 20000)
     }
 
+    let playClick = () => {
+        if (!muting) {
+            playSound('assets/audio/click.wav', 1)
+        }
+    }
+
+    let muteAll = () => {
+        var sounds = document.querySelector('#allAudio')
+        sounds.pause()
+    }
+
     // ******************************************************************************
     // ******************************************************************************
     // ******************************************************************************
@@ -54,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let closeMenu = document.querySelector('#closeMenu')
     let intro = document.querySelector('#intro')
     let reset = document.querySelector('#reset')
+    let ps2 = document.querySelector('#ps2')
+
 
 
 
@@ -162,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
     if (!muting && introing) {
-        playSound('assets/audio/ps2.wav', 1)
+        playSound(ps2.src, 1)
     }
     if (!muting) {
         womp.classList.add('active')
@@ -266,6 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     soundOn.addEventListener('click', () => {
+
         if (muting) {
             soundOn.innerHTML = 'Sound On'
             localStorage.removeItem('muting')
@@ -273,7 +287,9 @@ document.addEventListener('DOMContentLoaded', () => {
             chosenAudio = 'assets/audio/womp.wav'
             womp.classList.add('active')
             soundOn.classList.add('active')
+            playClick()
         } else {
+
             soundOn.innerHTML = 'Sound Off'
             localStorage.setItem('muting', 'true')
             soundOn.classList.remove('active')
@@ -282,6 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
     storyButton.addEventListener('click', () => {
+        playClick()
         $('.ui.dropdown').addClass("disabled");
         localStorage.removeItem('free')
         setActiveButton(storyButton, [freeButton])
@@ -295,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     })
     freeButton.addEventListener('click', () => {
+        playClick()
         $('.ui.dropdown').removeClass("disabled");
         $('.ui.button').removeClass("disabled");
         localStorage.setItem('free', 'true')
@@ -311,14 +329,21 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     intro.addEventListener('click', () => {
+        playClick()
         if (!introing) {
             intro.innerHTML = "PS2 Intro On"
-            playSound('assets/audio/ps2.wav', 1)
+            setTimeout(() => {
+                playSound('assets/audio/ps2.wav', 1)
+            }, 250)
             localStorage.setItem('intro', 'true')
             introing = true
             intro.classList.add('active')
         } else {
-            intro.innerHTML = "Intro Off"
+            playClick()
+            setTimeout(() => {
+                muteAll()
+            }, 25)
+            intro.innerHTML = "PS2 Intro Off"
             introing = false
             localStorage.removeItem('intro')
             intro.classList.remove('active')
@@ -326,6 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     menu.addEventListener('click', () => {
+        playClick()
         menu.classList.remove('flashit')
         $('.ui.basic.modal')
             .modal({
@@ -378,8 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     reset.addEventListener('click', () => {
-
-        ['free', 'homerun', 'special', 'intro', 'muting', 'champion'].forEach(a => {
+        playClick()['free', 'homerun', 'special', 'intro', 'muting', 'champion'].forEach(a => {
             localStorage.removeItem(a)
         })
 
@@ -434,6 +459,10 @@ document.addEventListener('DOMContentLoaded', () => {
             location.reload()
 
         }, 8500)
+    })
+
+    closeMenu.addEventListener('click', () => {
+        if (!muting) playSound('assets/audio/deny.wav', 1)
     })
 
     document.body.addEventListener('mousemove', e => {
@@ -586,6 +615,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
 
     theForm.addEventListener('submit', (e) => {
+        if (!muting) playSound('assets/audio/bell.wav')
         animating = true
         e.preventDefault()
         turnYourLightsDownLow()
@@ -595,7 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ripple = randomRipple ? getRandomColor() : ripple
         square.style.borderColor = randomBorder ? getRandomColor() : border
         setTimeout(() => {
-            if (animation == 'wrapAround') {
+            if (animation == 'wrapAround' || animation == 'spin') {
                 setTimeout(() => {
                     letThereBeLight()
                     square.classList.remove(animation)
