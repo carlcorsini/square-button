@@ -226,6 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title.style.opacity = '0.1'
         scoreBox.style.opacity = '0.1'
         document.body.style.backgroundColor = "#010106"
+        changeColorDiv.style.opacity = 0
     }
 
     // letThereBeLight function
@@ -238,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.backgroundColor = '#0c1522'
         button.disabled = false
         animating = false
+        changeColorDiv.style.opacity = 0
     }
 
 
@@ -624,16 +626,19 @@ document.addEventListener('DOMContentLoaded', () => {
         square.style.backgroundColor = random ? getRandomColor() : color
         ripple = randomRipple ? getRandomColor() : ripple
         square.style.borderColor = randomBorder ? getRandomColor() : border
+        changeColorDiv.style.opacity = 0
         setTimeout(() => {
             if (animation == 'wrapAround' || animation == 'spin') {
                 setTimeout(() => {
                     letThereBeLight()
+                    changeColorDiv.style.opacity = 1
                     square.classList.remove(animation)
                     document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
                 }, 7000)
 
             } else {
                 letThereBeLight()
+                changeColorDiv.style.opacity = 1
                 square.classList.remove(animation)
             }
             document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
@@ -654,7 +659,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let fib = (num) => num <= 1 ? 1 : fib(num - 1) + fib(num - 2)
 
     $("body").click(function (e) {
-        if (winner || (modaling && paused) || highScore || hovering) {
+        if ((modaling && paused) || hovering) {
 
 
             return
@@ -701,7 +706,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        if (!hovering && !highScore && !muting) {
+        if (!hovering && !muting) {
             play(pitch / modifier)
         }
 
@@ -770,6 +775,7 @@ document.addEventListener('DOMContentLoaded', () => {
             $('#sequence').css('opacity', '1')
             return
         }
+        if (highScore) $('.ripple').css('background', getRandomColor())
         scoreSize(score, '#scoreBox')
         scoreSize(score + 2, '#sequence')
         if (winner >= 2) {
@@ -781,7 +787,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
-        if (winner && !free) {
+        if (winner && !free && !highScore) {
 
             winner++
             if (winner == 2) {
@@ -815,6 +821,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 setIntervalX((e) => {
                     $('body').css('background-color', getRandomColor())
                 }, 1000, 13)
+                setIntervalX((e) => {
+                    $('.ripple').css('background', getRandomColor())
+                }, 1000, 13)
                 setTimeout(() => {
                     highScore = false
                     winner = 0
@@ -835,11 +844,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     letThereBeLight()
                     scoreBox.style.color = 'aliceblue'
                     animating = false
+                    changeColorDiv.style.opacity = 1
                 }, 20000)
                 setTimeout(() => {
                     $('#scoreBox').removeClass('hover')
                     $('#defaultCanvas0').css('opacity', '0')
                     $('#sequence').html('')
+                    changeColorDiv.style.opacity = 1
                 }, 17000)
 
                 setTimeout(() => {
@@ -880,7 +891,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     special.classList.remove('disabled')
                 }
             }
-        } else {
+        } else if (!highScore) {
             $('#scoreBox').effect('shake', {
                 times: 2,
                 distance: 3,

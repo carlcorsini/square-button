@@ -33,6 +33,7 @@ body {
 }
 
 #changeColorDiv {
+	transition: opacity 3s linear;
 	text-align: center;
 	margin: auto;
 	margin-top: 1em;
