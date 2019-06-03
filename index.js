@@ -408,8 +408,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     reset.addEventListener('click', () => {
-        playClick()['free', 'homerun', 'special', 'intro', 'muting', 'champion'].forEach(a => {
+        ['free', 'homerun', 'special', 'intro', 'muting', 'champion'].forEach(a => {
             localStorage.removeItem(a)
+            playClick()
         })
 
         $('#reset2').html('resetting.')
