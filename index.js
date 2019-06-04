@@ -172,11 +172,12 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('yes')
         freeButton.disabled = false
         freeButton.classList.remove('disabled')
-
     }
+
     if (!muting && introing) {
         playSound(ps2.src, 1)
     }
+
     if (!muting) {
         womp.classList.add('active')
         soundOn.classList.add('active')
@@ -191,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         intro.classList.add('active')
         intro.innerHTML = 'PS2 Intro On'
     }
+
     if (free) {
         freeButton.disabled = false
         freeButton.classList.remove('disabled')
@@ -201,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         })
     }
+
     if (score < 32) {
         if (!specialUnlocked) special.disabled = true
         if (!homerunUnlocked) homerun.disabled = true
@@ -241,9 +244,6 @@ document.addEventListener('DOMContentLoaded', () => {
         animating = false
         changeColorDiv.style.opacity = 0
     }
-
-
-
 
     // ******************************************************************************
     // ******************************************************************************
@@ -540,9 +540,6 @@ document.addEventListener('DOMContentLoaded', () => {
         hovering = false
     })
 
-
-
-
     // ******************************************************************************
     // ******************************************************************************
     // ******************************************************************************
@@ -708,12 +705,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-
         if (!hovering && !muting) {
             play(pitch / modifier)
         }
-
-
 
         // Setup
         var posX = $(this).offset().left - 17,
@@ -967,115 +961,6 @@ document.addEventListener('DOMContentLoaded', () => {
             left: x + 'px'
         }).addClass("rippleEffect2");
     })
-
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // Dots 
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-
-    var dots = [],
-        mouse = {
-            x: 0,
-            y: 0
-        };
-
-    // The Dot object used to scaffold the dots
-    var Dot = function () {
-        this.x = 0;
-        this.y = 0;
-        this.node = (function () {
-            var n = document.createElement("div");
-            n.className = "trail";
-            document.body.appendChild(n);
-            return n;
-        }());
-    };
-    // The Dot.prototype.draw() method sets the position of 
-    // the object's <div> node
-    Dot.prototype.draw = function () {
-        this.node.style.left = this.x + "px";
-        this.node.style.top = this.y + "px";
-    };
-
-    // Creates the Dot objects, populates the dots array
-    for (var i = 0; i < 12; i++) {
-        var d = new Dot();
-        dots.push(d);
-    }
-
-    // This is the screen redraw function
-    function draw() {
-        // Make sure the mouse position is set everytime
-        // draw() is called.
-        var x = mouse.x,
-            y = mouse.y;
-
-        // This loop is where all the 90s magic happens
-        dots.forEach(function (dot, index, dots) {
-            var nextDot = dots[index + 1] || dots[0];
-
-            dot.x = x;
-            dot.y = y;
-            dot.draw();
-            x += (nextDot.x - dot.x) * .6;
-            y += (nextDot.y - dot.y) * .6;
-
-        });
-    }
-
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // Tail
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-    // *****************************************************************************
-
-
-    // addEventListener("mousemove", function (event) {
-    //     //event.preventDefault();
-    //     mouse.x = event.pageX + 13.25
-    //     mouse.y = event.pageY + 13.25;
-    // });
-
-    // // animate() calls draw() then recursively calls itself
-    // // everytime the screen repaints via requestAnimationFrame().
-    // function animate() {
-    //     if (!hovering) {
-    //         draw();
-    //         $('.trail').css('visibility', 'visible')
-    //         requestAnimationFrame(animate);
-    //     } else {
-    //         $('.trail').css('visibility', 'hidden')
-    //         requestAnimationFrame(animate);
-    //     }
-    // }
-
-    // // And get it started by calling animate().
-    // animate()
 
     // *****************************************************************************
     // *****************************************************************************
