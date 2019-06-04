@@ -900,8 +900,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 100)
             score++
             fibula.push(fib(score))
-            console.log(fibula)
-            console.log(score)
             $('#scoreBox').prop('Counter', fibula[score - 2] || 0).animate({
                 Counter: fibula[score - 1]
             }, {
