@@ -53,8 +53,8 @@ body {
 	transition: opacity 2s linear, background-color 4s linear, border-color 5s linear;
 	text-align: center;
 	margin: 0 auto;
-	width: 420px;
-	height: 420px;
+	width: 210px;
+	height: 210px;
 	border: solid;
 	border-color: aliceblue;
 	border-radius: 10px;
@@ -64,26 +64,12 @@ body {
 	z-index: 1;
 	opacity: 1;
 	cursor: url(assets/images/overlay.png), auto;
+	margin-top: 7em;
 }
 
 
 
-.square {
-	background-color: #0c1522;
-	transition: opacity 2s linear, background-color 4s linear, border-color 5s linear;
-	text-align: center;
-	margin: 0 auto;
-	width: 420px;
-	height: 420px;
-	border: solid;
-	border-color: aliceblue;
-	border-radius: 10px;
-	box-shadow: #0c1522;
-	-webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
-	-moz-box-shadow: 0 0 10px rgb(0, 0, 0);
-	z-index: 1;
-	opacity: 1;
-}
+
 
 #defaultCanvas0 {
 	background-color: #0c1522;
@@ -122,10 +108,10 @@ body {
 
 #bottom-left {
 	transition: color .5s linear;
-	padding: .5em;
-	font-size: 2em;
+	/* padding: .5em; */
+	/* font-size: 2em; */
 	left: 0;
-	bottom: 0;
+	top: 0;
 	position: absolute;
 	margin: 1em;
 	text-overflow: ellipsis;
@@ -134,13 +120,16 @@ body {
 
 #bottom-right {
 	transition: color .5s linear;
-	padding: .5em;
+
 	font-size: 2em;
 	right: 0;
-	bottom: 0;
+	top: 0;
 	position: absolute;
-	margin: 1em;
+	margin: 0 auto;
 	text-overflow: ellipsis;
+	/* width: 10px; */
+	text-align: center;
+
 }
 
 #scoreBox {

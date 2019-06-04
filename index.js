@@ -106,39 +106,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // mobile check
     // ------------
 
-    if (mobileCheck()) {
-        let container = document.createElement('div')
-        let sorry = document.createElement('h1')
-        let sorry2 = document.createElement('h2')
-        let website = document.createElement('a')
-        document.body.innerHTML = ''
-        document.body.style.textAlign = "center"
-        container.classList.add('ui', 'container')
-        container.style.textAlign = 'center'
-        container.style.position = '-webkit-sticky'
-        document.body.appendChild(container)
-        container.appendChild(sorry)
-        container.appendChild(sorry)
-        container.appendChild(sorry2)
-        container.appendChild(website)
-        sorry.style.marginTop = '5em'
-        sorry.innerHTML = "Square doesn't work on a phone yet. Sorry :( "
-        sorry2.style.marginBottom = '2em'
-        sorry2.innerHTML = `Check out my website for other projects:`
-        website.href = 'https://carlcorsini.com/#projects'
-        website.innerText = 'carlcorsini.com'
-        website.style.fontSize = '3em'
-        website.style.color = 'aliceblue'
-        document.body.style.overflow = 'hidden'
-        document.body.addEventListener('touchstart', function (e) {
-            e.preventDefault();
-        });
-        setTimeout(() => {
-            let canvas = document.querySelector('#defaultCanvas0')
-            canvas.style.opacity = 1
-        }, 1000)
-        return
-    }
+    // if (mobileCheck()) {
+    //     let container = document.createElement('div')
+    //     let sorry = document.createElement('h1')
+    //     let sorry2 = document.createElement('h2')
+    //     let website = document.createElement('a')
+    //     document.body.innerHTML = ''
+    //     document.body.style.textAlign = "center"
+    //     container.classList.add('ui', 'container')
+    //     container.style.textAlign = 'center'
+    //     container.style.position = '-webkit-sticky'
+    //     document.body.appendChild(container)
+    //     container.appendChild(sorry)
+    //     container.appendChild(sorry)
+    //     container.appendChild(sorry2)
+    //     container.appendChild(website)
+    //     sorry.style.marginTop = '5em'
+    //     sorry.innerHTML = "Square doesn't work on a phone yet. Sorry :( "
+    //     sorry2.style.marginBottom = '2em'
+    //     sorry2.innerHTML = `Check out my website for other projects:`
+    //     website.href = 'https://carlcorsini.com/#projects'
+    //     website.innerText = 'carlcorsini.com'
+    //     website.style.fontSize = '3em'
+    //     website.style.color = 'aliceblue'
+    //     document.body.style.overflow = 'hidden'
+    //     document.body.addEventListener('touchstart', function (e) {
+    //         e.preventDefault();
+    //     });
+    //     setTimeout(() => {
+    //         let canvas = document.querySelector('#defaultCanvas0')
+    //         canvas.style.opacity = 1
+    //     }, 1000)
+    //     return
+    // }
 
     // ******************************************************************************
     // ******************************************************************************
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         freeButton.classList.remove('disabled')
         freeButton.classList.add('active')
         storyButton.classList.remove('active')
-        $('#scoreBox').html('Free Mode').css({
+        $('#scoreBox').html('Free').css({
             fontSize: '0.9em',
 
         })
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animating = true
         $('.ui.dropdown').addClass("disabled");
         $('.ui.button').addClass("disabled");
-        title.style.opacity = '0.1'
+        // title.style.opacity = '0.1'
         scoreBox.style.opacity = '0.1'
         document.body.style.backgroundColor = "#010106"
         changeColorDiv.style.opacity = 0
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let letThereBeLight = () => {
         if (score > 5 || free) $('.ui.dropdown').removeClass("disabled");
         $('.ui.button').removeClass("disabled");
-        title.style.opacity = '1'
+        // title.style.opacity = '1'
         scoreBox.style.opacity = '1'
         document.body.style.backgroundColor = '#0c1522'
         button.disabled = false
@@ -470,10 +470,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!muting) playSound('assets/audio/deny.wav', 1)
     })
 
-    document.body.addEventListener('mousemove', e => {
-        pitch = Math.ceil(e.clientY / 100)
-        modifier = Math.ceil(e.clientX / 100)
-    })
+    // document.body.addEventListener('mousemove', e => {
+    //     pitch = Math.ceil(e.clientY / 100)
+    //     modifier = Math.ceil(e.clientX / 100)
+    // })
 
     // ******************************************************************************
     // ******************************************************************************
@@ -658,261 +658,262 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let fib = (num) => num <= 1 ? 1 : fib(num - 1) + fib(num - 2)
 
-    $("body").click(function (e) {
-        if ((modaling && paused) || hovering) {
-
-
-            return
-        }
-        if ((score < 5 && !free) || (score > 31 && !free) || animating) {
-            $('.ui.dropdown').addClass("disabled");
-        } else {
-            $('.ui.dropdown').removeClass("disabled");
-        }
-
-        if (score === winningScore) {
-            console.log(winningScore)
-            chosenValue = Math.random() < 0.5 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
-            winner++
-        }
-
-        if (!homerun.disabled && !special.disabled) {
-            freeButton.disabled = false
-        }
-
-        if ((score + 2 > 3) && score + 2 < 35) {
-
-            $('#sequence').css('opacity', '1')
-            $('#sequence').html(score + 2)
-        }
-        if (score === 6 && !free) {
-            console.log(free)
-            chosenValue = 'assets/audio/achievement.wav'
-        }
-
-        let scoreSize = (currentScore, element) => {
-            if (currentScore + 2 < 3) {
-                $(element).css('font-size', '1em')
+    $("body").on({
+        'touchstart': function (e) {
+            // console.log('hey')
+            // e.preventDefault()
+            if ((modaling && paused) || hovering) {
+                return
             }
-            if (currentScore == 10) {
-                $(element).css('font-size', '1.1em')
+            if ((score < 5 && !free) || (score > 31 && !free) || animating) {
+                $('.ui.dropdown').addClass("disabled");
+            } else {
+                $('.ui.dropdown').removeClass("disabled");
             }
-            if (currentScore == 20) {
-                $(element).css('font-size', '1.2em')
-            }
-            if (currentScore == 30) {
-                $(element).css('font-size', '1.3em')
-            }
-        }
 
-        if (!hovering && !muting) {
-            play(pitch / modifier)
-        }
-
-        // Setup
-        var posX = $(this).offset().left - 17,
-            posY = $(this).offset().top - 25,
-            buttonWidth = $(this).width(),
-            buttonHeight = $(this).height();
-
-        // Add the element
-        $(this).prepend("<span class='ripple'></span>");
-        $(".ripple").css('background', ripple)
-
-
-        // Make it round!
-        if (buttonWidth >= buttonHeight) {
-            buttonHeight = buttonWidth;
-        } else {
-            buttonWidth = buttonHeight;
-        }
-
-        // Get the center of the element
-        var x = e.pageX - posX - buttonWidth / 2;
-        var y = e.pageY - posY - buttonHeight / 2;
-
-        if (squaring) {
-
-            $(".ripple").css({
-                borderRadius: '5%',
-                width: buttonWidth,
-                height: buttonHeight,
-                top: y + 'px',
-                left: x + 'px'
-            }).addClass("rippleEffect");
-
-        } else {
-            $(".ripple").css({
-                width: buttonWidth,
-                height: buttonHeight,
-                top: y + 'px',
-                left: x + 'px'
-            }).addClass("rippleEffect");
-
-        }
-        // ****************************************************************************
-        // ****************************************************************************
-        // ****************************************************************************
-        // ****************************************************************************
-        // Winner
-        // ****************************************************************************
-        // ****************************************************************************
-        // ****************************************************************************
-        // ****************************************************************************
-
-        if (free) {
-            score++
-            $('#sequence').html(score)
-            $('#sequence').effect('shake', {
-                times: 1,
-                distance: 10,
-                direction: 'up'
-            }, (score / score - 1))
-            $('#scoreBox').css('opacity', '.3')
-            $('#sequence').css('opacity', '1')
-            return
-        }
-        if (highScore) $('.ripple').css('background', getRandomColor())
-        scoreSize(score, '#scoreBox')
-        scoreSize(score + 2, '#sequence')
-        if (winner >= 2) {
-            winner++
-            $('#scoreBox').effect('shake', {
-                times: 4,
-                distance: 2,
-            }, 400)
-
-        }
-
-        if (winner && !free && !highScore) {
-
-            winner++
-            if (winner == 2) {
-
-                Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
-                turnYourLightsDownLow()
-                highScore = true
-                animating = true
+            if (score === winningScore) {
+                console.log(winningScore)
+                chosenValue = Math.random() < 0.5 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
                 winner++
-                scoreBox.innerHTML = 'HIGH SCORE!!'
-                $('#defaultCanvas0').css('opacity', '1')
+            }
+
+            if (!homerun.disabled && !special.disabled) {
+                freeButton.disabled = false
+            }
+
+            if ((score + 2 > 3) && score + 2 < 35) {
+
+                $('#sequence').css('opacity', '1')
+                $('#sequence').html(score + 2)
+            }
+            if (score === 6 && !free) {
+                console.log(free)
+                chosenValue = 'assets/audio/achievement.wav'
+            }
+
+            let scoreSize = (currentScore, element) => {
+                if (currentScore + 2 < 3) {
+                    $(element).css('font-size', '1em')
+                }
+                if (currentScore == 10) {
+                    $(element).css('font-size', '1.1em')
+                }
+                if (currentScore == 20) {
+                    $(element).css('font-size', '1.2em')
+                }
+                if (currentScore == 30) {
+                    $(element).css('font-size', '1.3em')
+                }
+            }
+
+            if (!hovering && !muting) {
+                play(pitch / modifier)
+            }
+
+            // Setup
+            var posX = $(this).offset().left,
+                posY = $(this).offset().top
+            buttonWidth = $(this).width(),
+                buttonHeight = $(this).height();
+
+            // Add the element
+            $(this).prepend("<span class='ripple'></span>");
+            $(".ripple").css('background', ripple)
+
+
+            // Make it round!
+            if (buttonWidth >= buttonHeight) {
+                buttonHeight = buttonWidth;
+            } else {
+                buttonWidth = buttonHeight;
+            }
+
+            // Get the center of the element
+            var x = e.pageX - posX - buttonWidth / 2;
+            var y = e.pageY - posY - buttonHeight / 2;
+
+            if (squaring) {
+
+                $(".ripple").css({
+                    borderRadius: '5%',
+                    width: buttonWidth,
+                    height: buttonHeight,
+                    top: y + 'px',
+                    left: x + 'px'
+                }).addClass("rippleEffect");
+
+            } else {
+                $(".ripple").css({
+                    width: buttonWidth,
+                    height: buttonHeight,
+                    top: y + 'px',
+                    left: x + 'px'
+                }).addClass("rippleEffect");
+
+            }
+            // ****************************************************************************
+            // ****************************************************************************
+            // ****************************************************************************
+            // ****************************************************************************
+            // Winner
+            // ****************************************************************************
+            // ****************************************************************************
+            // ****************************************************************************
+            // ****************************************************************************
+
+            if (free) {
+                score++
+                $('#sequence').html(score)
                 $('#sequence').effect('shake', {
-                    times: 15,
-                    distance: 5,
+                    times: 1,
+                    distance: 10,
                     direction: 'up'
-                }, 17000).css({
-                    fontSize: '1.5em',
-                    color: 'yellow'
-                })
+                }, (score / score - 1))
+                $('#scoreBox').css('opacity', '.3')
+                $('#sequence').css('opacity', '1')
+                return
+            }
+            if (highScore) $('.ripple').css('background', getRandomColor())
+            scoreSize(score, '#scoreBox')
+            scoreSize(score + 2, '#sequence')
+            if (winner >= 2) {
+                winner++
+                $('#scoreBox').effect('shake', {
+                    times: 4,
+                    distance: 2,
+                }, 400)
 
-                $('#square').css({
-                    opacity: '0',
-                    borderColor: 'black'
-                }).addClass('moveUp')
+            }
 
-                $('#scoreBox').addClass('hover').css({
-                    opacity: '1',
-                    color: 'yellow'
-                })
+            if (winner && !free && !highScore) {
 
-                setIntervalX((e) => {
-                    $('body').css('background-color', getRandomColor())
-                }, 1000, 13)
-                setIntervalX((e) => {
-                    $('.ripple').css('background', getRandomColor())
-                }, 1000, 13)
-                setTimeout(() => {
-                    highScore = false
-                    winner = 0
-                    score = 0
-                    $('#square').css('opacity', '1')
-                    $('body').css('background-color', '#0c1522')
+                winner++
+                if (winner == 2) {
+
+                    Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
+                    turnYourLightsDownLow()
+                    highScore = true
                     animating = true
-                    $('#defaultCanvas0').css('border-color', 'black')
-                    $('#square').css('border-color', 'aliceblue')
-                    $('#square').css('background-color', '#0c1522')
-                    $('#defaultCanvas0').css('opacity', '0.1')
-                    $('#defaultCanvas0').css('border-color', '#0c1522')
-                    $('#sequence').css('opacity', '0')
-                }, 14000)
-                setTimeout(() => {
-                    $('#square').removeClass('moveUp')
-                    initiateSquare()
-                    letThereBeLight()
-                    scoreBox.style.color = 'aliceblue'
-                    animating = false
-                    changeColorDiv.style.opacity = 1
-                }, 20000)
-                setTimeout(() => {
-                    $('#scoreBox').removeClass('hover')
-                    $('#defaultCanvas0').css('opacity', '0')
-                    $('#sequence').html('')
-                    changeColorDiv.style.opacity = 1
-                }, 17000)
+                    winner++
+                    scoreBox.innerHTML = 'HIGH SCORE!!'
+                    $('#defaultCanvas0').css('opacity', '1')
+                    $('#sequence').effect('shake', {
+                        times: 15,
+                        distance: 5,
+                        direction: 'up'
+                    }, 17000).css({
+                        fontSize: '1.5em',
+                        color: 'yellow'
+                    })
 
-                setTimeout(() => {
-                    if (champion) return
-                    if (chosenValue == 'assets/audio/homerun.wav' && !free && homerun.disabled) {
-                        localStorage.setItem('homerun', 'true')
-                        homerun.disabled = false
+                    $('#square').css({
+                        opacity: '0',
+                        borderColor: 'black'
+                    }).addClass('moveUp')
+
+                    $('#scoreBox').addClass('hover').css({
+                        opacity: '1',
+                        color: 'yellow'
+                    })
+
+                    setIntervalX((e) => {
+                        $('body').css('background-color', getRandomColor())
+                    }, 1000, 13)
+                    setIntervalX((e) => {
+                        $('.ripple').css('background', getRandomColor())
+                    }, 1000, 13)
+                    setTimeout(() => {
+                        highScore = false
+                        winner = 0
+                        score = 0
+                        $('#square').css('opacity', '1')
+                        $('body').css('background-color', '#0c1522')
+                        animating = true
+                        $('#defaultCanvas0').css('border-color', 'black')
+                        $('#square').css('border-color', 'aliceblue')
+                        $('#square').css('background-color', '#0c1522')
+                        $('#defaultCanvas0').css('opacity', '0.1')
+                        $('#defaultCanvas0').css('border-color', '#0c1522')
+                        $('#sequence').css('opacity', '0')
+                    }, 14000)
+                    setTimeout(() => {
+                        $('#square').removeClass('moveUp')
+                        initiateSquare()
+                        letThereBeLight()
+                        scoreBox.style.color = 'aliceblue'
+                        animating = false
+                        changeColorDiv.style.opacity = 1
+                    }, 20000)
+                    setTimeout(() => {
+                        $('#scoreBox').removeClass('hover')
+                        $('#defaultCanvas0').css('opacity', '0')
+                        $('#sequence').html('')
+                        changeColorDiv.style.opacity = 1
+                    }, 17000)
+
+                    setTimeout(() => {
+                        if (champion) return
+                        if (chosenValue == 'assets/audio/homerun.wav' && !free && homerun.disabled) {
+                            localStorage.setItem('homerun', 'true')
+                            homerun.disabled = false
+                            homerun.classList.add('flashit')
+                            homerun.classList.remove('disabled')
+                            homerun.disabled = false
+                        } else if (!free && special.disabled) {
+                            localStorage.setItem('special', 'true')
+                            special.disabled = false
+                            special.classList.add('flashit')
+                            special.classList.remove('disabled')
+                            special.disabled = false
+                        }
+                        if (!special.disabled && !homerun.disabled) {
+                            console.log('but champion?')
+                            if (!free && !champion) {
+                                console.log('tis');
+                                menu.classList.add('flashit')
+                                freeButton.classList.add('flashit')
+                                localStorage.setItem('champion', 'true')
+                                freeButton.disabled = false
+                                freeButton.classList.remove('disabled')
+                            }
+                            champion = true
+                        }
+                    }, 16000)
+
+                    if (chosenValue == 'assets/audio/homerun') {
                         homerun.classList.add('flashit')
                         homerun.classList.remove('disabled')
-                        homerun.disabled = false
-                    } else if (!free && special.disabled) {
-                        localStorage.setItem('special', 'true')
-                        special.disabled = false
+                    }
+                    if (chosenValue == 'assets/audio/special') {
                         special.classList.add('flashit')
                         special.classList.remove('disabled')
-                        special.disabled = false
                     }
-                    if (!special.disabled && !homerun.disabled) {
-                        console.log('but champion?')
-                        if (!free && !champion) {
-                            console.log('tis');
-                            menu.classList.add('flashit')
-                            freeButton.classList.add('flashit')
-                            localStorage.setItem('champion', 'true')
-                            freeButton.disabled = false
-                            freeButton.classList.remove('disabled')
-                        }
-                        champion = true
-                    }
-                }, 16000)
-
-                if (chosenValue == 'assets/audio/homerun') {
-                    homerun.classList.add('flashit')
-                    homerun.classList.remove('disabled')
                 }
-                if (chosenValue == 'assets/audio/special') {
-                    special.classList.add('flashit')
-                    special.classList.remove('disabled')
-                }
+            } else if (!highScore) {
+                $('#scoreBox').effect('shake', {
+                    times: 2,
+                    distance: 3,
+                }, 100)
+                $('#sequence').effect('shake', {
+                    times: 2,
+                    distance: 3,
+                    direction: 'up'
+                }, 100)
+                score++
+                fibula.push(fib(score))
+                $('#scoreBox').prop('Counter', fibula[score - 2] || 0).animate({
+                    Counter: fibula[score - 1]
+                }, {
+                    duration: 500,
+                    easing: 'swing',
+                    step: function (now) {
+                        $('#scoreBox').text(Math.ceil(now));
+                    },
+                    queue: false
+                });
+                scoreBox.innerHTML = fibula[score]
             }
-        } else if (!highScore) {
-            $('#scoreBox').effect('shake', {
-                times: 2,
-                distance: 3,
-            }, 100)
-            $('#sequence').effect('shake', {
-                times: 2,
-                distance: 3,
-                direction: 'up'
-            }, 100)
-            score++
-            fibula.push(fib(score))
-            $('#scoreBox').prop('Counter', fibula[score - 2] || 0).animate({
-                Counter: fibula[score - 1]
-            }, {
-                duration: 500,
-                easing: 'swing',
-                step: function (now) {
-                    $('#scoreBox').text(Math.ceil(now));
-                },
-                queue: false
-            });
-            scoreBox.innerHTML = fibula[score]
         }
-
     });
 
     // *****************************************************************************
