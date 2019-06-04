@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
             muting = false
             chosenAudio = 'assets/audio/womp.wav'
             setActiveButton(womp, [drip, soundOn, rasta, homerun, special])
-
+            soundOn.classList.add('active')
             playClick()
         } else {
             setActiveButton(null, [drip, soundOn, rasta, homerun, special, womp])
