@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     // -----------
     // helpers
     // -----------
@@ -126,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
         website.style.fontSize = '3em'
         website.style.color = 'aliceblue'
         document.body.style.overflow = 'hidden'
-        e.preventDefault();
         setTimeout(() => {
             let canvas = document.querySelector('#defaultCanvas0')
             canvas.style.opacity = 1
@@ -144,7 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
     // ******************************************************************************
 
-
+    if (!localStorage.getItem('regular')) {
+        help.classList.add('flashit')
+    }
 
     setTimeout(() => {
         document.body.style.backgroundColor = '#0c1522'
@@ -379,6 +379,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     modaling = false
                 },
                 onShow: function () {
+                    help.classList.remove('flashit')
+                    localStorage.setItem('regular', 'true')
                     $('#changeColorDiv').css('opacity', '0')
                     $('#square').css('opacity', '0')
                     $('#title').css('opacity', '0')
@@ -424,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     reset.addEventListener('click', () => {
-        ['free', 'homerun', 'special', 'intro', 'muting', 'champion'].forEach(a => {
+        ['free', 'homerun', 'special', 'intro', 'muting', 'champion', 'regular'].forEach(a => {
             localStorage.removeItem(a)
             playClick()
         })
