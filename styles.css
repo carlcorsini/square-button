@@ -8,6 +8,7 @@
 	cursor: url(assets/images/github.png), auto !important;
 }
 
+
 html {
 	overflow-x: hidden;
 	overflow-y: hidden;
@@ -58,7 +59,7 @@ body {
 	border: solid;
 	border-color: aliceblue;
 	border-radius: 10px;
-	box-shadow: #0c1522;
+	box-shadow: 0 0 2px #04122a;
 	-webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
 	-moz-box-shadow: 0 0 10px rgb(0, 0, 0);
 	z-index: 1;
@@ -340,6 +341,7 @@ body {
 
 	55% {
 		transform: rotate(7200deg);
+		/* left: 200px; */
 		border: 15px solid white;
 		border-radius: 100%;
 		background-color: #48dbfb;
@@ -425,6 +427,7 @@ body {
 	}
 
 	to {
+		box-shadow: 0 0 20px aliceblue;
 		transform: translateY(-50px);
 	}
 }
@@ -656,7 +659,7 @@ body {
 
 .shaker {
 	/* Start the shake animation and make the animation last for 0.5 seconds  */
-	animation: shaker 1.75s;
+	animation: shaker 1.3s;
 
 	/* When the animation is finished, start again */
 	animation-iteration-count: infinite;
@@ -668,6 +671,7 @@ body {
 
 
 	50% {
+		box-shadow: 0 0 10px aliceblue;
 		transform: translateY(1.5%);
 	}
 
@@ -688,7 +692,8 @@ body {
 
 
 	50% {
-		transform: translateY(4%) rotate(5deg)
+		transform: translateY(4%) rotate(5deg);
+		box-shadow: 0 0 10px aliceblue;
 	}
 
 

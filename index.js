@@ -1163,8 +1163,8 @@ function setup() {
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 4;
     cnv.position(x, y);
-    stroke(10);
-    strokeWeight(1);
+    stroke('#c7f0fb');
+    strokeWeight(20);
 
     gravity = createVector(0, .2);
 }
