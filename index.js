@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let randomBackground = true
     let randomBorder = true
     let random = true
+    let randomWinnerBoo = false
     let animating = false
     let hovering = false
     let squaring = false
@@ -909,8 +910,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 17000)
 
                 setTimeout(() => {
-                    $('#defaultCanvas0').addClass('shakerSquare')
-                    $('#square').addClass('shakerSquare')
+                    $('#defaultCanvas0').addClass('shakerSquare') ?
+                        $('#square').addClass('shakerSquare') : undefined
                 }, 10100)
 
                 setTimeout(() => {

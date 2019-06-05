@@ -515,12 +515,17 @@ body {
 
 	33.1% {
 		border-radius: 100%;
+		visibility: hidden;
+		-webkit-transform: translateY(500%);
+	}
 
-		-webkit-transform: translateX(300%);
+	33.2% {
+		-webkit-transform: translateY(-500%);
 	}
 
 
 	66% {
+		visibility: visible;
 		-webkit-transform: translateX(0%);
 	}
 
