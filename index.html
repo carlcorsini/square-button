@@ -22,13 +22,13 @@
 </head>
 
 <body>
-    <div tabindex="-1" id="titleLink">
-        <a tabindex="-1" id="gitlink" href="https://github.com/carlcorsini/square-button" target="_blank">
-            <h1 tabindex="-1" href="https://github.com/carlcorsini/square-button" id="title">Square</h1>
+    <div id="titleLink">
+        <a id="gitlink" href="https://github.com/carlcorsini/square-button" target="_blank">
+            <h1 href="https://github.com/carlcorsini/square-button" id="title">Square</h1>
         </a>
     </div>
 
-    <section class="shape1" id="square"></section>
+    <section class="shape1 shaker" id="square"></section>
     <!-- <section class="square spin" id="square2"></section> -->
     <br>
 
@@ -112,6 +112,7 @@
             <button id="rasta" class="ui inverted yellow button">Rasta</button>
 
             <button id="menu" class="ui icon inverted grey button"><i class="cog icon"></i></button>
+            <button id="help" class="ui icon inverted green button"><i class="question icon"></i></button>
             <div id='modal' class="ui mini basic modal">
                 <div class="Settings">
                     <i class="cog icon"></i>
@@ -136,6 +137,58 @@
                     </div>
                 </div>
                 <div id="closeMenu" style="text-align: center;" class="actions">
+                    <div class="ui red basic cancel inverted button">
+                        <i class="remove icon"></i>
+                        Close
+                    </div>
+                </div>
+            </div>
+            <div id='helpModal' class="ui large basic modal">
+                <h2 class="Settings">
+                    <i class="question icon"></i>
+                    What's Going On?
+                </h2>
+                <div style="text-align: left" class="content">
+
+                    <div class="ui bulleted list">
+                        <div class="item">Click anywhere to set off ripple effect and sound</div>
+                        <div class="item">The pitch will change depending on where you click (highest note @ top right
+                            and
+                            lowest
+                            note @ bottom left)</div>
+                        <div class="item">Choose your sound with the buttons on the bottom right</div>
+                        <div class="item">Click the <i class="cog icon"></i>to open settings menu</div>
+                        <div class="item">The numbers on the bottom left are the fibonacci sequence number and
+                            the fibonacci number itself reading top to bottom</div>
+                        <div class="item">Once you reach the 7th fibonacci number you unlock the drop down menus below
+                            the
+                            square</div>
+                        <div class="item">Use the drop down menus and the "Commence" button to change colors and animate
+                            the
+                            square</div>
+                        <div class="item">Once you reach the 34th fibonacci number, you win and unlock a special sound,
+                            and subsequently become more popular
+                        </div>
+                        <div class="item">Once you unlock both special sounds, you unlock "Free Mode" accessible from
+                            the
+                            settings menu. Free Mode removes the fibonacci sequence and allows you to click to your
+                            hearts
+                            content</div>
+                        <div class="item">The reset button in the settings menu starts you back at "square one"...</div>
+                        <div class="item">A link to the code is hidden somewhere on the page</div>
+                        <div class="item">Square was created by <a target="_blank" href="https://carlcorsini.com">Carl
+                                Corsini</a>. Why you ask? Because it was fun.
+                        </div>
+                        <div style="text-align: center; margin-top: 1em; font-size: 1.2em;"><em>For optimal squaring
+                                experience use
+                                Chrome, go full
+                                screen and refresh
+                                the page</em>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="closeHelpMenu" style="text-align: center;" class="actions">
                     <div class="ui red basic cancel inverted button">
                         <i class="remove icon"></i>
                         Close

@@ -13,13 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return color;
     }
 
-    let initiateSquare = () => {
-        $('#square').effect('shake', {
-            times: 14,
-            distance: 5,
-            direction: 'up'
-        }, 20000)
-    }
+
 
     let playClick = () => {
         if (!muting) {
@@ -60,12 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let special = document.querySelector('#special')
     let changeColorDiv = document.querySelector('#changeColorDiv')
     let modal = document.querySelector('#modal')
+    let helpModal = document.querySelector('#helpModal')
     let freeButton = document.querySelector('#free')
     let storyButton = document.querySelector('#story')
     let closeMenu = document.querySelector('#closeMenu')
     let intro = document.querySelector('#intro')
     let reset = document.querySelector('#reset')
     let ps2 = document.querySelector('#ps2')
+    let help = document.querySelector('#help')
 
 
 
@@ -130,9 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         website.style.fontSize = '3em'
         website.style.color = 'aliceblue'
         document.body.style.overflow = 'hidden'
-        document.body.addEventListener('touchstart', function (e) {
-            e.preventDefault();
-        });
+        e.preventDefault();
         setTimeout(() => {
             let canvas = document.querySelector('#defaultCanvas0')
             canvas.style.opacity = 1
@@ -151,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
 
 
-    initiateSquare()
 
     setTimeout(() => {
         document.body.style.backgroundColor = '#0c1522'
@@ -336,9 +329,8 @@ document.addEventListener('DOMContentLoaded', () => {
         playClick()
         if (!introing) {
             intro.innerHTML = "PS2 Intro On"
-            setTimeout(() => {
-                playSound('assets/audio/ps2.wav', 1)
-            }, 250)
+
+            playSound('assets/audio/ps2.wav', 1)
             localStorage.setItem('intro', 'true')
             introing = true
             intro.classList.add('active')
@@ -357,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menu.addEventListener('click', () => {
         playClick()
         menu.classList.remove('flashit')
-        $('.ui.basic.modal')
+        $('#modal')
             .modal({
                 autoFocus: false,
                 onHide: function () {
@@ -367,6 +359,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 onShow: function () {
                     menu.classList.add('active')
+                    paused = true
+                }
+            }).modal('show');
+    })
+
+    help.addEventListener('click', () => {
+        playClick()
+        help.classList.remove('flashit')
+        $('#helpModal')
+            .modal({
+                autoFocus: false,
+                onHide: function () {
+                    help.classList.remove('active')
+                    $('#changeColorDiv').css('opacity', '1')
+                    $('#title').css('opacity', '1')
+                    $('#square').css('opacity', '1')
+                    paused = false
+                    modaling = false
+                },
+                onShow: function () {
+                    $('#changeColorDiv').css('opacity', '0')
+                    $('#square').css('opacity', '0')
+                    $('#title').css('opacity', '0')
+                    help.classList.add('active')
                     paused = true
                 }
             }).modal('show');
@@ -470,6 +486,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!muting) playSound('assets/audio/deny.wav', 1)
     })
 
+    closeHelpMenu.addEventListener('click', () => {
+        if (!muting) playSound('assets/audio/deny.wav', 1)
+    })
+
     document.body.addEventListener('mousemove', e => {
         pitch = Math.ceil(e.clientY / 100)
         modifier = Math.ceil(e.clientX / 100)
@@ -489,6 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
     square.addEventListener('mouseover', () => {
 
         if (!animating) {
+            square.classList.remove('shaker')
             square.classList.add('hover')
         } else {
             square.classList.add('no')
@@ -498,7 +519,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     square.addEventListener('mouseout', () => {
         $("#ripple2").css('display', 'none')
-        if (!animating) square.classList.remove('hover')
+        if (!animating) {
+            square.classList.remove('hover')
+            square.classList.add('shaker')
+            square.classList.remove('hover')
+        }
         square.classList.remove('no')
         hovering = false
     })
@@ -533,10 +558,25 @@ document.addEventListener('DOMContentLoaded', () => {
         modaling = false
     })
 
+    helpModal.addEventListener('mouseover', () => {
+        modaling = true
+    })
+
+    helpModal.addEventListener('mouseout', () => {
+        modaling = false
+    })
+
     closeMenu.addEventListener('mouseover', () => {
         hovering = true
     })
     closeMenu.addEventListener('mouseout', () => {
+        hovering = false
+    })
+
+    closeHelpMenu.addEventListener('mouseover', () => {
+        hovering = true
+    })
+    closeHelpMenu.addEventListener('mouseout', () => {
         hovering = false
     })
 
@@ -618,6 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     theForm.addEventListener('submit', (e) => {
         if (!muting) playSound('assets/audio/bell.wav')
+        square.classList.remove('shaker')
         animating = true
         e.preventDefault()
         turnYourLightsDownLow()
@@ -631,6 +672,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (animation == 'wrapAround' || animation == 'spin') {
                 setTimeout(() => {
                     letThereBeLight()
+                    square.classList.add('shaker')
                     changeColorDiv.style.opacity = 1
                     square.classList.remove(animation)
                     document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
@@ -638,6 +680,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             } else {
                 letThereBeLight()
+                square.classList.add('shaker')
                 changeColorDiv.style.opacity = 1
                 square.classList.remove(animation)
                 document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
@@ -788,6 +831,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             winner++
             if (winner == 2) {
+                $('#defaultCanvas0').removeClass('shakerSquare')
+                $('#square').removeClass('shaker')
+                $('#square').removeClass(animation)
+                $('#defaultCanvas0').removeClass('shaker')
+                $('#defaultCanvas0').addClass('spin')
+                setTimeout(() => {
+                    $('#defaultCanvas0').removeClass('spin')
+
+                }, 10500)
 
                 Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
                 turnYourLightsDownLow()
@@ -795,7 +847,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 animating = true
                 winner++
                 scoreBox.innerHTML = 'HIGH SCORE!!'
-                $('#defaultCanvas0').css('opacity', '1')
+                setTimeout(() => {
+                    $('#defaultCanvas0').css('opacity', '1')
+
+                }, 500)
                 $('#sequence').effect('shake', {
                     times: 15,
                     distance: 5,
@@ -822,6 +877,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     $('.ripple').css('background', getRandomColor())
                 }, 1000, 13)
                 setTimeout(() => {
+
                     highScore = false
                     winner = 0
                     score = 0
@@ -831,24 +887,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     $('#defaultCanvas0').css('border-color', 'black')
                     $('#square').css('border-color', 'aliceblue')
                     $('#square').css('background-color', '#0c1522')
-                    $('#defaultCanvas0').css('opacity', '0.1')
+                    $('#defaultCanvas0').css('opacity', '0')
                     $('#defaultCanvas0').css('border-color', '#0c1522')
                     $('#sequence').css('opacity', '0')
+                    $('#square').removeClass('moveUp')
                 }, 14000)
                 setTimeout(() => {
-                    $('#square').removeClass('moveUp')
-                    initiateSquare()
                     letThereBeLight()
                     scoreBox.style.color = 'aliceblue'
                     animating = false
                     changeColorDiv.style.opacity = 1
-                }, 20000)
+                    $('#square').removeClass('shakerSquare')
+                    $('#square').addClass('shaker')
+                }, 19000)
                 setTimeout(() => {
                     $('#scoreBox').removeClass('hover')
-                    $('#defaultCanvas0').css('opacity', '0')
                     $('#sequence').html('')
                     changeColorDiv.style.opacity = 1
                 }, 17000)
+
+                setTimeout(() => {
+                    $('#defaultCanvas0').addClass('shakerSquare')
+                    $('#square').addClass('shakerSquare')
+                }, 10100)
 
                 setTimeout(() => {
                     if (champion) return
@@ -1095,7 +1156,7 @@ function setup() {
     if (mobileCheck()) {
         var cnv = createCanvas(375, 812);
     } else {
-        var cnv = createCanvas(1260, 420);
+        var cnv = createCanvas(420, 420);
     }
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 4;
