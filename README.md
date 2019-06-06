@@ -1,5 +1,5 @@
 # <a href="https://sqr.surge.sh" target="_blank">Square</a>
-## 
+
 ### This is a square.
 *DOM Manipulation*, ever heard of it?
 
