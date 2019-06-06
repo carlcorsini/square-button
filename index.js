@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // helpers
     // -----------
 
+    // Credit:
+    // https://stackoverflow.com/a/1484514
     let getRandomColor = () => {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -11,8 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return color;
     }
-
-
 
     let playClick = () => {
         if (!muting) {
@@ -61,9 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let reset = document.querySelector('#reset')
     let ps2 = document.querySelector('#ps2')
     let help = document.querySelector('#help')
-
-
-
 
     // assign required variables
     let free = localStorage.getItem('free') || false
@@ -473,11 +470,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 distance: 6,
             }, 3000)
         }, 5500)
-        // setTimeout(() => {
-        //     $('#reset2').html('your computer will now explode')
-
-        // }, 7500)
-
 
         setTimeout(() => {
             location.reload()
@@ -755,6 +747,8 @@ document.addEventListener('DOMContentLoaded', () => {
             play(pitch / modifier)
         }
 
+        // Credit:
+        // https://codepen.io/finnhvman/pen/jLXKJw
         // Setup
         var posX = $(this).offset().left - 17,
             posY = $(this).offset().top - 25,
@@ -994,6 +988,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return
         }
         play(pitch / modifier)
+
+        // Credit
+        // https://codepen.io/finnhvman/pen/jLXKJw
         // Setup
         var posX = $(this).offset().left - 15,
             posY = $(this).offset().top - 13,
@@ -1037,6 +1034,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function playSound(file, speed = 1, pitchShift = 1, loop = false, autoplay = true) {
 
         if (muting) return
+
+        // Credit:
+        // https://stackoverflow.com/a/49749868
         if (pitchShift) {
             audioCtx = new(window.AudioContext || window.webkitAudioContext)();
             source = audioCtx.createBufferSource();
@@ -1088,7 +1088,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
+    // Credit
+    // https://stackoverflow.com/a/26869192
     function getSoundAndFadeAudio(audiosnippetId) {
         if (muting) return
         var sound = document.getElementById(audiosnippetId);
@@ -1152,6 +1153,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // *****************************************************************************
 // *****************************************************************************
 
+// Credit:
+// https://codepen.io/Alexndr/pen/OYgmWg
 var fireworks = [];
 var gravity;
 
@@ -1318,6 +1321,9 @@ function setIntervalX(callback, delay, repetitions) {
         }
     }, delay);
 }
+
+//Credit
+// https://stackoverflow.com/a/11381730
 let mobileCheck = () => {
     var check = false;
     (function (a) {

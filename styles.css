@@ -499,11 +499,11 @@ body {
 } */
 
 .wrapAround {
-	animation: moveSlideShow 10s linear 1;
+	animation: wrap 10s linear 1;
 	transform: translate3d(0, 0, 0);
 }
 
-@keyframes moveSlideShow {
+@keyframes wrap {
 	0% {
 		-webkit-transform: translateX(0%);
 	}
@@ -515,17 +515,12 @@ body {
 
 	33.1% {
 		border-radius: 100%;
-		visibility: hidden;
-		-webkit-transform: translateY(500%);
-	}
 
-	33.2% {
-		-webkit-transform: translateY(-500%);
+		-webkit-transform: translateX(300%);
 	}
 
 
 	66% {
-		visibility: visible;
 		-webkit-transform: translateX(0%);
 	}
 
@@ -536,11 +531,11 @@ body {
 }
 
 .wrapAround2 {
-	animation: moveSlideShow2 10s linear infinite;
+	animation: wrap2 10s linear infinite;
 	transform: translate3d(0, 0, 0);
 }
 
-@keyframes moveSlideShow2 {
+@keyframes wrap2 {
 	100% {
 
 		-webkit-transform: translateX(100%);
