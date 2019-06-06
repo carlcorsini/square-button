@@ -970,7 +970,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             scoreBox.innerHTML = fibula[score]
         }
-
+        // ¯\_(ツ)_/¯
     });
 
     // *****************************************************************************
