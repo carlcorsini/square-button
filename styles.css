@@ -8,6 +8,9 @@
 	cursor: url(assets/images/github.png), auto !important;
 }
 
+.sorry {
+	transition: opacity 3s linear;
+}
 
 html {
 	overflow-x: hidden;

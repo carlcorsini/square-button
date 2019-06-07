@@ -102,31 +102,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mobileCheck()) {
         let container = document.createElement('div')
         let sorry = document.createElement('h1')
-        let sorry2 = document.createElement('h2')
-        let website = document.createElement('a')
+        sorry.classList.add('sorry')
         document.body.innerHTML = ''
         document.body.style.textAlign = "center"
         container.classList.add('ui', 'container')
         container.style.textAlign = 'center'
         container.style.position = '-webkit-sticky'
         document.body.appendChild(container)
+        sorry.style.marginTop = '10em'
+        sorry.style.opacity = '0'
+        sorry.innerHTML = "Click anywhere to be redirected to the Square Mobile Beta 1.0"
         container.appendChild(sorry)
-        container.appendChild(sorry)
-        container.appendChild(sorry2)
-        container.appendChild(website)
-        sorry.style.marginTop = '5em'
-        sorry.innerHTML = "Square doesn't work on a phone yet. Sorry :( "
-        sorry2.style.marginBottom = '2em'
-        sorry2.innerHTML = `Check out my website for other projects:`
-        website.href = 'https://carlcorsini.com/#projects'
-        website.innerText = 'carlcorsini.com'
-        website.style.fontSize = '3em'
-        website.style.color = 'aliceblue'
         document.body.style.overflow = 'hidden'
         setTimeout(() => {
             let canvas = document.querySelector('#defaultCanvas0')
+            sorry.style.opacity = '1'
             canvas.style.opacity = 1
-        }, 1000)
+        }, 500)
+
+        document.body.addEventListener('click', () => {
+            setTimeout(() => {
+                window.location.href = "https://sqrm.surge.sh"
+            }, 2000)
+        })
+
         return
     }
 
