@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    setTimeout(function () {
-        window.scrollTo(0, 300);
-    }, 200);
+
 
 
     let getRandomColor = () => {
@@ -17,9 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function play(sound) {
         var audio = document.createElement('audio');
         audio.src = `assets/audio/${sound}.wav`;
-        audio.addEventListener("ended", function () {
-            document.removeChild(this);
-        }, false);
+
         audio.play();
     }
 
