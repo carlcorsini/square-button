@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    window.scrollTo(0, 1)
+    setTimeout(function () {
+        window.scrollTo(0, 300);
+    }, 200);
     // -----------
     // helpers
     // -----------
@@ -27,10 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     //     }
     // }
 
-    let muteAll = () => {
-        var sounds = document.querySelector('#allAudio')
-        sounds.pause()
-    }
+    // let muteAll = () => {
+    //     var sounds = document.querySelector('#allAudio')
+    //     sounds.pause()
+    // }
 
     // ******************************************************************************
     // ******************************************************************************
@@ -44,35 +46,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // select necessary html elements    
     let square = document.querySelector('#square')
-    let theForm = document.querySelector('#theForm')
+    // let theForm = document.querySelector('#theForm')
     // let selectaAnimation = document.querySelector('#selectaAnimation')
     // let selectaColor = document.querySelector('#selectaColor')
     // let selectaRipple = document.querySelector('#selectaRipple')
-    let button = document.querySelector('#changeColor')
-    let title = document.querySelector('#title')
-    let bottomRight = document.querySelector('#bottom-right')
-    let scoreBox = document.querySelector('#scoreBox')
-    let womp = document.querySelector('#womp')
-    let drip = document.querySelector('#drip')
-    let soundOn = document.querySelector('#soundOn')
-    let rasta = document.querySelector('#rasta')
-    let homerun = document.querySelector('#homerun')
-    let special = document.querySelector('#special')
-    let changeColorDiv = document.querySelector('#changeColorDiv')
-    let modal = document.querySelector('#modal')
-    let freeButton = document.querySelector('#free')
-    let storyButton = document.querySelector('#story')
-    let closeMenu = document.querySelector('#closeMenu')
-    let intro = document.querySelector('#intro')
-    let reset = document.querySelector('#reset')
-    let ps2 = document.querySelector('#ps2')
+    // let button = document.querySelector('#changeColor')
+    // let title = document.querySelector('#title')
+    // let bottomRight = document.querySelector('#bottom-right')
+    // let scoreBox = document.querySelector('#scoreBox')
+    // let womp = document.querySelector('#womp')
+    // let drip = document.querySelector('#drip')
+    // let soundOn = document.querySelector('#soundOn')
+    // let rasta = document.querySelector('#rasta')
+    // let homerun = document.querySelector('#homerun')
+    // let special = document.querySelector('#special')
+    // let changeColorDiv = document.querySelector('#changeColorDiv')
+    // let modal = document.querySelector('#modal')
+    // let freeButton = document.querySelector('#free')
+    // let storyButton = document.querySelector('#story')
+    // let closeMenu = document.querySelector('#closeMenu')
+    // let intro = document.querySelector('#intro')
+    // let reset = document.querySelector('#reset')
+    // let ps2 = document.querySelector('#ps2')
 
 
 
 
     // assign required variables
-    let free = localStorage.getItem('free') || false
-    let introing = localStorage.getItem('intro') || false
+    // let free = localStorage.getItem('free') || false
+    // let introing = localStorage.getItem('intro') || false
     let color = '#0c1522'
     let background = '#0c1522'
     let border = 'aliceblue'
@@ -88,19 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let modaling = false
     let animations = ['spin', 'bounce', 'move', 'wrapAround']
     let animation = animations[Math.floor(Math.random() * animations.length)];
-    let score = 0
-    let highScore = false
-    let winner = 0
-    let pitch = 1
-    let modifier = 5
-    let fibula = []
-    let chosenValue
-    let chosenAudio = 'assets/audio/womp.wav'
+    // let score = 0
+    // let highScore = false
+    // let winner = 0
+    // let pitch = 1
+    // let modifier = 5
+    // let fibula = []
+    // let chosenValue
+    // let chosenAudio = 'assets/audio/womp.wav'
     let muting = localStorage.getItem('muting') ? true : false
-    let winningScore = free ? 1000000000 : 32
-    let specialUnlocked = localStorage.getItem('special') || false
-    let homerunUnlocked = localStorage.getItem('homerun') || false
-    let champion = localStorage.getItem('champion') || false
+    // let winningScore = free ? 1000000000 : 32
+    // let specialUnlocked = localStorage.getItem('special') || false
+    // let homerunUnlocked = localStorage.getItem('homerun') || false
+    // let champion = localStorage.getItem('champion') || false
 
     // ------------
     // mobile check
@@ -210,15 +212,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // }
 
     // fade in 
-    $('#theForm').hide().fadeIn(9000)
-    $('#titleLink').hide().fadeIn(9000)
-    $('#bottom-right').hide().fadeIn(9000)
-    $('#bottom-left').hide().fadeIn(9000)
+    // $('#theForm').hide().fadeIn(9000)
+    // $('#titleLink').hide().fadeIn(9000)
+    // $('#bottom-right').hide().fadeIn(9000)
+    // $('#bottom-left').hide().fadeIn(9000)
     $('#square').fadeIn(5000)
 
     // initialize semantic dropdown
-    $('.ui.dropdown')
-        .dropdown();
+    // $('.ui.dropdown')
+    //     .dropdown();
 
     // turnYourLightsDownLow function
     //        * dims page *
@@ -641,7 +643,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // changeColorDiv.style.opacity = 1
                         square.classList.remove(animation)
                         document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
-                    }, 6000)
+                    }, 7000)
 
                 } else {
                     squaring = false
@@ -651,7 +653,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     square.classList.remove(animation)
                     document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
                 }
-            }, 4000)
+            }, 5000)
         }
     })
 
@@ -750,9 +752,9 @@ document.addEventListener('DOMContentLoaded', () => {
             //     }
             // }
 
-            if (!hovering && !muting) {
-                // play(pitch / modifier)
-            }
+            // if (!hovering && !muting) {
+            //     play(pitch / modifier)
+            // }
 
             // Setup
             var posX = $(this).offset().left,

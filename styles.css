@@ -9,8 +9,8 @@
 }
 
 html {
-	overflow-x: hidden;
-	overflow-y: hidden;
+	overflow: auto;
+	height: 110%;
 }
 
 #gitlink {
@@ -18,13 +18,17 @@ html {
 	cursor: url(assets/images/github.png), auto !important;
 }
 
+.container {
+	/* overflow-x: hidden;
+	overflow-y: hidden; */
+}
+
 body {
+	height: 100%;
 	touch-action: none;
 	background-color: #010106;
 	transition: background-color 1s linear;
 	color: aliceblue;
-	overflow-x: hidden;
-	overflow-y: hidden;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
 	-moz-user-select: none;
