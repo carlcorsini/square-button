@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (mobileCheck()) {
         let container = document.createElement('div')
-        let sorry = document.createElement('h1')
+        let sorry = document.createElement('h2')
         sorry.classList.add('sorry')
         document.body.innerHTML = ''
         document.body.style.textAlign = "center"
@@ -109,21 +109,19 @@ document.addEventListener('DOMContentLoaded', () => {
         container.style.textAlign = 'center'
         container.style.position = '-webkit-sticky'
         document.body.appendChild(container)
-        sorry.style.marginTop = '10em'
+        sorry.style.marginTop = '8em'
         sorry.style.opacity = '0'
-        sorry.innerHTML = "Click anywhere to be redirected to the Square Mobile Beta 1.0"
+        sorry.innerHTML = "Tap anywhere to be redirected to the Square Mobile Beta 1.0"
         container.appendChild(sorry)
         document.body.style.overflow = 'hidden'
         setTimeout(() => {
             let canvas = document.querySelector('#defaultCanvas0')
-            sorry.style.opacity = '1'
+            sorry.style.opacity = 1
             canvas.style.opacity = 1
         }, 500)
 
-        document.body.addEventListener('click', () => {
-            setTimeout(() => {
-                window.location.href = "https://sqrm.surge.sh"
-            }, 2000)
+        document.body.addEventListener('touchstart', () => {
+            window.location.href = "https://sqrm.surge.sh"
         })
 
         return
@@ -1159,7 +1157,7 @@ var gravity;
 
 function setup() {
     if (mobileCheck()) {
-        var cnv = createCanvas(375, 812);
+        var cnv = createCanvas(375, 700);
     } else {
         var cnv = createCanvas(420, 420);
     }
