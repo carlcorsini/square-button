@@ -10,12 +10,10 @@
     <link rel="stylesheet" href="./styles.css">
     <link rel="icon" href="https://sitejerk.com/images/black-square-outline-png-9.png">
     <meta property="og:title" content="Square">
-    <meta property="og:description" content="DOM Manipulation, ever heard of it?">
+    <meta property="og:description" content="Square 2.0: Mobile Squared">
     <meta property="og:image" content="https://sitejerk.com/images/black-square-outline-png-9.png">
-    <meta property="og:url" content="https://sqr.surge.sh">
-    <audio id="works" src="assets/audio/fireworks.wav"></audio>
-    <audio id="goodTimes" src="assets/audio/goodTimes.wav"></audio>
-    <audio id="ps2" src="assets/audio/ps2.wav"></audio>
+    <meta property="og:url" content="https://sqrm.surge.sh">
+    <audio id="bell" src="assets/audio/bellMobile.wav"></audio>
 
     <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
     <title>Square</title>
@@ -23,128 +21,15 @@
 
 <body>
     <div class="ui container fluid">
-
         <section class="shape1" id="square"></section>
-        <!-- <section class="square spin" id="square2"></section> -->
-        <br>
-
-        <!-- <div id="changeColorDiv">
-        <div class="ui form mini compact ">
-            <form onsubmit="console.log(why)" id="theForm">
-                <div class="five fields compact">
-                    <div class="field"> -->
-        <!-- <select id="selectaBackground" class="ui dropdown">
-                            <option value="random">Random Background</option>
-                            <option value="keep">Keep Background</option>
-                            <option value="white">White</option>
-                            <option value="#1FE3C8">Teal</option>
-                            <option value="#05BFF2">Blue</option>
-                            <option value="#F20568">Red</option>
-                            <option value="#f06406">Orange</option>
-                            <option value="rgba(215, 14, 255, 0.4)">Pink</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <select id="selectaColor" class="ui dropdown">
-                            <option value="random">Random Color</option>
-                            <option value="keep">Keep Color</option>
-                            <option value="white">White</option>
-                            <option value="#1FE3C8">Teal</option>
-                            <option value="#05BFF2">Blue</option>
-                            <option value="#F20568">Red</option>
-                            <option value="#f06406">Orange</option>
-                            <option value="rgba(215, 14, 255, 0.4)">Pink</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <select id="selectaBorder" class="ui dropdown">
-                            <option value="random">Random Border</option>
-                            <option value="keep">Keep Border</option>
-                            <option value="white">White</option>
-                            <option value="#1FE3C8">Teal</option>
-                            <option value="#05BFF2">Blue</option>
-                            <option value="#F20568">Red</option>
-                            <option value="#f06406">Orange</option>
-                            <option value="rgba(215, 14, 255, 0.4)">Pink</option>
-                        </select>
-                    </div> -->
-        <!-- <div class="field">
-        <select id="selectaAnimation" class="ui dropdown compact">
-            <option value="random">Random</option>
-            <option value="spin">Spin</option>
-            <option value="bounce">Bounce</option>
-            <option value="move">Move</option>
-            <option value="wrapAround">Wrap</option>
-        </select>
-    </div> -->
-        <!-- <div class="field">
-                        <select id="selectaRipple" class="ui dropdown">
-                            <option value="random">Random Ripple</option>
-                            <option value="keep">Keep Ripple</option>
-                            <option value="white">White</option>
-                            <option value="#1FE3C8">Teal</option>
-                            <option value="#05BFF2">Blue</option>
-                            <option value="#F20568">Red</option>
-                            <option value="#f06406">Orange</option>
-                            <option value="rgba(215, 14, 255, 0.4)">Pink</option>
-                        </select>
-                    </div> -->
-        <!-- </div>
-    <br>
-    <button type="submit" id="changeColor" class="ui inverted white button mini">Commence</button>
-    </form>
-    </div> -->
-        <!-- <div id="bottom-right">
-            <div class="ui buttons mini">
-                <button id="homerun" class="ui disabled inverted red button">Home Run</button>
-                <button id="special" class="ui disabled inverted yellow button">Special</button>
-                <button id="womp" class="ui inverted violet button">Womp</button>
-                <button id="drip" class="ui inverted teal button">Drip</button>
-                <button id="rasta" class="ui inverted yellow button">Rasta</button>
-                <button id="menu" class="ui icon inverted grey button"><i class="cog icon"></i></button>
-            </div>
-            <div id='modal' class="ui mini basic modal">
-                <div class="Settings">
-                    <i class="cog icon"></i>
-                    Settings
-                </div>
-                <div style="text-align: center" class="content">
-                    <div class="five vertical ui buttons ">
-                        <button id="soundOn" class="ui inverted toggle active button red">Sound On</button>
-                        <button id="intro" class="ui inverted toggle red button">PS2 Intro Off</button>
-                        <div id="story" class="ui toggle button active red inverted animated button" tabindex="0">
-                            <div class="visible content">Fibonacci Mode</div>
-                            <div class="hidden content">
-                                New Game </div>
-                        </div>
-                        <button disabled id="free" class="ui inverted red toggle button">Free Mode</button>
-                        <div id="reset" class="ui button red inverted animated button" tabindex="0">
-                            <div id="reset1" class="visible content">Reset</div>
-                            <div id="reset2" class="hidden content">
-                                ...are you sure? </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div id="closeMenu" style="text-align: center;" class="actions">
-                    <div class="ui red basic cancel inverted button">
-                        <i class="remove icon"></i>
-                        Close
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
-    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.6/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.6/addons/p5.dom.js"></script>
+
 </body>
 
 </html>

@@ -8,9 +8,11 @@
 	cursor: url(assets/images/github.png), auto !important;
 }
 
+
+
 html {
 	overflow: auto;
-	height: 110%;
+	height: 100%;
 }
 
 #gitlink {
@@ -18,12 +20,9 @@ html {
 	cursor: url(assets/images/github.png), auto !important;
 }
 
-.container {
-	/* overflow-x: hidden;
-	overflow-y: hidden; */
-}
 
 body {
+	transition-property: color;
 	height: 100%;
 	touch-action: none;
 	background-color: #010106;
@@ -477,14 +476,7 @@ body {
 	}
 }
 
-/* .trail {
-	className for the trail elements
-	position: absolute;
-	height: 6px;
-	width: 6px;
-	border-radius: 3px;
-	background: teal;
-} */
+
 
 .wrapAround {
 	animation: moveSlideShow 10s linear 1;
@@ -519,17 +511,6 @@ body {
 
 }
 
-.wrapAround2 {
-	animation: moveSlideShow2 10s linear infinite;
-	transform: translate3d(0, 0, 0);
-}
-
-@keyframes moveSlideShow2 {
-	100% {
-
-		-webkit-transform: translateX(100%);
-	}
-}
 
 .flashit {
 	color: #f2f;
