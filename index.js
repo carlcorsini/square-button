@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+    window.scrollTo(0, 1)
     // -----------
     // helpers
     // -----------
@@ -618,6 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
 
     square.addEventListener('touchstart', (e) => {
+        squaring = true
         // if (!muting) playSound('assets/audio/bell.wav')
         if (!animating) {
             denitiateSquare()
@@ -634,6 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 if (animation == 'wrapAround' || animation == 'spin') {
                     setTimeout(() => {
+                        squaring = false
                         animating = false
                         letThereBeLight()
                         // changeColorDiv.style.opacity = 1
@@ -642,6 +644,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }, 6000)
 
                 } else {
+                    squaring = false
                     animating = false
                     letThereBeLight()
                     // changeColorDiv.style.opacity = 1
@@ -699,11 +702,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $("body").on({
 
-
         'touchstart': function (e) {
             e.preventDefault()
             // console.log('hey')
-            squaring = false
+
             // if ((modaling && paused) || hovering) {
             //     return
             // }
