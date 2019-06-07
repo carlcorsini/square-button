@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let initiateSquare = () => {
-        $('#square').effect('shake', {
-            times: 14,
-            distance: 5,
-            direction: 'up'
-        }, 20000)
+        Math.random() < 0.5 ? $('#square').addClass('shakerSquare') : $('#square').addClass('shaker')
+    }
+
+    let denitiateSquare = () => {
+        $('#square').removeClass('shakerSquare shaker')
     }
 
     // let playClick = () => {
@@ -224,25 +224,26 @@ document.addEventListener('DOMContentLoaded', () => {
     //        * dims page *
     let turnYourLightsDownLow = () => {
         animating = true
-        $('.ui.dropdown').addClass("disabled");
-        $('.ui.button').addClass("disabled");
+        // $('.ui.dropdown').addClass("disabled");
+        // $('.ui.button').addClass("disabled");
         // title.style.opacity = '0.1'
         // scoreBox.style.opacity = '0.1'
         document.body.style.backgroundColor = "#010106"
-        changeColorDiv.style.opacity = 0
+        // changeColorDiv.style.opacity = 0
     }
 
     // letThereBeLight function
     // * reverses dim effect *
     let letThereBeLight = () => {
-        $('.ui.dropdown').removeClass("disabled");
-        $('.ui.button').removeClass("disabled");
+        // $('.ui.dropdown').removeClass("disabled");
+        // $('.ui.button').removeClass("disabled");
         // title.style.opacity = '1'
         // scoreBox.style.opacity = '1'
         document.body.style.backgroundColor = '#0c1522'
-        button.disabled = false
+        // button.disabled = false
         animating = false
-        changeColorDiv.style.opacity = 0
+        // changeColorDiv.style.opacity = 0
+        initiateSquare()
     }
 
     // ******************************************************************************
@@ -510,16 +511,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // bottomRight.addEventListener('mouseout', () => {
     //     hovering = false
     // })
-    changeColor.addEventListener('mouseover', () => {
-        hovering = true
+    // changeColor.addEventListener('mouseover', () => {
+    //     hovering = true
 
-    })
-    changeColor.addEventListener('mouseout', () => {
-        hovering = false
-    })
-    changeColorDiv.addEventListener('touchstart', () => {
-        squaring = true
-    })
+    // })
+    // changeColor.addEventListener('mouseout', () => {
+    //     hovering = false
+    // })
+    // changeColorDiv.addEventListener('touchstart', () => {
+    //     squaring = true
+    // })
 
     // changeColorDiv.addEventListener('mouseout', () => {
     //     squaring = false
@@ -550,15 +551,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
     // ******************************************************************************
 
-    selectaAnimation.addEventListener('change', (e) => {
-        if (e.target.value == 'random') {
-            randomAnimation = true
-            animation = animations[Math.floor(Math.random() * animations.length)]
-        } else {
-            randomAnimation = false
-            animation = e.target.value
-        }
-    })
+    // selectaAnimation.addEventListener('change', (e) => {
+    //     if (e.target.value == 'random') {
+    //         randomAnimation = true
+    //         animation = animations[Math.floor(Math.random() * animations.length)]
+    //     } else {
+    //         randomAnimation = false
+    //         animation = e.target.value
+    //     }
+    // })
 
     // selectaColor.addEventListener('change', (e) => {
     //     if (e.target.value == 'random') {
@@ -618,31 +619,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     square.addEventListener('touchstart', (e) => {
         // if (!muting) playSound('assets/audio/bell.wav')
-        animating = true
-        e.preventDefault()
-        turnYourLightsDownLow()
-        animation = randomAnimation ? animations[Math.floor(Math.random() * animations.length)] : animation
-        square.classList.add(animation)
-        square.style.backgroundColor = random ? getRandomColor() : color
-        ripple = randomRipple ? getRandomColor() : ripple
-        square.style.borderColor = randomBorder ? getRandomColor() : border
-        changeColorDiv.style.opacity = 0
-        setTimeout(() => {
-            if (animation == 'wrapAround' || animation == 'spin') {
-                setTimeout(() => {
+        if (!animating) {
+            denitiateSquare()
+
+            animating = true
+            e.preventDefault()
+            turnYourLightsDownLow()
+            animation = randomAnimation ? animations[Math.floor(Math.random() * animations.length)] : animation
+            square.classList.add(animation)
+            square.style.backgroundColor = random ? getRandomColor() : color
+            ripple = randomRipple ? getRandomColor() : ripple
+            square.style.borderColor = randomBorder ? getRandomColor() : border
+            // changeColorDiv.style.opacity = 0
+            setTimeout(() => {
+                if (animation == 'wrapAround' || animation == 'spin') {
+                    setTimeout(() => {
+                        animating = false
+                        letThereBeLight()
+                        // changeColorDiv.style.opacity = 1
+                        square.classList.remove(animation)
+                        document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
+                    }, 6000)
+
+                } else {
+                    animating = false
                     letThereBeLight()
-                    changeColorDiv.style.opacity = 1
+                    // changeColorDiv.style.opacity = 1
                     square.classList.remove(animation)
                     document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
-                }, 6000)
-
-            } else {
-                letThereBeLight()
-                changeColorDiv.style.opacity = 1
-                square.classList.remove(animation)
-                document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
-            }
-        }, 4000)
+                }
+            }, 4000)
+        }
     })
 
     // function preventBehavior(e) {
@@ -691,6 +698,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // let fib = (num) => num <= 1 ? 1 : fib(num - 1) + fib(num - 2)
 
     $("body").on({
+
 
         'touchstart': function (e) {
             e.preventDefault()
