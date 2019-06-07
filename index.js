@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 20000)
     }
 
-    let playClick = () => {
-        if (!muting) {
-            playSound('assets/audio/click.wav', 1)
-        }
-    }
+    // let playClick = () => {
+    //     if (!muting) {
+    //         playSound('assets/audio/click.wav', 1)
+    //     }
+    // }
 
     let muteAll = () => {
         var sounds = document.querySelector('#allAudio')
@@ -45,9 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // select necessary html elements    
     let square = document.querySelector('#square')
     let theForm = document.querySelector('#theForm')
-    let selectaAnimation = document.querySelector('#selectaAnimation')
-    let selectaColor = document.querySelector('#selectaColor')
-    let selectaRipple = document.querySelector('#selectaRipple')
+    // let selectaAnimation = document.querySelector('#selectaAnimation')
+    // let selectaColor = document.querySelector('#selectaColor')
+    // let selectaRipple = document.querySelector('#selectaRipple')
     let button = document.querySelector('#changeColor')
     let title = document.querySelector('#title')
     let bottomRight = document.querySelector('#bottom-right')
@@ -158,56 +158,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2000)
 
 
-    if (homerunUnlocked) {
-        homerun.disabled = false
-        homerun.classList.remove('disabled')
+    // if (homerunUnlocked) {
+    //     homerun.disabled = false
+    //     homerun.classList.remove('disabled')
 
-    }
-    if (specialUnlocked) {
-        special.classList.remove('disabled')
-        special.disabled = false
-    }
+    // }
+    // if (specialUnlocked) {
+    //     special.classList.remove('disabled')
+    //     special.disabled = false
+    // }
 
-    if (specialUnlocked && homerunUnlocked) {
-        console.log('yes')
-        freeButton.disabled = false
-        freeButton.classList.remove('disabled')
-    }
+    // if (specialUnlocked && homerunUnlocked) {
+    //     console.log('yes')
+    //     freeButton.disabled = false
+    //     freeButton.classList.remove('disabled')
+    // }
 
-    if (!muting && introing) {
-        playSound(ps2.src, 1)
-    }
+    // if (!muting && introing) {
+    //     // playSound(ps2.src, 1)
+    // }
 
-    if (!muting) {
-        womp.classList.add('active')
-        soundOn.classList.add('active')
-    }
+    // if (!muting) {
+    //     womp.classList.add('active')
+    //     soundOn.classList.add('active')
+    // }
 
-    if (muting) {
-        soundOn.innerHTML = 'Sound Off'
-        soundOn.classList.remove('active')
-    }
+    // if (muting) {
+    //     soundOn.innerHTML = 'Sound Off'
+    //     soundOn.classList.remove('active')
+    // }
 
-    if (introing) {
-        intro.classList.add('active')
-        intro.innerHTML = 'PS2 Intro On'
-    }
+    // if (introing) {
+    //     intro.classList.add('active')
+    //     intro.innerHTML = 'PS2 Intro On'
+    // }
 
-    if (free) {
-        freeButton.disabled = false
-        freeButton.classList.remove('disabled')
-        freeButton.classList.add('active')
-        storyButton.classList.remove('active')
-        $('#scoreBox').html('Free').css({
-            fontSize: '0.9em',
+    // if (free) {
+    //     freeButton.disabled = false
+    //     freeButton.classList.remove('disabled')
+    //     freeButton.classList.add('active')
+    //     storyButton.classList.remove('active')
+    //     $('#scoreBox').html('Free').css({
+    //         fontSize: '0.9em',
 
-        })
-    }
+    //     })
+    // }
 
-    if (score < 32) {
-        if (!specialUnlocked) special.disabled = true
-        if (!homerunUnlocked) homerun.disabled = true
-    }
+    // if (score < 32) {
+    //     if (!specialUnlocked) special.disabled = true
+    //     if (!homerunUnlocked) homerun.disabled = true
+    // }
 
     // fade in 
     $('#theForm').hide().fadeIn(9000)
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $('.ui.dropdown').addClass("disabled");
         $('.ui.button').addClass("disabled");
         // title.style.opacity = '0.1'
-        scoreBox.style.opacity = '0.1'
+        // scoreBox.style.opacity = '0.1'
         document.body.style.backgroundColor = "#010106"
         changeColorDiv.style.opacity = 0
     }
@@ -235,10 +235,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // letThereBeLight function
     // * reverses dim effect *
     let letThereBeLight = () => {
-        if (score > 5 || free) $('.ui.dropdown').removeClass("disabled");
+        $('.ui.dropdown').removeClass("disabled");
         $('.ui.button').removeClass("disabled");
         // title.style.opacity = '1'
-        scoreBox.style.opacity = '1'
+        // scoreBox.style.opacity = '1'
         document.body.style.backgroundColor = '#0c1522'
         button.disabled = false
         animating = false
@@ -256,219 +256,219 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
 
     // helper for sound selection
-    let setActiveButton = (active, disabled) => {
-        if (active) active.classList.add('active')
+    // let setActiveButton = (active, disabled) => {
+    //     if (active) active.classList.add('active')
 
-        disabled.forEach(a => {
-            a.classList.remove('active')
-        })
-    }
+    //     disabled.forEach(a => {
+    //         a.classList.remove('active')
+    //     })
+    // }
 
-    womp.addEventListener('click', () => {
-        localStorage.removeItem('muting')
-        setActiveButton(womp, [drip, soundOn, rasta, homerun, special])
-        muting = false
-        chosenAudio = 'assets/audio/womp.wav'
-        playSound(chosenAudio, 1)
-    })
+    // womp.addEventListener('click', () => {
+    //     localStorage.removeItem('muting')
+    //     setActiveButton(womp, [drip, soundOn, rasta, homerun, special])
+    //     muting = false
+    //     chosenAudio = 'assets/audio/womp.wav'
+    //     // playSound(chosenAudio, 1)
+    // })
 
-    drip.addEventListener('click', () => {
-        localStorage.removeItem('muting')
-        setActiveButton(drip, [womp, rasta, homerun, special])
-        muting = false
-        chosenAudio = 'assets/audio/drip.wav'
-        playSound(chosenAudio, 1)
-    })
+    // drip.addEventListener('click', () => {
+    //     localStorage.removeItem('muting')
+    //     setActiveButton(drip, [womp, rasta, homerun, special])
+    //     muting = false
+    //     chosenAudio = 'assets/audio/drip.wav'
+    //     // playSound(chosenAudio, 1)
+    // })
 
-    soundOn.addEventListener('click', () => {
+    // soundOn.addEventListener('click', () => {
 
-        if (muting) {
-            soundOn.innerHTML = 'Sound On'
-            localStorage.removeItem('muting')
-            muting = false
-            chosenAudio = 'assets/audio/womp.wav'
-            setActiveButton(womp, [drip, soundOn, rasta, homerun, special])
+    //     if (muting) {
+    //         soundOn.innerHTML = 'Sound On'
+    //         localStorage.removeItem('muting')
+    //         muting = false
+    //         chosenAudio = 'assets/audio/womp.wav'
+    //         setActiveButton(womp, [drip, soundOn, rasta, homerun, special])
 
-            playClick()
-        } else {
-            setActiveButton(null, [drip, soundOn, rasta, homerun, special, womp])
-            soundOn.innerHTML = 'Sound Off'
-            localStorage.setItem('muting', 'true')
-            soundOn.classList.remove('active')
-            muting = true
-            chosenAudio = ''
-        }
-    })
-    storyButton.addEventListener('click', () => {
-        playClick()
-        $('.ui.dropdown').addClass("disabled");
-        localStorage.removeItem('free')
-        setActiveButton(storyButton, [freeButton])
-        free = false
-        score = 0
-        winner = false
-        winningScore = 32
-        highScore = 0
-        $('#sequence').css('opacity', '0').html(0)
-        $('#scoreBox').html(1).css('opacity', '1')
-        fibula = []
+    //         // playClick()
+    //     } else {
+    //         setActiveButton(null, [drip, soundOn, rasta, homerun, special, womp])
+    //         soundOn.innerHTML = 'Sound Off'
+    //         localStorage.setItem('muting', 'true')
+    //         soundOn.classList.remove('active')
+    //         muting = true
+    //         chosenAudio = ''
+    //     }
+    // })
+    // storyButton.addEventListener('click', () => {
+    //     // playClick()
+    //     $('.ui.dropdown').addClass("disabled");
+    //     localStorage.removeItem('free')
+    //     setActiveButton(storyButton, [freeButton])
+    //     free = false
+    //     score = 0
+    //     winner = false
+    //     winningScore = 32
+    //     highScore = 0
+    //     $('#sequence').css('opacity', '0').html(0)
+    //     $('#scoreBox').html(1).css('opacity', '1')
+    //     fibula = []
 
-    })
-    freeButton.addEventListener('click', () => {
-        playClick()
-        $('.ui.dropdown').removeClass("disabled");
-        $('.ui.button').removeClass("disabled");
-        localStorage.setItem('free', 'true')
-        setActiveButton(freeButton, [storyButton])
-        $('#sequence').html('')
-        $('#scoreBox').css('font-size', '.9em').html('Free Mode')
-        freeButton.classList.remove('flashit')
-        free = true
-        score = 0
-        winner = 0
-        highScore = false
-        fibula = []
-        winningScore = 100000000000
-        // console.log(winningScore)
-    })
+    // })
+    // freeButton.addEventListener('click', () => {
+    //     // playClick()
+    //     $('.ui.dropdown').removeClass("disabled");
+    //     $('.ui.button').removeClass("disabled");
+    //     localStorage.setItem('free', 'true')
+    //     setActiveButton(freeButton, [storyButton])
+    //     $('#sequence').html('')
+    //     $('#scoreBox').css('font-size', '.9em').html('Free Mode')
+    //     freeButton.classList.remove('flashit')
+    //     free = true
+    //     score = 0
+    //     winner = 0
+    //     highScore = false
+    //     fibula = []
+    //     winningScore = 100000000000
+    //     // console.log(winningScore)
+    // })
 
-    intro.addEventListener('click', () => {
-        playClick()
-        if (!introing) {
-            intro.innerHTML = "PS2 Intro On"
-            setTimeout(() => {
-                playSound('assets/audio/ps2.wav', 1)
-            }, 250)
-            localStorage.setItem('intro', 'true')
-            introing = true
-            intro.classList.add('active')
-        } else {
-            playClick()
-            setTimeout(() => {
-                muteAll()
-            }, 25)
-            intro.innerHTML = "PS2 Intro Off"
-            introing = false
-            localStorage.removeItem('intro')
-            intro.classList.remove('active')
-        }
-    })
+    // intro.addEventListener('click', () => {
+    //     // playClick()
+    //     if (!introing) {
+    //         intro.innerHTML = "PS2 Intro On"
+    //         setTimeout(() => {
+    //             // playSound('assets/audio/ps2.wav', 1)
+    //         }, 250)
+    //         localStorage.setItem('intro', 'true')
+    //         introing = true
+    //         intro.classList.add('active')
+    //     } else {
+    //         // playClick()
+    //         setTimeout(() => {
+    //             muteAll()
+    //         }, 25)
+    //         intro.innerHTML = "PS2 Intro Off"
+    //         introing = false
+    //         localStorage.removeItem('intro')
+    //         intro.classList.remove('active')
+    //     }
+    // })
 
-    menu.addEventListener('click', () => {
-        playClick()
-        menu.classList.remove('flashit')
-        $('.ui.basic.modal')
-            .modal({
-                autoFocus: false,
-                onHide: function () {
-                    menu.classList.remove('active')
-                    paused = false
-                    modaling = false
-                },
-                onShow: function () {
-                    menu.classList.add('active')
-                    paused = true
-                }
-            }).modal('show');
-    })
-
-
-    rasta.addEventListener('click', () => {
-        playSound('assets/audio/streets.wav', 1)
-        square.style.backgroundColor = '#D51C2C'
-        document.body.style.backgroundColor = '#018A2D'
-        square.style.borderColor = '#FCDE03'
-        setActiveButton(rasta, [drip, womp, homerun, special])
-        muting = false
-        chosenAudio = 'assets/audio/rasta.wav'
-        ripple = '#FCDE03'
-    })
-
-    homerun.addEventListener('click', () => {
-        setActiveButton(homerun, [drip, rasta, womp, special])
-        muting = false
-        chosenAudio = 'assets/audio/homerun.wav'
-        playSound(chosenAudio, 1)
-        homerun.classList.remove('flashit')
-    })
-
-    special.addEventListener('click', () => {
-        setActiveButton(special, [drip, rasta, womp, homerun])
-        muting = false
-        chosenAudio = 'assets/audio/tony.wav'
-        playSound(chosenAudio, 1)
-        special.classList.remove('flashit')
-    })
-
-    special.addEventListener('click', () => {
-        setActiveButton(special, [drip, rasta, womp, homerun])
-        muting = false
-        chosenAudio = 'assets/audio/tony.wav'
-        playSound(chosenAudio, 1)
-    })
-
-    reset.addEventListener('click', () => {
-        ['free', 'homerun', 'special', 'intro', 'muting', 'champion'].forEach(a => {
-            localStorage.removeItem(a)
-            playClick()
-        })
-
-        $('#reset2').html('resetting.')
-
-        setTimeout(() => {
-            $('#reset2').html('resetting..')
-        }, 400)
-        setTimeout(() => {
-            $('#reset2').html('resetting...')
-        }, 800)
-        setTimeout(() => {
-            $('#reset2').html('')
-        }, 1200)
-        setTimeout(() => {
-            $('#reset2').html('desynchronizing.')
-        }, 1600)
-
-        setTimeout(() => {
-            $('#reset2').html('desynchronizing..')
-        }, 2000)
-        setTimeout(() => {
-            $('#reset2').html('desynchronizing...')
-        }, 2400)
-        setTimeout(() => {
-            $('#reset2').html('')
-        }, 2800)
-        setTimeout(() => {
-            $('#reset2').html('detaching service node.')
-        }, 3200)
-
-        setTimeout(() => {
-            $('#reset2').html('detaching service node..')
-        }, 3600)
-        setTimeout(() => {
-            $('#reset2').html('detaching service node...')
-        }, 4000)
-        setTimeout(() => {
-            $('#reset2').html('fatal_error::ERR_HARD_DRIVE_COMPROMISED')
-            $('#reset2').effect('shake', {
-                times: 10,
-                distance: 6,
-            }, 3000)
-        }, 5500)
-        // setTimeout(() => {
-        //     $('#reset2').html('your computer will now explode')
-
-        // }, 7500)
+    // menu.addEventListener('click', () => {
+    //     // playClick()
+    //     menu.classList.remove('flashit')
+    //     $('.ui.basic.modal')
+    //         .modal({
+    //             autoFocus: false,
+    //             onHide: function () {
+    //                 menu.classList.remove('active')
+    //                 paused = false
+    //                 modaling = false
+    //             },
+    //             onShow: function () {
+    //                 menu.classList.add('active')
+    //                 paused = true
+    //             }
+    //         }).modal('show');
+    // })
 
 
-        setTimeout(() => {
-            location.reload()
+    // rasta.addEventListener('click', () => {
+    //     // playSound('assets/audio/streets.wav', 1)
+    //     square.style.backgroundColor = '#D51C2C'
+    //     document.body.style.backgroundColor = '#018A2D'
+    //     square.style.borderColor = '#FCDE03'
+    //     setActiveButton(rasta, [drip, womp, homerun, special])
+    //     muting = false
+    //     chosenAudio = 'assets/audio/rasta.wav'
+    //     ripple = '#FCDE03'
+    // })
 
-        }, 8500)
-    })
+    // homerun.addEventListener('click', () => {
+    //     setActiveButton(homerun, [drip, rasta, womp, special])
+    //     muting = false
+    //     chosenAudio = 'assets/audio/homerun.wav'
+    //     // playSound(chosenAudio, 1)
+    //     homerun.classList.remove('flashit')
+    // })
 
-    closeMenu.addEventListener('click', () => {
-        if (!muting) playSound('assets/audio/deny.wav', 1)
-    })
+    // special.addEventListener('click', () => {
+    //     setActiveButton(special, [drip, rasta, womp, homerun])
+    //     muting = false
+    //     chosenAudio = 'assets/audio/tony.wav'
+    //     // playSound(chosenAudio, 1)
+    //     special.classList.remove('flashit')
+    // })
+
+    // special.addEventListener('click', () => {
+    //     setActiveButton(special, [drip, rasta, womp, homerun])
+    //     muting = false
+    //     chosenAudio = 'assets/audio/tony.wav'
+    //     // playSound(chosenAudio, 1)
+    // })
+
+    // reset.addEventListener('click', () => {
+    //     ['free', 'homerun', 'special', 'intro', 'muting', 'champion'].forEach(a => {
+    //         localStorage.removeItem(a)
+    //         // playClick()
+    //     })
+
+    //     $('#reset2').html('resetting.')
+
+    //     setTimeout(() => {
+    //         $('#reset2').html('resetting..')
+    //     }, 400)
+    //     setTimeout(() => {
+    //         $('#reset2').html('resetting...')
+    //     }, 800)
+    //     setTimeout(() => {
+    //         $('#reset2').html('')
+    //     }, 1200)
+    //     setTimeout(() => {
+    //         $('#reset2').html('desynchronizing.')
+    //     }, 1600)
+
+    //     setTimeout(() => {
+    //         $('#reset2').html('desynchronizing..')
+    //     }, 2000)
+    //     setTimeout(() => {
+    //         $('#reset2').html('desynchronizing...')
+    //     }, 2400)
+    //     setTimeout(() => {
+    //         $('#reset2').html('')
+    //     }, 2800)
+    //     setTimeout(() => {
+    //         $('#reset2').html('detaching service node.')
+    //     }, 3200)
+
+    //     setTimeout(() => {
+    //         $('#reset2').html('detaching service node..')
+    //     }, 3600)
+    //     setTimeout(() => {
+    //         $('#reset2').html('detaching service node...')
+    //     }, 4000)
+    //     setTimeout(() => {
+    //         $('#reset2').html('fatal_error::ERR_HARD_DRIVE_COMPROMISED')
+    //         $('#reset2').effect('shake', {
+    //             times: 10,
+    //             distance: 6,
+    //         }, 3000)
+    //     }, 5500)
+    //     // setTimeout(() => {
+    //     //     $('#reset2').html('your computer will now explode')
+
+    //     // }, 7500)
+
+
+    //     setTimeout(() => {
+    //         location.reload()
+
+    //     }, 8500)
+    // })
+
+    // closeMenu.addEventListener('click', () => {
+    //     // if (!muting) playSound('assets/audio/deny.wav', 1)
+    // })
 
     // document.body.addEventListener('mousemove', e => {
     //     pitch = Math.ceil(e.clientY / 100)
@@ -486,30 +486,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
 
 
-    square.addEventListener('mouseover', () => {
+    // square.addEventListener('mouseover', () => {
 
-        if (!animating) {
-            square.classList.add('hover')
-        } else {
-            square.classList.add('no')
-        }
-        hovering = true
-    })
+    //     if (!animating) {
+    //         square.classList.add('hover')
+    //     } else {
+    //         square.classList.add('no')
+    //     }
+    //     hovering = true
+    // })
 
-    square.addEventListener('mouseout', () => {
-        $("#ripple2").css('display', 'none')
-        if (!animating) square.classList.remove('hover')
-        square.classList.remove('no')
-        hovering = false
-    })
+    // square.addEventListener('mouseout', () => {
+    //     $("#ripple2").css('display', 'none')
+    //     if (!animating) square.classList.remove('hover')
+    //     square.classList.remove('no')
+    //     hovering = false
+    // })
 
-    bottomRight.addEventListener('mouseover', () => {
-        hovering = true
-    })
+    // bottomRight.addEventListener('mouseover', () => {
+    //     hovering = true
+    // })
 
-    bottomRight.addEventListener('mouseout', () => {
-        hovering = false
-    })
+    // bottomRight.addEventListener('mouseout', () => {
+    //     hovering = false
+    // })
     changeColor.addEventListener('mouseover', () => {
         hovering = true
 
@@ -517,28 +517,28 @@ document.addEventListener('DOMContentLoaded', () => {
     changeColor.addEventListener('mouseout', () => {
         hovering = false
     })
-    changeColorDiv.addEventListener('mouseover', () => {
+    changeColorDiv.addEventListener('touchstart', () => {
         squaring = true
     })
 
-    changeColorDiv.addEventListener('mouseout', () => {
-        squaring = false
-    })
+    // changeColorDiv.addEventListener('mouseout', () => {
+    //     squaring = false
+    // })
 
-    modal.addEventListener('mouseover', () => {
-        modaling = true
-    })
+    // modal.addEventListener('mouseover', () => {
+    //     modaling = true
+    // })
 
-    modal.addEventListener('mouseout', () => {
-        modaling = false
-    })
+    // modal.addEventListener('mouseout', () => {
+    //     modaling = false
+    // })
 
-    closeMenu.addEventListener('mouseover', () => {
-        hovering = true
-    })
-    closeMenu.addEventListener('mouseout', () => {
-        hovering = false
-    })
+    // closeMenu.addEventListener('mouseover', () => {
+    //     hovering = true
+    // })
+    // closeMenu.addEventListener('mouseout', () => {
+    //     hovering = false
+    // })
 
     // ******************************************************************************
     // ******************************************************************************
@@ -560,50 +560,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    selectaColor.addEventListener('change', (e) => {
-        if (e.target.value == 'random') {
-            random = true
+    // selectaColor.addEventListener('change', (e) => {
+    //     if (e.target.value == 'random') {
+    //         random = true
 
-        } else if (e.target.value == 'keep') {
-            random = false
-        } else {
-            color = e.target.value
-            random = false
-        }
-    })
+    //     } else if (e.target.value == 'keep') {
+    //         random = false
+    //     } else {
+    //         color = e.target.value
+    //         random = false
+    //     }
+    // })
 
-    selectaRipple.addEventListener('change', (e) => {
-        if (e.target.value == 'random') {
-            randomRipple = true
-        } else if (e.target.value === 'keep') {
-            randomRipple = false
-        } else {
-            ripple = e.target.value
-            randomRipple = false
-        }
-    })
+    // selectaRipple.addEventListener('change', (e) => {
+    //     if (e.target.value == 'random') {
+    //         randomRipple = true
+    //     } else if (e.target.value === 'keep') {
+    //         randomRipple = false
+    //     } else {
+    //         ripple = e.target.value
+    //         randomRipple = false
+    //     }
+    // })
 
-    selectaBackground.addEventListener('change', (e) => {
-        if (e.target.value == 'random') {
-            randomBackground = true
-        } else if (e.target.value === 'keep') {
-            randomBackground = false
-        } else {
-            background = e.target.value
-            randomBackground = false
-        }
-    })
+    // selectaBackground.addEventListener('change', (e) => {
+    //     if (e.target.value == 'random') {
+    //         randomBackground = true
+    //     } else if (e.target.value === 'keep') {
+    //         randomBackground = false
+    //     } else {
+    //         background = e.target.value
+    //         randomBackground = false
+    //     }
+    // })
 
-    selectaBorder.addEventListener('change', (e) => {
-        if (e.target.value == 'random') {
-            randomBorder = true
-        } else if (e.target.value === 'keep') {
-            randomBorder = false
-        } else {
-            border = e.target.value
-            randomBorder = false
-        }
-    })
+    // selectaBorder.addEventListener('change', (e) => {
+    //     if (e.target.value == 'random') {
+    //         randomBorder = true
+    //     } else if (e.target.value === 'keep') {
+    //         randomBorder = false
+    //     } else {
+    //         border = e.target.value
+    //         randomBorder = false
+    //     }
+    // })
 
 
     // ******************************************************************************
@@ -616,8 +616,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
     // ******************************************************************************
 
-    theForm.addEventListener('submit', (e) => {
-        if (!muting) playSound('assets/audio/bell.wav')
+    square.addEventListener('touchstart', (e) => {
+        // if (!muting) playSound('assets/audio/bell.wav')
         animating = true
         e.preventDefault()
         turnYourLightsDownLow()
@@ -645,6 +645,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000)
     })
 
+    // function preventBehavior(e) {
+    //     e.preventDefault();
+    // };
+
+    // document.addEventListener("touchmove", preventBehavior, {
+    //     passive: false
+    // });
+
+    // var startX, startY, endX, endY;
+    // document.addEventListener("touchstart", function (e) {
+    //     startX = e.touches[0].pageX;
+    //     startY = e.touches[0].pageY;
+
+    //     e.preventDefault(); //Stops the default behavior
+    // }, false);
+
+    // document.addEventListener("touchend", function (e) {
+    //     endX = e.touches[0].pageX;
+    //     endY = e.touches[0].pageY;
+
+    //     e.preventDefault(); //Stops the default behavior
+    // }, false);
+
+    jQuery.event.special.touchstart = {
+        setup: function (_, ns, handle) {
+
+            this.addEventListener("touchstart", handle, {
+                passive: false
+            });
+
+        }
+    };
 
     // ******************************************************************************
     // ******************************************************************************
@@ -656,58 +688,60 @@ document.addEventListener('DOMContentLoaded', () => {
     // ******************************************************************************
     // ******************************************************************************
 
-    let fib = (num) => num <= 1 ? 1 : fib(num - 1) + fib(num - 2)
+    // let fib = (num) => num <= 1 ? 1 : fib(num - 1) + fib(num - 2)
 
     $("body").on({
+
         'touchstart': function (e) {
+            e.preventDefault()
             // console.log('hey')
-            // e.preventDefault()
-            if ((modaling && paused) || hovering) {
-                return
-            }
-            if ((score < 5 && !free) || (score > 31 && !free) || animating) {
-                $('.ui.dropdown').addClass("disabled");
-            } else {
-                $('.ui.dropdown').removeClass("disabled");
-            }
+            squaring = false
+            // if ((modaling && paused) || hovering) {
+            //     return
+            // }
+            // if ((score < 5 && !free) || (score > 31 && !free) || animating) {
+            //     $('.ui.dropdown').addClass("disabled");
+            // } else {
+            //     $('.ui.dropdown').removeClass("disabled");
+            // }
 
-            if (score === winningScore) {
-                console.log(winningScore)
-                chosenValue = Math.random() < 0.5 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
-                winner++
-            }
+            // if (score === winningScore) {
+            //     console.log(winningScore)
+            //     chosenValue = Math.random() < 0.5 ? 'assets/audio/homerun.wav' : 'assets/audio/tony.wav';
+            //     winner++
+            // }
 
-            if (!homerun.disabled && !special.disabled) {
-                freeButton.disabled = false
-            }
+            // if (!homerun.disabled && !special.disabled) {
+            //     freeButton.disabled = false
+            // }
 
-            if ((score + 2 > 3) && score + 2 < 35) {
+            // if ((score + 2 > 3) && score + 2 < 35) {
 
-                $('#sequence').css('opacity', '1')
-                $('#sequence').html(score + 2)
-            }
-            if (score === 6 && !free) {
-                console.log(free)
-                chosenValue = 'assets/audio/achievement.wav'
-            }
+            //     $('#sequence').css('opacity', '1')
+            //     $('#sequence').html(score + 2)
+            // }
+            // if (score === 6 && !free) {
+            //     console.log(free)
+            //     chosenValue = 'assets/audio/achievement.wav'
+            // }
 
-            let scoreSize = (currentScore, element) => {
-                if (currentScore + 2 < 3) {
-                    $(element).css('font-size', '1em')
-                }
-                if (currentScore == 10) {
-                    $(element).css('font-size', '1.1em')
-                }
-                if (currentScore == 20) {
-                    $(element).css('font-size', '1.2em')
-                }
-                if (currentScore == 30) {
-                    $(element).css('font-size', '1.3em')
-                }
-            }
+            // let scoreSize = (currentScore, element) => {
+            //     if (currentScore + 2 < 3) {
+            //         $(element).css('font-size', '1em')
+            //     }
+            //     if (currentScore == 10) {
+            //         $(element).css('font-size', '1.1em')
+            //     }
+            //     if (currentScore == 20) {
+            //         $(element).css('font-size', '1.2em')
+            //     }
+            //     if (currentScore == 30) {
+            //         $(element).css('font-size', '1.3em')
+            //     }
+            // }
 
             if (!hovering && !muting) {
-                play(pitch / modifier)
+                // play(pitch / modifier)
             }
 
             // Setup
@@ -761,205 +795,185 @@ document.addEventListener('DOMContentLoaded', () => {
             // ****************************************************************************
             // ****************************************************************************
 
-            if (free) {
-                score++
-                $('#sequence').html(score)
-                $('#sequence').effect('shake', {
-                    times: 1,
-                    distance: 10,
-                    direction: 'up'
-                }, (score / score - 1))
-                $('#scoreBox').css('opacity', '.3')
-                $('#sequence').css('opacity', '1')
-                return
-            }
-            if (highScore) $('.ripple').css('background', getRandomColor())
-            scoreSize(score, '#scoreBox')
-            scoreSize(score + 2, '#sequence')
-            if (winner >= 2) {
-                winner++
-                $('#scoreBox').effect('shake', {
-                    times: 4,
-                    distance: 2,
-                }, 400)
+            // if (free) {
+            //     score++
+            //     $('#sequence').html(score)
+            //     $('#sequence').effect('shake', {
+            //         times: 1,
+            //         distance: 10,
+            //         direction: 'up'
+            //     }, (score / score - 1))
+            //     $('#scoreBox').css('opacity', '.3')
+            //     $('#sequence').css('opacity', '1')
+            //     return
+            // }
+            // if (highScore) $('.ripple').css('background', getRandomColor())
+            // scoreSize(score, '#scoreBox')
+            // scoreSize(score + 2, '#sequence')
+            // if (winner >= 2) {
+            //     winner++
+            //     $('#scoreBox').effect('shake', {
+            //         times: 4,
+            //         distance: 2,
+            //     }, 400)
 
-            }
+            // }
 
-            if (winner && !free && !highScore) {
+            // if (winner && !free && !highScore) {
 
-                winner++
-                if (winner == 2) {
+            //     winner++
+            //     if (winner == 2) {
 
-                    Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
-                    turnYourLightsDownLow()
-                    highScore = true
-                    animating = true
-                    winner++
-                    scoreBox.innerHTML = 'HIGH SCORE!!'
-                    $('#defaultCanvas0').css('opacity', '1')
-                    $('#sequence').effect('shake', {
-                        times: 15,
-                        distance: 5,
-                        direction: 'up'
-                    }, 17000).css({
-                        fontSize: '1.5em',
-                        color: 'yellow'
-                    })
+            //         // Math.random() < 0.7 ? getSoundAndFadeAudio('goodTimes') : getSoundAndFadeAudio('works')
+            //         turnYourLightsDownLow()
+            //         highScore = true
+            //         animating = true
+            //         winner++
+            //         scoreBox.innerHTML = 'HIGH SCORE!!'
+            //         $('#defaultCanvas0').css('opacity', '1')
+            //         $('#sequence').effect('shake', {
+            //             times: 15,
+            //             distance: 5,
+            //             direction: 'up'
+            //         }, 17000).css({
+            //             fontSize: '1.5em',
+            //             color: 'yellow'
+            //         })
 
-                    $('#square').css({
-                        opacity: '0',
-                        borderColor: 'black'
-                    }).addClass('moveUp')
+            //         $('#square').css({
+            //             opacity: '0',
+            //             borderColor: 'black'
+            //         }).addClass('moveUp')
 
-                    $('#scoreBox').addClass('hover').css({
-                        opacity: '1',
-                        color: 'yellow'
-                    })
+            //         $('#scoreBox').addClass('hover').css({
+            //             opacity: '1',
+            //             color: 'yellow'
+            //         })
 
-                    setIntervalX((e) => {
-                        $('body').css('background-color', getRandomColor())
-                    }, 1000, 13)
-                    setIntervalX((e) => {
-                        $('.ripple').css('background', getRandomColor())
-                    }, 1000, 13)
-                    setTimeout(() => {
-                        highScore = false
-                        winner = 0
-                        score = 0
-                        $('#square').css('opacity', '1')
-                        $('body').css('background-color', '#0c1522')
-                        animating = true
-                        $('#defaultCanvas0').css('border-color', 'black')
-                        $('#square').css('border-color', 'aliceblue')
-                        $('#square').css('background-color', '#0c1522')
-                        $('#defaultCanvas0').css('opacity', '0.1')
-                        $('#defaultCanvas0').css('border-color', '#0c1522')
-                        $('#sequence').css('opacity', '0')
-                    }, 14000)
-                    setTimeout(() => {
-                        $('#square').removeClass('moveUp')
-                        initiateSquare()
-                        letThereBeLight()
-                        scoreBox.style.color = 'aliceblue'
-                        animating = false
-                        changeColorDiv.style.opacity = 1
-                    }, 20000)
-                    setTimeout(() => {
-                        $('#scoreBox').removeClass('hover')
-                        $('#defaultCanvas0').css('opacity', '0')
-                        $('#sequence').html('')
-                        changeColorDiv.style.opacity = 1
-                    }, 17000)
+            //         setIntervalX((e) => {
+            //             $('body').css('background-color', getRandomColor())
+            //         }, 1000, 13)
+            //         setIntervalX((e) => {
+            //             $('.ripple').css('background', getRandomColor())
+            //         }, 1000, 13)
+            //         setTimeout(() => {
+            //             highScore = false
+            //             winner = 0
+            //             score = 0
+            //             $('#square').css('opacity', '1')
+            //             $('body').css('background-color', '#0c1522')
+            //             animating = true
+            //             $('#defaultCanvas0').css('border-color', 'black')
+            //             $('#square').css('border-color', 'aliceblue')
+            //             $('#square').css('background-color', '#0c1522')
+            //             $('#defaultCanvas0').css('opacity', '0.1')
+            //             $('#defaultCanvas0').css('border-color', '#0c1522')
+            //             $('#sequence').css('opacity', '0')
+            //         }, 14000)
+            //         setTimeout(() => {
+            //             $('#square').removeClass('moveUp')
+            //             initiateSquare()
+            //             letThereBeLight()
+            //             scoreBox.style.color = 'aliceblue'
+            //             animating = false
+            //             changeColorDiv.style.opacity = 1
+            //         }, 20000)
+            //         setTimeout(() => {
+            //             $('#scoreBox').removeClass('hover')
+            //             $('#defaultCanvas0').css('opacity', '0')
+            //             $('#sequence').html('')
+            //             changeColorDiv.style.opacity = 1
+            //         }, 17000)
 
-                    setTimeout(() => {
-                        if (champion) return
-                        if (chosenValue == 'assets/audio/homerun.wav' && !free && homerun.disabled) {
-                            localStorage.setItem('homerun', 'true')
-                            homerun.disabled = false
-                            homerun.classList.add('flashit')
-                            homerun.classList.remove('disabled')
-                            homerun.disabled = false
-                        } else if (!free && special.disabled) {
-                            localStorage.setItem('special', 'true')
-                            special.disabled = false
-                            special.classList.add('flashit')
-                            special.classList.remove('disabled')
-                            special.disabled = false
-                        }
-                        if (!special.disabled && !homerun.disabled) {
-                            console.log('but champion?')
-                            if (!free && !champion) {
-                                console.log('tis');
-                                menu.classList.add('flashit')
-                                freeButton.classList.add('flashit')
-                                localStorage.setItem('champion', 'true')
-                                freeButton.disabled = false
-                                freeButton.classList.remove('disabled')
-                            }
-                            champion = true
-                        }
-                    }, 16000)
+            //         setTimeout(() => {
+            //             if (champion) return
+            //             if (chosenValue == 'assets/audio/homerun.wav' && !free && homerun.disabled) {
+            //                 localStorage.setItem('homerun', 'true')
+            //                 homerun.disabled = false
+            //                 homerun.classList.add('flashit')
+            //                 homerun.classList.remove('disabled')
+            //                 homerun.disabled = false
+            //             } else if (!free && special.disabled) {
+            //                 localStorage.setItem('special', 'true')
+            //                 special.disabled = false
+            //                 special.classList.add('flashit')
+            //                 special.classList.remove('disabled')
+            //                 special.disabled = false
+            //             }
+            //             if (!special.disabled && !homerun.disabled) {
+            //                 console.log('but champion?')
+            //                 if (!free && !champion) {
+            //                     console.log('tis');
+            //                     menu.classList.add('flashit')
+            //                     freeButton.classList.add('flashit')
+            //                     localStorage.setItem('champion', 'true')
+            //                     freeButton.disabled = false
+            //                     freeButton.classList.remove('disabled')
+            //                 }
+            //                 champion = true
+            //             }
+            //         }, 16000)
 
-                    if (chosenValue == 'assets/audio/homerun') {
-                        homerun.classList.add('flashit')
-                        homerun.classList.remove('disabled')
-                    }
-                    if (chosenValue == 'assets/audio/special') {
-                        special.classList.add('flashit')
-                        special.classList.remove('disabled')
-                    }
-                }
-            } else if (!highScore) {
-                $('#scoreBox').effect('shake', {
-                    times: 2,
-                    distance: 3,
-                }, 100)
-                $('#sequence').effect('shake', {
-                    times: 2,
-                    distance: 3,
-                    direction: 'up'
-                }, 100)
-                score++
-                fibula.push(fib(score))
-                $('#scoreBox').prop('Counter', fibula[score - 2] || 0).animate({
-                    Counter: fibula[score - 1]
-                }, {
-                    duration: 500,
-                    easing: 'swing',
-                    step: function (now) {
-                        $('#scoreBox').text(Math.ceil(now));
-                    },
-                    queue: false
-                });
-                scoreBox.innerHTML = fibula[score]
-            }
+            //         if (chosenValue == 'assets/audio/homerun') {
+            //             homerun.classList.add('flashit')
+            //             homerun.classList.remove('disabled')
+            //         }
+            //         if (chosenValue == 'assets/audio/special') {
+            //             special.classList.add('flashit')
+            //             special.classList.remove('disabled')
+            //         }
+            //     }
+            // }
         }
+    }, {
+        passive: false
     });
 
+
     // *****************************************************************************
     // *****************************************************************************
     // *****************************************************************************
     // *****************************************************************************
-    // Square Event Listener
+    // Square Click
     // *****************************************************************************
     // *****************************************************************************
     // *****************************************************************************
     // *****************************************************************************
 
-    $("#square").click(function (e) {
-        if (animating) {
-            return
-        }
-        play(pitch / modifier)
-        // Setup
-        var posX = $(this).offset().left - 15,
-            posY = $(this).offset().top - 13,
-            buttonWidth = $(this).width(),
-            buttonHeight = $(this).height();
+    // $("#square").click(function (e) {
+    //     if (animating) {
+    //         return
+    //     }
+    //     play(pitch / modifier)
+    //     // Setup
+    //     var posX = $(this).offset().left - 15,
+    //         posY = $(this).offset().top - 13,
+    //         buttonWidth = $(this).width(),
+    //         buttonHeight = $(this).height();
 
-        // Add the element
-        $(this).prepend("<span class='ripple2'></span>");
-        $(".ripple2").css('background', '#010106')
+    //     // Add the element
+    //     $(this).prepend("<span class='ripple2'></span>");
+    //     $(".ripple2").css('background', '#010106')
 
-        // Make it round!
-        if (buttonWidth >= buttonHeight) {
-            buttonHeight = buttonWidth;
-        } else {
-            buttonWidth = buttonHeight;
-        }
+    //     // Make it round!
+    //     if (buttonWidth >= buttonHeight) {
+    //         buttonHeight = buttonWidth;
+    //     } else {
+    //         buttonWidth = buttonHeight;
+    //     }
 
-        // Get the center of the element
-        var x = e.pageX - posX - buttonWidth / 2;
-        var y = e.pageY - posY - buttonHeight / 2;
+    //     // Get the center of the element
+    //     var x = e.pageX - posX - buttonWidth / 2;
+    //     var y = e.pageY - posY - buttonHeight / 2;
 
-        // Add the ripples CSS and start the animation
-        $(".ripple2").css({
-            width: buttonWidth,
-            height: buttonHeight,
-            top: y + 'px',
-            left: x + 'px'
-        }).addClass("rippleEffect2");
-    })
+    //     // Add the ripples CSS and start the animation
+    //     $(".ripple2").css({
+    //         width: buttonWidth,
+    //         height: buttonHeight,
+    //         top: y + 'px',
+    //         left: x + 'px'
+    //     }).addClass("rippleEffect2");
+    // })
 
     // *****************************************************************************
     // *****************************************************************************
@@ -971,267 +985,267 @@ document.addEventListener('DOMContentLoaded', () => {
     // *****************************************************************************
     // *****************************************************************************
 
-    function playSound(file, speed = 1, pitchShift = 1, loop = false, autoplay = true) {
+    // function playSound(file, speed = 1, pitchShift = 1, loop = false, autoplay = true) {
 
-        if (muting) return
-        if (pitchShift) {
-            audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-            source = audioCtx.createBufferSource();
-            request = new XMLHttpRequest();
-            request.open('GET', file, true);
-            request.responseType = 'arraybuffer';
+    //     if (muting) return
+    //     if (pitchShift) {
+    //         audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+    //         source = audioCtx.createBufferSource();
+    //         request = new XMLHttpRequest();
+    //         request.open('GET', file, true);
+    //         request.responseType = 'arraybuffer';
 
-            request.onload = function () {
-                var audioData = request.response;
+    //         request.onload = function () {
+    //             var audioData = request.response;
 
-                audioCtx.decodeAudioData(audioData, function (buffer) {
-                        myBuffer = buffer;
-                        songLength = buffer.duration;
-                        source.buffer = myBuffer;
-                        source.playbackRate.value = speed;
-                        source.connect(audioCtx.destination);
-                        source.loop = loop;
-                    },
-                    function (e) {
-                        "Error with decoding audio data" + e.error
-                    });
+    //             audioCtx.decodeAudioData(audioData, function (buffer) {
+    //                     myBuffer = buffer;
+    //                     songLength = buffer.duration;
+    //                     source.buffer = myBuffer;
+    //                     source.playbackRate.value = speed;
+    //                     source.connect(audioCtx.destination);
+    //                     source.loop = loop;
+    //                 },
+    //                 function (e) {
+    //                     "Error with decoding audio data" + e.error
+    //                 });
 
-            }
-            request.send();
-            source.play = source.start
-        } else {
-            source = new Audio(file)
-            source.playbackRate = speed
-            source.loop = loop
-        }
-        if (autoplay) {
-            source.play()
-        }
-        return source
-    }
-    var source
-
-
-    function play(pitch) {
-        if (hovering) {
-            source = playSound('assets/audio/pop.wav', pitch)
-            return
-        } else if (score === winningScore) {
-            source = playSound(chosenValue, 1)
-        } else if (score == 5 && !free) {
-            source = playSound('assets/audio/achievement.wav')
-        } else {
-            source = playSound(chosenAudio, pitch)
-        }
-    }
+    //         }
+    //         request.send();
+    //         source.play = source.start
+    //     } else {
+    //         source = new Audio(file)
+    //         source.playbackRate = speed
+    //         source.loop = loop
+    //     }
+    //     if (autoplay) {
+    //         source.play()
+    //     }
+    //     return source
+    // }
+    // var source
 
 
-    function getSoundAndFadeAudio(audiosnippetId) {
-        if (muting) return
-        var sound = document.getElementById(audiosnippetId);
+    // function play(pitch) {
+    //     if (hovering) {
+    //         source = playSound('assets/audio/pop.wav', pitch)
+    //         return
+    //     } else if (score === winningScore) {
+    //         source = playSound(chosenValue, 1)
+    //     } else if (score == 5 && !free) {
+    //         source = playSound('assets/audio/achievement.wav')
+    //     } else {
+    //         source = playSound(chosenAudio, pitch)
+    //     }
+    // }
 
-        // Set the point in playback that fadeout begins. This is for a 2 second fade out.
-        var fadePoint = sound.duration - 2;
 
-        var fadeAudio = setInterval(function () {
+    //     function getSoundAndFadeAudio(audiosnippetId) {
+    //         if (muting) return
+    //         var sound = document.getElementById(audiosnippetId);
 
-            // Only fade if past the fade out point or not at zero already
+    //         // Set the point in playback that fadeout begins. This is for a 2 second fade out.
+    //         var fadePoint = sound.duration - 2;
 
-            if ((sound.currentTime >= fadePoint) && (sound.volume >= 0.0)) {
-                sound.volume -= 0.09;
-            }
-            // When volume at zero stop all the intervalling
-            if (sound.volume <= 0.010000000000000259) {
-                sound.volume = 0
-                clearInterval(fadeAudio);
-                sound.volume = 1
-            }
-        }, 200);
+    //         var fadeAudio = setInterval(function () {
 
-        sound.play()
-    }
+    //             // Only fade if past the fade out point or not at zero already
+
+    //             if ((sound.currentTime >= fadePoint) && (sound.volume >= 0.0)) {
+    //                 sound.volume -= 0.09;
+    //             }
+    //             // When volume at zero stop all the intervalling
+    //             if (sound.volume <= 0.010000000000000259) {
+    //                 sound.volume = 0
+    //                 clearInterval(fadeAudio);
+    //                 sound.volume = 1
+    //             }
+    //         }, 200);
+
+    //         sound.play()
+    //     }
+    // })
+
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // p5
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+
+
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // Fire Works
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+    // *****************************************************************************
+
+    // var fireworks = [];
+    // var gravity;
+
+    // function setup() {
+    //     if (mobileCheck()) {
+    //         var cnv = createCanvas(375, 812);
+    //     } else {
+    //         var cnv = createCanvas(1260, 420);
+    //     }
+    //     var x = (windowWidth - width) / 2;
+    //     var y = (windowHeight - height) / 4;
+    //     cnv.position(x, y);
+    //     stroke(10);
+    //     strokeWeight(1);
+
+    //     gravity = createVector(0, .2);
+    // }
+
+    // function draw() {
+    //     colorMode(RGB, 1000);
+    //     background(0, 100);
+
+    //     if (random(1) < .3) {
+    //         fireworks.push(new Firework());
+    //     }
+
+    //     for (var i = fireworks.length - 1; i >= 0; i--) {
+    //         fireworks[i].update();
+    //         fireworks[i].show();
+    //         if (fireworks[i].done()) {
+    //             fireworks.splice(i, 1);
+    //         }
+    //     }
+    // }
+
+
+    // //____Particle Function____// 
+    // function Particle(x, y, firework, hu) {
+    //     this.pos = createVector(x, y);
+    //     this.firework = firework;
+    //     this.lifespan = 300;
+    //     this.weight = 4;
+    //     this.hu = hu;
+
+    //     if (this.firework) {
+    //         this.vel = createVector(0, -random(height / 100, height / (32 + height / 100)));
+    //     } else {
+    //         this.vel = p5.Vector.random2D();
+    //         this.vel.setMag(pow(random(1, 2), 2));
+    //         this.weight = map(mag(this.vel.x, this.vel.y), 1, 4, 3, 0);
+    //         this.vel.mult(height / this.pos.y);
+    //     }
+
+    //     this.acc = createVector(0, 0);
+
+    //     this.applyForce = function (force) {
+    //         this.acc.add(force);
+    //     }
+
+    //     this.update = function () {
+    //         if (!this.firework) {
+    //             this.vel.mult(0.9);
+    //             this.lifespan -= 5;
+    //         }
+    //         this.vel.add(this.acc);
+    //         this.pos.add(this.vel);
+    //         this.acc.mult(0);
+    //     }
+
+    //     this.done = function () {
+    //         if (this.lifespan > 0) {
+    //             return false;
+    //         } else {
+    //             return true;
+    //         }
+    //     }
+
+    //     this.show = function () {
+    //         if (!this.firework) {
+    //             colorMode(HSB);
+    //             stroke(hu, 255, 255, this.lifespan);
+    //             strokeWeight(this.weight);
+    //         } else {
+    //             colorMode(HSB);
+    //             stroke(hu, 255, 255);
+    //             strokeWeight(4);
+    //         }
+    //         point(this.pos.x, this.pos.y);
+    //     }
+
+    // }
+
+
+    // //____Firework Function____// 
+    // function Firework() {
+
+    //     this.hu = random(255);
+    //     this.firework = new Particle(random(width), height, true, this.hu);
+    //     this.exploded = false;
+    //     this.particles = [];
+
+    //     this.done = function () {
+    //         if (this.exploded && this.particles.length === 0) {
+    //             return true;
+    //         } else {
+    //             return false;
+    //         }
+    //     }
+
+    //     this.update = function () {
+    //         if (!this.exploded) {
+    //             this.firework.applyForce(gravity);
+    //             this.firework.update();
+    //             if (this.firework.vel.y >= 0) {
+    //                 this.exploded = true;
+    //                 this.explode();
+    //             }
+    //         }
+    //         for (var i = this.particles.length - 1; i >= 0; i--) {
+    //             this.particles[i].applyForce(gravity);
+    //             this.particles[i].update();
+    //             if (this.particles[i].done()) {
+    //                 this.particles.splice(i, 1);
+    //             }
+    //         }
+    //     }
+
+    //     this.explode = function () {
+    //         for (var i = 0; i < floor(random(10, 100)); i++) {
+    //             var p = new Particle(this.firework.pos.x, this.firework.pos.y, false, this.hu);
+    //             this.particles.push(p);
+    //         }
+    //     }
+
+    //     this.show = function () {
+    //         if (!this.exploded) {
+    //             this.firework.show();
+    //         }
+    //         for (var i = 0; i < this.particles.length; i++) {
+    //             this.particles[i].show();
+    //         }
+    //     }
 })
-
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// p5
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-
-
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// Fire Works
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-
-var fireworks = [];
-var gravity;
-
-function setup() {
-    if (mobileCheck()) {
-        var cnv = createCanvas(375, 812);
-    } else {
-        var cnv = createCanvas(1260, 420);
-    }
-    var x = (windowWidth - width) / 2;
-    var y = (windowHeight - height) / 4;
-    cnv.position(x, y);
-    stroke(10);
-    strokeWeight(1);
-
-    gravity = createVector(0, .2);
-}
-
-function draw() {
-    colorMode(RGB, 1000);
-    background(0, 100);
-
-    if (random(1) < .3) {
-        fireworks.push(new Firework());
-    }
-
-    for (var i = fireworks.length - 1; i >= 0; i--) {
-        fireworks[i].update();
-        fireworks[i].show();
-        if (fireworks[i].done()) {
-            fireworks.splice(i, 1);
-        }
-    }
-}
-
-
-//____Particle Function____// 
-function Particle(x, y, firework, hu) {
-    this.pos = createVector(x, y);
-    this.firework = firework;
-    this.lifespan = 300;
-    this.weight = 4;
-    this.hu = hu;
-
-    if (this.firework) {
-        this.vel = createVector(0, -random(height / 100, height / (32 + height / 100)));
-    } else {
-        this.vel = p5.Vector.random2D();
-        this.vel.setMag(pow(random(1, 2), 2));
-        this.weight = map(mag(this.vel.x, this.vel.y), 1, 4, 3, 0);
-        this.vel.mult(height / this.pos.y);
-    }
-
-    this.acc = createVector(0, 0);
-
-    this.applyForce = function (force) {
-        this.acc.add(force);
-    }
-
-    this.update = function () {
-        if (!this.firework) {
-            this.vel.mult(0.9);
-            this.lifespan -= 5;
-        }
-        this.vel.add(this.acc);
-        this.pos.add(this.vel);
-        this.acc.mult(0);
-    }
-
-    this.done = function () {
-        if (this.lifespan > 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    this.show = function () {
-        if (!this.firework) {
-            colorMode(HSB);
-            stroke(hu, 255, 255, this.lifespan);
-            strokeWeight(this.weight);
-        } else {
-            colorMode(HSB);
-            stroke(hu, 255, 255);
-            strokeWeight(4);
-        }
-        point(this.pos.x, this.pos.y);
-    }
-
-}
-
-
-//____Firework Function____// 
-function Firework() {
-
-    this.hu = random(255);
-    this.firework = new Particle(random(width), height, true, this.hu);
-    this.exploded = false;
-    this.particles = [];
-
-    this.done = function () {
-        if (this.exploded && this.particles.length === 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    this.update = function () {
-        if (!this.exploded) {
-            this.firework.applyForce(gravity);
-            this.firework.update();
-            if (this.firework.vel.y >= 0) {
-                this.exploded = true;
-                this.explode();
-            }
-        }
-        for (var i = this.particles.length - 1; i >= 0; i--) {
-            this.particles[i].applyForce(gravity);
-            this.particles[i].update();
-            if (this.particles[i].done()) {
-                this.particles.splice(i, 1);
-            }
-        }
-    }
-
-    this.explode = function () {
-        for (var i = 0; i < floor(random(10, 100)); i++) {
-            var p = new Particle(this.firework.pos.x, this.firework.pos.y, false, this.hu);
-            this.particles.push(p);
-        }
-    }
-
-    this.show = function () {
-        if (!this.exploded) {
-            this.firework.show();
-        }
-        for (var i = 0; i < this.particles.length; i++) {
-            this.particles[i].show();
-        }
-    }
-}
 
 
 // *****************************************************************************

@@ -29,11 +29,11 @@
     <br>
 
     <div id="changeColorDiv">
-        <div class="ui form inverted">
-            <form id="theForm">
-                <div class="five fields">
-                    <div class="field">
-                        <select disabled id="selectaBackground" class="ui dropdown">
+        <div class="ui form mini compact ">
+            <form onsubmit="console.log(why)" id="theForm">
+                <div class="five fields compact">
+                    <!-- <div class="field"> -->
+                    <!-- <select id="selectaBackground" class="ui dropdown">
                             <option value="random">Random Background</option>
                             <option value="keep">Keep Background</option>
                             <option value="white">White</option>
@@ -45,7 +45,7 @@
                         </select>
                     </div>
                     <div class="field">
-                        <select disabled id="selectaColor" class="ui dropdown">
+                        <select id="selectaColor" class="ui dropdown">
                             <option value="random">Random Color</option>
                             <option value="keep">Keep Color</option>
                             <option value="white">White</option>
@@ -57,7 +57,7 @@
                         </select>
                     </div>
                     <div class="field">
-                        <select disabled id="selectaBorder" class="ui dropdown">
+                        <select id="selectaBorder" class="ui dropdown">
                             <option value="random">Random Border</option>
                             <option value="keep">Keep Border</option>
                             <option value="white">White</option>
@@ -67,18 +67,18 @@
                             <option value="#f06406">Orange</option>
                             <option value="rgba(215, 14, 255, 0.4)">Pink</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="field">
-                        <select disabled id="selectaAnimation" class="ui dropdown">
-                            <option value="random">Random Animation</option>
+                        <select id="selectaAnimation" class="ui dropdown compact">
+                            <option value="random">Random</option>
                             <option value="spin">Spin</option>
                             <option value="bounce">Bounce</option>
                             <option value="move">Move</option>
                             <option value="wrapAround">Wrap</option>
                         </select>
                     </div>
-                    <div class="field">
-                        <select disabled id="selectaRipple" class="ui dropdown">
+                    <!-- <div class="field">
+                        <select id="selectaRipple" class="ui dropdown">
                             <option value="random">Random Ripple</option>
                             <option value="keep">Keep Ripple</option>
                             <option value="white">White</option>
@@ -88,19 +88,13 @@
                             <option value="#f06406">Orange</option>
                             <option value="rgba(215, 14, 255, 0.4)">Pink</option>
                         </select>
-                    </div>
+                    </div> -->
                 </div>
                 <br>
-                <button type="submit" id="changeColor" class="ui inverted white button">Commence</button>
+                <button type="submit" id="changeColor" class="ui inverted white button mini">Commence</button>
             </form>
         </div>
-        <div id="bottom-left">
-            <p id="scoreBox">
-                <em id="score">1</em>
-            </p>
-            <p id="sequence"></p>
-        </div>
-        <div id="bottom-right">
+        <!-- <div id="bottom-right">
             <div class="ui buttons mini">
                 <button id="homerun" class="ui disabled inverted red button">Home Run</button>
                 <button id="special" class="ui disabled inverted yellow button">Special</button>
@@ -140,7 +134,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
