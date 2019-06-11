@@ -19,9 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.play();
     }
 
-
-
-
     let color = '#0c1522'
     let background = '#0c1522'
     let border = 'aliceblue'
@@ -57,12 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#square').fadeIn(5000)
 
     let turnYourLightsDownLow = () => {
-        animating = true
         document.body.style.backgroundColor = "#010106"
     }
 
     let letThereBeLight = () => {
-        animating = false
         document.body.style.backgroundColor = '#0c1522'
         initiateSquare()
     }
@@ -78,6 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
         squaring = true
 
         if (!animating) {
+            var id = window.setTimeout(function () {}, 0);
+
+            while (id--) {
+                window.clearTimeout(id); // will do nothing if no timeout with id is present
+            }
             play('bellMobile')
             denitiateSquare()
             animating = true
@@ -94,21 +94,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => {
                         squaring = false
                         letThereBeLight()
-                        square.classList.remove(animation)
                         document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
                         setTimeout(() => {
+                            square.classList.remove(animation)
                             animating = false
-                        }, 12000)
+                        }, 2000)
                     }, 6000)
 
                 } else {
                     squaring = false
                     letThereBeLight()
-                    square.classList.remove(animation)
                     document.body.style.backgroundColor = randomBackground ? getRandomColor() : background
                     setTimeout(() => {
+                        square.classList.remove(animation)
                         animating = false
-                    }, 6000)
+                    }, 1500)
                 }
 
             }, 4000)
@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault()
 
             if (animating) $(".ripple").remove();
+
             // Setup
             var posX = $(this).offset().left,
                 posY = $(this).offset().top
@@ -179,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).addClass("rippleEffect");
 
             }
+            if (animating) $('.ripple').css('background', getRandomColor())
 
         }
     });
